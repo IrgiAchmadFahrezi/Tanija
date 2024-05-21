@@ -1,0 +1,91 @@
+.navbar {
+    padding-left: 100px;
+}
+.navbar-brand img {
+    height: 100px;
+    margin-right: 100px; 
+}
+
+.navbar{
+    background-color: #00880D; 
+}
+
+.form-control{
+    border-radius: 15px;
+    height: 50px;
+    width: 300px !important; 
+}
+
+.btn-outline-success{
+    background-color: #F6B943;
+    border-color:  #F6B943 !important;
+    color: #fff;
+    height: 50px;
+    width: 100px;
+    border-radius: 15px;
+    margin-left: -35px;
+}
+.btn-outline-success:hover{
+    background-color: #c88e0a; 
+  border-color: #c88e0a !important;
+}
+
+.navbar-nav{
+    margin-right: 50px;
+}
+.nav-link .fa-user {
+  font-size: 20px; 
+  margin-right: 5px;
+  color: #fff;
+}
+
+.nav-link {
+  font-size: 16px; 
+  color: #fff !important;
+}
+.badge {
+      top: -8px;
+      right: -10px;
+      padding: 3px 6px;
+      border-radius: 50%;
+      background-color: #F6B943;
+      color: white;
+      font-size: 10px;
+    }
+
+.btn-login{
+    background-color: #F6B943;
+    border-color:  #F6B943 !important;
+    color: #fff;
+    height: 50px;
+    width: 100px;
+    border-radius: 15px;
+}
+.btn-login:hover{
+    background-color: #c88e0a; 
+  border-color: #c88e0a !important;
+}
+
+/* navbar kedua */
+#navbar-kedua{
+    background-color: #E2DFDF;
+}
+#navbar-kedua .navbar-nav .nav-link {
+    color: #333 !important; /* Warna teks default */
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+#navbar-kedua .navbar-nav .nav-link:hover,
+#navbar-kedua .navbar-nav .nav-link:focus {
+    color: #555 !important; /* Warna teks saat dihover */
+}
+
+#navbar-kedua .navbar-nav .dropdown-item {
+    color: #333 !important; /* Warna teks dropdown item */
+}
+
+#navbar-kedua .navbar-nav .dropdown-item:hover,
+#navbar-kedua .navbar-nav .dropdown-item:focus {
+    color: #555 !important; /* Warna teks dropdown item saat dihover */
+}
