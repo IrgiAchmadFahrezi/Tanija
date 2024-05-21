@@ -7,6 +7,8 @@
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/css/bootstrap.css" rel="stylesheet">
+  <!-- Style CSS -->
+  <link href="assets/css/style.css" rel="stylesheet">
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
@@ -40,10 +42,46 @@
 
         </li>
       </ul>
-      
     </div>
   </nav>
 
+  <!-- Navbar Kedua -->
+  <nav class="navbar navbar-expand" id="navbar-kedua">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSecond" aria-controls="navbarSecond" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSecond">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Beranda</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="kategoriDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Kategori
+            </a>
+            <div class="dropdown-menu" aria-labelledby="kategoriDropdown">
+              <a class="dropdown-item" href="#">Kategori 1</a>
+              <a class="dropdown-item" href="#">Kategori 2</a>
+              <a class="dropdown-item" href="#">Kategori 3</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Artikel</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Tentang Kami</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main>
+
+  </main>
+
+  <footer></footer>
   <!-- Bootstrap JS, Popper.js, dan jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
