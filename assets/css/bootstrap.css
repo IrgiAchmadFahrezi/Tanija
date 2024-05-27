@@ -123,6 +123,7 @@ carousel-item {
 
 .carousel-item img {
   margin-bottom: 10%;
+  margin-top: 10px;
 }
 
 .carousel-item h5 {
@@ -135,12 +136,13 @@ carousel-item {
 
 .carousel-control-prev,
 .carousel-control-next {
-  background-color: #000; /* Warna tombol */
+  background-color: #00880ea9; /* Warna tombol */
   width: 50px; /* Lebar tombol */
   height: 50px; /* Tinggi tombol */
   border-radius: 50%; /* Membuat tombol menjadi bulat */
   background-size: 100%, 100%;
   position: absolute; /* Mengatur posisi absolut */
+  margin: 10px;
   top: 50%; /* Posisi vertikal di tengah */
   transform: translateY(
     -50%
