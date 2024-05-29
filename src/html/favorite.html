@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Produk - Tanija</title>
+  <title>Favorit - Tanija</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="/assets/css/bootstrap.css" rel="stylesheet">
 
   <!-- Style CSS -->
-  <link href="/src/css/product.css" rel="stylesheet">
+  <link href="/src/css/favorite.css" rel="stylesheet">
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -78,144 +78,44 @@
 
   <!-- main -->
   <main>
-    <div class="container mt-5">
-      <div class="row">
-          <div class="col-md-3">
-              <h5>Categories</h5>
-              <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="checkAll">
-                  <label class="form-check-label" for="checkAll">
-                      Semua Kategori
-                  </label>
+    <div class="container my-5">
+        <h1 class="text-center">Produk Favorit</h1>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <img src="/assets/images/promo1.png" class="card-img-top" alt="Product 1">
+              <div class="card-body">
+                <h5 class="card-title">Nama Produk 1</h5>
+                <p class="card-text">Rp. 100.000</p>
+                <button class="btn btn-danger"><i class="far fa-heart"></i> Hapus dari Favorit</button>
+                <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Tambahkan ke Keranjang</button>
               </div>
-              <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="checkPupuk">
-                  <label class="form-check-label" for="checkPupuk">
-                      Pupuk
-                  </label>
-              </div>
-              <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="checkAlatPertanian">
-                  <label class="form-check-label" for="checkAlatPertanian">
-                      Alat Pertanian
-                  </label>
-              </div>
-              <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="checkBibitTanaman">
-                  <label class="form-check-label" for="checkBibitTanaman">
-                      Bibit Tanaman
-                  </label>
-              </div>
-              <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="checkPestisida">
-                  <label class="form-check-label" for="checkPestisida">
-                      Pestisida
-                  </label>
-              </div>
-              <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="checkLainnya">
-                  <label class="form-check-label" for="checkLainnya">
-                      Lainnya
-                  </label>
-              </div>
+            </div>
           </div>
-
-          <div class="col-md-9">
-              <div class="row">
-                  <div class="col-md-4 mb-4">
-                      <div class="card">
-                          <img src="/assets/images/promo1.png" class="card-img-top" alt="...">
-                          <div class="card-body">
-                              <p class="card-text"><a href="/src/html/detail-product.html">Pupuk Urea</a></p>
-                              <p class="price">$11.70</p>
-                              <div class="rating">★★★★★</div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 mb-4">
-                      <div class="card">
-                          <img src="controller.jpg" class="card-img-top" alt="...">
-                          <div class="card-body">
-                              <p class="card-text"><a href="#">Cangkul</a></p>
-                              <p class="price">$11.70</p>
-                              <div class="rating">★★★★★</div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 mb-4">
-                      <div class="card">
-                          <img src="laptop.jpg" class="card-img-top" alt="...">
-                          <div class="card-body">
-                              <p class="card-text"><a href="#">Bibit Jagung Manis</a></p>
-                              <p class="price">$11.70</p>
-                              <div class="rating">★★★★★</div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 mb-4">
-                      <div class="card">
-                          <img src="headphone.jpg" class="card-img-top" alt="...">
-                          <div class="card-body">
-                              <p class="card-text"><a href="#">Sabit</a></p>
-                              <p class="price">$11.70</p>
-                              <div class="rating">★★★★★</div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 mb-4">
-                      <div class="card">
-                          <img src="controller.jpg" class="card-img-top" alt="...">
-                          <div class="card-body">
-                              <p class="card-text"><a href="#">Bibit Tomat</a></p>
-                              <p class="price">$11.70</p>
-                              <div class="rating">★★★★★</div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 mb-4">
-                      <div class="card">
-                          <img src="laptop.jpg" class="card-img-top" alt="...">
-                          <div class="card-body">
-                              <p class="card-text"><a href="#">Pupuk Kompos</a></p>
-                              <p class="price">$11.70</p>
-                              <div class="rating">★★★★★</div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="laptop.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text"><a href="#">Pupuk Kompos</a></p>
-                            <p class="price">$11.70</p>
-                            <div class="rating">★★★★★</div>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="laptop.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text"><a href="#">Pupuk Kompos</a></p>
-                            <p class="price">$11.70</p>
-                            <div class="rating">★★★★★</div>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="laptop.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text"><a href="#">Pupuk Kompos</a></p>
-                            <p class="price">$11.70</p>
-                            <div class="rating">★★★★★</div>
-                        </div>
-                    </div>
-                  </div>
+          <div class="col-md-4">
+            <div class="card">
+              <img src="/assets/images/product2.jpg" class="card-img-top" alt="Product 2">
+              <div class="card-body">
+                <h5 class="card-title">Nama Produk 2</h5>
+                <p class="card-text">Rp. 150.000</p>
+                <button class="btn btn-danger"><i class="far fa-heart"></i> Hapus dari Favorit</button>
+                <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Tambahkan ke Keranjang</button>
               </div>
+            </div>
           </div>
+          <div class="col-md-4">
+            <div class="card">
+              <img src="/assets/images/product3.jpg" class="card-img-top" alt="Product 3">
+              <div class="card-body">
+                <h5 class="card-title">Nama Produk 3</h5>
+                <p class="card-text">Rp. 200.000</p>
+                <button class="btn btn-danger"><i class="far fa-heart"></i> Hapus dari Favorit</button>
+                <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Tambahkan ke Keranjang</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-  </div>
   </main>
 
   <!-- footer -->
@@ -277,6 +177,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+  
 </body>
 </html>

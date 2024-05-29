@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
   const descriptionButton = document.querySelector(
-    '[data-bs-target="#description"]'
+    '[data-bs-toggle="collapse"][href="#description"]'
   );
-  const reviewsButton = document.querySelector('[data-bs-target="#reviews"]');
+  const reviewsButton = document.querySelector(
+    '[data-bs-toggle="collapse"][href="#reviews"]'
+  );
   const descriptionCollapse = document.querySelector("#description");
   const reviewsCollapse = document.querySelector("#reviews");
 
@@ -10,8 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!descriptionCollapse.classList.contains("show")) {
       descriptionCollapse.classList.add("show");
       reviewsCollapse.classList.remove("show");
-    } else {
-      descriptionCollapse.classList.remove("show");
     }
   });
 
@@ -19,8 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!reviewsCollapse.classList.contains("show")) {
       reviewsCollapse.classList.add("show");
       descriptionCollapse.classList.remove("show");
-    } else {
-      reviewsCollapse.classList.remove("show");
     }
   });
 });
