@@ -4,7 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Tanija</title>
-    <link rel="stylesheet" href="/assets/css/style.css" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
@@ -24,26 +31,41 @@
   <body>
     <div class="container-daftar">
       <div class="left-section">
-        <img src="/assets/icons/gambar_login.png" alt="gambar" />
+        <img src="../assets/icons/gambar_login.png" alt="gambar" />
         <h2>Beli Barang Pertanian Murah di Tanija</h2>
         <p>Gabung dan rasakan kemudahan bertransaksi di Tanija</p>
       </div>
       <div class="right-section">
-        <a href="/index.html">
-          <img src="/assets/icons/logo-tanija2.png" alt="" />
+        <a href="/tanija/index.php">
+          <img src="../assets/icons/logo-tanija2.png" alt="" />
         </a>
         <h3>Daftar Sekarang</h3>
-        <a href="#" class="google-btn">
-          <img src="/assets/icons/icon G.png" alt="Google" />
+        <!-- <a href="#" class="google-btn">
+          <img src="../assets/icons/icon G.png" alt="Google" />
           Google
         </a>
-        <h5>Atau daftar dengan</h5>
-        <form>
-          <input type="text" placeholder="Masukkan Nama" required />
+        <h5>Atau daftar dengan</h5> -->
+        <form action="../php/register.php" method="post">
+          <input
+            type="text"
+            name="nama_user"
+            placeholder="Masukkan Nama"
+            required
+          />
           <p>Contoh : Tanija</p>
-          <input type="email" placeholder="Masukkan Email" required />
+          <input
+            type="email"
+            name="email_user"
+            placeholder="Masukkan Email"
+            required
+          />
           <p>Contoh : example@gmail.com</p>
-          <input type="password" placeholder="Masukkan password" required />
+          <input
+            type="password"
+            name="password_user"
+            placeholder="Masukkan password"
+            required
+          />
           <p>
             Password terdiri dari minimal 8 karakter. Terdapat huruf kapital dan
             karakter unik atau angka.

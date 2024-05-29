@@ -4,7 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Tanija</title>
-    <link rel="stylesheet" href="/assets/css/style.css" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css" />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
@@ -24,29 +32,44 @@
   <body>
     <div class="container-login">
       <div class="left-section">
-        <img src="/assets/icons/gambar_login.png" alt="gambar" />
+        <img src="../assets/icons/gambar_login.png" alt="gambar" />
         <h2>Beli Barang Pertanian Murah di Tanija</h2>
         <p>Gabung dan rasakan kemudahan bertransaksi di Tanija</p>
       </div>
       <div class="right-section">
-        <a href="/index.html">
-          <img src="/assets/icons/logo-tanija2.png" alt="" />
+        <a href="/tanija/index.php">
+          <img
+            src="../assets/icons/logo-tanija2.png"
+            alt=""
+            onclick="window.location.href='index.html'"
+          />
         </a>
         <h3>Masuk Akun Anda</h3>
-        <form class="login">
-          <input type="email" placeholder="example@gmail.com" required />
-          <input type="password" placeholder="masukkan password" required />
+        <form class="login" action="../php/login.php" method="POST">
+          <input
+            type="email"
+            name="email"
+            placeholder="example@gmail.com"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="masukkan password"
+            required
+          />
           <p>
             Password terdiri dari minimal 8 karakter. Terdapat huruf kapital dan
             karakter unik atau angka.
           </p>
-          <button type="submit">Daftar</button>
+          <button type="submit">Masuk</button>
         </form>
+        <!-- 
         <h5>Atau masuk dengan</h5>
-        <a href="#" class="google-btn">
-          <img src="/assets/icons/icon G.png" alt="Google" />
+        <a href="/tanija/login_google.php" class="google-btn">
+          <img src="../assets/icons/icon G.png" alt="Google" />
           Google
-        </a>
+        </a> -->
         <p>Belum punya akun Tanija? <a href="daftar.html">Daftar</a></p>
         <p>
           Dengan mendaftar, saya menyetujui
@@ -56,4 +79,8 @@
       </div>
     </div>
   </body>
+  <!-- Bootstrap JS, Popper.js, dan jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </html>
