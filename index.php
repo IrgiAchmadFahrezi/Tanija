@@ -36,10 +36,10 @@ session_start();
           <a class="nav-link" href="#"> <i class="far fa-user"></i> <span id="nama_user"> Profile</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="far fa-heart"></i></i><span class="badge">5</span></a>
+          <a class="nav-link" href="./src/html/favorite.html"><i class="far fa-heart"></i></i><span class="badge">5</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./src/html/cart.html"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
+          <a class="nav-link" href="./src/html/cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
         </li>
         <li class="nav-item">
         <?php
@@ -167,7 +167,7 @@ session_start();
                 // Ambil nama file gambar dari database
                 $nama_file = $row['foto_produk'];
                 // Buat path lengkap menuju file gambar di folder uploads
-                $path_gambar = "uploads/" . $nama_file;
+                $path_gambar = "./src/uploads/" . $nama_file;
                 // Periksa apakah file gambar ada
                 if (file_exists($path_gambar)) {
                     // Jika ada, tampilkan gambar
@@ -177,8 +177,8 @@ session_start();
                     echo '<img src="default_image.jpg" class="card-img-top" alt="Default Image">';
                 }
                 echo '<div class="card-body">';
-                echo '<p class="card-text"><a href="#">'.$row['nama_produk'].'</a></p>';
-                echo '<p class="price">$'.$row['harga_produk'].'</p>';
+                echo '<p class="card-text"><a href="src/html/detail-product.php?id='.$row['id_produk'].'">'.$row['nama_produk'].'</a></p>';
+                echo '<p class="price">Rp'.$row['harga_produk'].'</p>';
                 echo '<div class="rating">★★★★★</div>';
                 echo '</div>';
                 echo '</div>';
