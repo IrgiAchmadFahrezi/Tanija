@@ -1,24 +1,27 @@
 <?php
 session_start();
+include '../php/db_connection.php';
 
 // Pastikan tombol "Add to Cart" ditekan
-if(isset($_POST['addToCartBtn'])) {
-    // Tangkap detail produk
-    $id_produk = $_GET['id_produk'];
-    $nama_produk = $row['nama_produk'];
-    $harga_produk = $row['harga_produk'];
+if (isset($_POST['addToCartBtn'])) {
+    // Tangkap detail produk dari POST data
+    $id_produk = $_POST['id_produk'];
+    $nama_produk = $_POST['nama_produk'];
+    $harga_produk = $_POST['harga_produk'];
     $jumlah = $_POST['quantity'];
+    $nama_file_foto = $_POST['foto_produk']; // Mendapatkan nama file foto produk dari form
 
     // Buat array untuk menyimpan detail produk
     $produk = array(
         'id' => $id_produk,
         'nama' => $nama_produk,
         'harga' => $harga_produk,
-        'jumlah' => $jumlah
+        'jumlah' => $jumlah,
+        'foto_produk' => $nama_file_foto // Simpan nama file foto produk ke dalam sesi
     );
 
     // Periksa apakah keranjang belanja telah dibuat sebelumnya dalam sesi
-    if(!isset($_SESSION['cart'])) {
+    if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = array();
     }
 
@@ -29,6 +32,19 @@ if(isset($_POST['addToCartBtn'])) {
     $total_items = count($_SESSION['cart']);
     echo "<script>alert('Produk berhasil ditambahkan ke keranjang belanja. Total item dalam keranjang: $total_items');</script>";
 }
+
+// Tangkap ID produk dari URL
+$id_produk = $_GET['id'];
+$sql = "SELECT * FROM produk WHERE id_produk = '$id_produk'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+} else {
+    echo "Produk tidak ditemukan.";
+    exit();
+}
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -133,45 +149,52 @@ if(isset($_POST['addToCartBtn'])) {
     <main>
         <div class="container my-5">
         <div class="row">
-          <div class="col-md-6">
-              <img src="../uploads/<?php echo $row['foto_produk']; ?>" class="img-fluid" alt="<?php echo $row['nama_produk']; ?>">
-          </div>
-          <div class="col-md-6">
-              <h1><?php echo $row['nama_produk']; ?></h1>
-              <p class="price">$<?php echo $row['harga_produk']; ?></p>
+            <div class="col-md-6">
+                <img src="../uploads/<?php echo $row['foto_produk']; ?>" class="img-fluid" alt="<?php echo $row['nama_produk']; ?>">
+            </div>
+            <div class="col-md-6">
+                <h1><?php echo $row['nama_produk']; ?></h1>
+                <p class="price">$<?php echo $row['harga_produk']; ?></p>
 
-              <div class="quantity mb-3">
-                  <button class="btn btn-outline-secondary" type="button" id="decrease">-</button>
-                  <input type="text" id="quantity" value="1" class="form-control w-auto d-inline text-center">
-                  <button class="btn btn-outline-secondary" type="button" id="increase">+</button>
-              </div>
-              <button class="btn btn-warning" id="addToCartBtn">Add to Cart</button>
+                <div class="quantity mb-3">
+                    <button class="btn btn-outline-secondary" type="button" id="decrease">-</button>
+                    <input type="text" id="quantity" value="1" class="form-control w-auto d-inline text-center">
+                    <button class="btn btn-outline-secondary" type="button" id="increase">+</button>
+                </div>
+                <form method="post" action="">
+                        <input type="hidden" name="id_produk" value="<?php echo $row['id_produk']; ?>">
+                        <input type="hidden" name="nama_produk" value="<?php echo $row['nama_produk']; ?>">
+                        <input type="hidden" name="harga_produk" value="<?php echo $row['harga_produk']; ?>">
+                        <input type="hidden" name="quantity" id="form_quantity" value="1">
+                        <input type="hidden" name="foto_produk" value="<?php echo $row['foto_produk']; ?>"> <!-- Tambahkan input hidden untuk menyimpan nama file foto produk -->
+                        <button type="submit" name="addToCartBtn" class="btn btn-warning">Add to Cart</button>
+                    </form>
+                <!-- <button class="btn btn-warning" id="addToCartBtn">Add to Cart</button> -->
 
-              <button class="btn btn-success">Buy it now</button>
-              <p class="mt-3">
-                  <strong>Stok:</strong> <?php echo $row['id_produk']; ?><br>
-                  <strong>Kategori:</strong> <?php echo $row['kategori']; ?><br>
-                  <strong>Share:</strong>
-              </p>
-              <div>
-                  <button class="btn-outline-primary" data-bs-toggle="collapse" href="#description" role="button" aria-expanded="false" aria-controls="description">
-                      Description
-                  </button>
-                  <button class="btn-outline-primary" data-bs-toggle="collapse" href="#reviews" role="button" aria-expanded="false" aria-controls="reviews">
-                      Reviews
-                  </button>
-                  <div class="collapse mt-3" id="description">
-                      <div class="card card-body">
-                          <?php echo $row['deskripsi_produk']; ?>
-                      </div>
-                  </div>
-                  <div class="collapse mt-3" id="reviews">
-                      <div class="card card-body">No reviews yet</div>
-                  </div>
-              </div>
-          </div>
-      </div>
-
+                <button class="btn btn-success">Buy it now</button>
+                <p class="mt-3">
+                    <strong>Stok:</strong> <?php echo $row['stock']; ?><br>
+                    <strong>Kategori:</strong> <?php echo $row['kategori']; ?><br>
+                    <strong>Share:</strong>
+                </p>
+                <div>
+                    <button class="btn-outline-primary" data-bs-toggle="collapse" href="#description" role="button" aria-expanded="false" aria-controls="description">
+                        Description
+                    </button>
+                    <button class="btn-outline-primary" data-bs-toggle="collapse" href="#reviews" role="button" aria-expanded="false" aria-controls="reviews">
+                        Reviews
+                    </button>
+                    <div class="collapse mt-3" id="description">
+                        <div class="card card-body">
+                            <?php echo $row['deskripsi_produk']; ?>
+                        </div>
+                    </div>
+                    <div class="collapse mt-3" id="reviews">
+                        <div class="card card-body">No reviews yet</div>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </main>
 
@@ -256,8 +279,13 @@ if(isset($_POST['addToCartBtn'])) {
             // Redirect ke halaman logout (buat file logout.php)
             window.location.href = "logout.php";
         }
+
+        
   </script>
-    <script src="../scripts/detail-product.js"></script>
+  <!-- <script>
+    
+</script> -->
+<script src="../scripts/detail-product.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
