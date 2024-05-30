@@ -22,8 +22,8 @@ session_start();
 
   <!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="#">
-        <img src="/assets/icons/logo-tanija.png" alt="Logo Tanija">
+    <a class="navbar-brand" href="/tanija/index.php">
+        <img src="../assets/icons/logo-tanija.png" alt="Logo Tanija">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -42,16 +42,16 @@ session_start();
           <a class="nav-link" href="/src/html/favorite.html"><i class="far fa-heart"></i></i><span class="badge">5</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./cart.html"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
+          <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
         </li>
         <li class="nav-item">
         <?php
             if (isset($_SESSION['email'])) {
-                echo '<form action="./src/php/logout.php" method="post">
+                echo '<form action="../php/logout.php" method="post">
                         <button class="btn btn-login" type="submit" name="logout">Logout</button>
                     </form>';
             } else {
-                echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'src/html/login.html\';">Login</button>';
+                echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'../html/login.html\';">Login</button>';
             }
             ?>
         </li>
@@ -69,10 +69,10 @@ session_start();
       <div class="collapse navbar-collapse" id="navbarSecond">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/index.html">Beranda</a>
+            <a class="nav-link" href="/tanija/index.php">Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/src/html/product.html">Produk</a>
+            <a class="nav-link" href="../html/product.php">Produk</a>
           </li>
           </li>
           <li class="nav-item">

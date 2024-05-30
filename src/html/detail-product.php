@@ -80,7 +80,7 @@ if(isset($_POST['addToCartBtn'])) {
             </form>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="#"> <i class="far fa-user"></i> <span id="nama_user"> Profile</span></a>
+                  <a class="nav-link" href="#"><i class="far fa-user"></i> <span id="nama_user"> Profile</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/src/html/favorite.html"><i class="far fa-heart"></i><span class="badge">5</span></a>
@@ -91,11 +91,11 @@ if(isset($_POST['addToCartBtn'])) {
                 <li class="nav-item">
                 <?php
                 if (isset($_SESSION['email'])) {
-                    echo '<form action="./src/php/logout.php" method="post">
+                    echo '<form action="../php/logout.php" method="post">
                             <button class="btn btn-login" type="submit" name="logout">Logout</button>
                           </form>';
                 } else {
-                    echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'src/html/login.html\';">Login</button>';
+                    echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'../html/login.html\';">Login</button>';
                 }
                 ?>
                 </li>
