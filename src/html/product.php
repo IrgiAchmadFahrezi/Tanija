@@ -10,12 +10,12 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Produk - Tanija</title>
 
-<!-- Bootstrap CSS -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<link href="../assets/css/bootstrap.css" rel="stylesheet">
-<!-- Style CSS -->
-<link href="../assets/css/style.css" rel="stylesheet">
-<!-- <link href="../assets/css/detail-product.css" rel="stylesheet"> -->
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/bootstrap.css" rel="stylesheet">
+  <!-- Style CSS -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+  <!-- <link href="../assets/css/detail-product.css" rel="stylesheet"> -->
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@ session_start();
 
   <!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/tanija/index.php">
         <img src="../assets/icons/logo-tanija.png" alt="Logo Tanija">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,11 +48,11 @@ session_start();
         <li class="nav-item">
         <?php
         if (isset($_SESSION['email'])) {
-            echo '<form action="./src/php/logout.php" method="post">
+            echo '<form action="../php/logout.php" method="post">
                     <button class="btn btn-login" type="submit" name="logout">Logout</button>
                   </form>';
         } else {
-            echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'src/html/login.html\';">Login</button>';
+            echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'../html/login.html\';">Login</button>';
         }
         ?>
         </li>
@@ -122,12 +122,6 @@ session_start();
                   <input class="form-check-input" type="checkbox" name="kategori[]" value="Pestisida" id="checkPestisida">
                   <label class="form-check-label" for="checkPestisida">
                       Pestisida
-                  </label>
-              </div>
-              <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Lainnya" id="checkLainnya">
-                  <label class="form-check-label" for="checkLainnya">
-                      Lainnya
                   </label>
               </div>
               <button type="submit" class="btn btn-primary mt-2">Filter</button>
