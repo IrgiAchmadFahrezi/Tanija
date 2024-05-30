@@ -1,58 +1,33 @@
+/* Add some margin to the body for better readability */
 body {
-  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-h5 {
-  font-weight: bold;
-  color: green;
-}
-
-.form-check-label {
-  margin-bottom: 10px;
-  display: block;
-}
-
-.reset-link {
-  display: block;
-  margin-top: 20px;
-  color: red;
-  cursor: pointer;
+h1 {
+  font-weight: bolder;
+  color: #1b5a7d;
+  margin-bottom: 30px;
 }
 
 .card {
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.card-title {
+  color: green;
+}
+
+.card-text {
+  font-weight: bold;
+}
+
+.card .btn-danger {
+  margin-bottom: 15px;
 }
 
 .card-img-top {
-  max-height: 200px;
-  object-fit: contain;
-}
-
-.card-body {
-  text-align: center;
-}
-
-.card-text a {
-  text-decoration: none;
-  color: green;
-  font-weight: bold;
-}
-
-.price {
-  color: #333;
-  font-size: 1.2em;
   margin-top: 10px;
-}
-
-.rating {
-  color: gold;
-  margin-top: 5px;
-}
-
-.form-check-input:checked ~ .form-check-label {
-  font-weight: bold;
-  color: green;
 }
 
 .footer {

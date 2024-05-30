@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detail Produk - Tanija</title>
+  <title>Keranjang - Tanija</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="/assets/css/bootstrap.css" rel="stylesheet">
 
   <!-- Style CSS -->
-  <link href="/src/css/detail-product.css" rel="stylesheet">
+  <link href="/src/css/cart.css" rel="stylesheet">
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -78,47 +78,101 @@
 
   <!-- main -->
   <main>
-    <div class="container my-5">
+    <div class="container mt-5">
         <div class="row">
-            <div class="col-md-6">
-                <img src="/assets/images/promo1.png" class="img-fluid" alt="Product Image">
-            </div>
-            <div class="col-md-6">
-                <h1>Play game</h1>
-                <p class="price">$11,70</p>
-                
-                <div class="quantity mb-3">
-                    <button class="btn btn-outline-secondary" type="button" id="decrease">-</button>
-                    <input type="text" id="quantity" value="1" class="form-control w-auto d-inline text-center">
-                    <button class="btn btn-outline-secondary" type="button" id="increase">+</button>
-                </div>
-                <button class="btn btn-warning">Add to cart</button>
-                <button class="btn btn-success">Buy it now</button>
-                <p class="mt-3">
-                    <strong>Sku:</strong> <br>
-                    <strong>Category:</strong> <br>
-                    <strong>Share:</strong>
-                    <a href="#"><i class="bi bi-facebook"></i></a>
-                    <a href="#"><i class="bi bi-twitter"></i></a>
-                    <a href="#"><i class="bi bi-whatsapp"></i></a>
-                </p>
-                <div>
-                    <button class="btn-outline-primary" data-bs-toggle="collapse" href="#description" role="button" aria-expanded="false" aria-controls="description">Description</button>
-                    <button class="btn-outline-primary" data-bs-toggle="collapse" href="#reviews" role="button" aria-expanded="false" aria-controls="reviews">Reviews</button>
-                    <div class="collapse mt-3" id="description">
-                        <div class="card card-body">
-                            Description content goes here.
-                        </div>
+          <div class="col-lg-8">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Product</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img src="/assets/icons/50x50.png" class="img-fluid me-3" alt="Product Image">
+                      <div>
+                        <p class="mb-0">Play game</p>
+                      </div>
                     </div>
-                    <div class="collapse mt-3" id="reviews">
-                        <div class="card card-body">
-                            No reviews yet
-                        </div>
+                  </td>
+                  <td>$11,70</td>
+                  <td>
+                    <div class="input-group">
+                      <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
+                      <input type="text" class="form-control form-control-sm text-center" value="1">
+                      <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
                     </div>
-                </div>
+                  </td>
+                  <td>$11,70</td>
+                  <td>
+                    <button class="btn btn-sm btn-outline-danger">×</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img src="/assets/icons/50x50.png" class="img-fluid me-3" alt="Product Image">
+                      <div>
+                        <p class="mb-0">Play game</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>$11,70</td>
+                  <td>
+                    <div class="input-group">
+                      <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
+                      <input type="text" class="form-control form-control-sm text-center" value="1">
+                      <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
+                    </div>
+                  </td>
+                  <td>$11,70</td>
+                  <td>
+                    <button class="btn btn-sm btn-outline-danger">×</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-warning">Continue shopping</button>
+              <button class="btn btn-success">Update cart</button>
+              <button class="btn btn-danger">Clear cart</button>
             </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Cart total</h5>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Subtotal
+                    <span>$23,20</span>
+                  </li>
+                  
+                  <!-- <li class="list-group-item"> -->
+                    <!-- <div class="input-group"> -->
+                      <!-- <input type="text" class="form-control" placeholder="Enter coupon code"> -->
+                      <!-- <button class="btn btn-outline-success" type="button">Apply</button> -->
+                    <!-- </div> -->
+                  <!-- </li> -->
+
+                  <li class="list-group-item">
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Total amount
+                    <span>$23,20</span>
+                  </li>
+                </ul>
+                <button class="btn btn-warning mt-3 w-100">Proceed to checkout</button>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
   </main>
 
   <!-- footer -->
@@ -180,6 +234,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="/src/scripts/detail-product.js"></script>
+
 </body>
 </html>

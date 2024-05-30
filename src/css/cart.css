@@ -1,58 +1,52 @@
-body {
-  font-family: Arial, sans-serif;
+.table th {
+  background-color: #e3f2fd;
 }
 
-h5 {
-  font-weight: bold;
-  color: green;
+.table tbody tr td:last-child {
+  text-align: right;
 }
 
-.form-check-label {
-  margin-bottom: 10px;
-  display: block;
-}
-
-.reset-link {
-  display: block;
-  margin-top: 20px;
-  color: red;
-  cursor: pointer;
-}
-
-.card {
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-}
-
-.card-img-top {
-  max-height: 200px;
-  object-fit: contain;
-}
-
-.card-body {
+.table .form-control {
+  max-width: 60px;
   text-align: center;
 }
 
-.card-text a {
-  text-decoration: none;
-  color: green;
-  font-weight: bold;
+.table .btn-outline-secondary {
+  min-width: 30px;
 }
 
-.price {
-  color: #333;
-  font-size: 1.2em;
-  margin-top: 10px;
+.card {
+  border: none;
 }
 
-.rating {
-  color: gold;
-  margin-top: 5px;
+.card-title {
+  background-color: #e3f2fd;
+  min-height: 45px;
 }
 
-.form-check-input:checked ~ .form-check-label {
-  font-weight: bold;
-  color: green;
+.card .card-body {
+  background-color: #f8f9fa;
+}
+
+.card .btn-outline-success {
+  border-color: #198754;
+  color: #198754;
+}
+
+.card .btn-outline-success:hover {
+  background-color: #198754;
+  color: #fff;
+}
+
+.img-fluid {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+
+.input-group button {
+  align-items: center;
+  color: black;
 }
 
 .footer {
@@ -62,21 +56,26 @@ h5 {
   padding: 50px 0;
   font-weight: 500;
 }
+
 .footer .logo img {
   max-width: 150px;
 }
+
 .footer .subtext-text-desc {
   font-size: 0.9rem;
   line-height: 1.6;
 }
+
 .footer .subtext-menu {
   margin-bottom: 30px;
 }
+
 .footer .subtext-menu-subtitle {
   font-size: 1.2rem;
   margin-bottom: 15px;
   color: #f6b943;
 }
+
 .footer .nav-link {
   color: #1b5a7d !important;
   font-size: 0.9rem;
@@ -84,25 +83,31 @@ h5 {
   display: block;
   transition: color 0.3s;
 }
+
 .footer .nav-link:hover {
   color: #f6b943;
 }
+
 .footer .ic-wrap .nav-link {
   display: inline-block;
   margin-right: 15px;
 }
+
 .footer .ic-wrap .nav-link svg {
   fill: #1b5a7d;
   transition: fill 0.3s;
 }
+
 .footer .ic-wrap .nav-link:hover svg {
   fill: #f6b943;
 }
+
 .footer .content-bottom {
   border-top: 1px solid #4b6b82;
   padding-top: 20px;
   margin-top: 20px;
 }
+
 .footer .copyright {
   font-size: 0.8rem;
 }
