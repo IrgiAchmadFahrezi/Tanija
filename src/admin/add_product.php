@@ -32,7 +32,13 @@ if (!isset($_SESSION['admin'])) {
             </div>
             <div class="mb-3">
                 <label for="kategori" class="form-label">Category</label>
-                <input type="text" class="form-control" id="kategori" name="kategori" required>
+                <select class="form-control" id="kategori" name="kategori" required>
+                    <option value="">Select Category</option>
+                    <option value="pupuk">Pupuk</option>
+                    <option value="alat pertanian">Alat Pertanian</option>
+                    <option value="bibit tanaman">Bibit Tanaman</option>
+                    <option value="pestisida">Pestisida</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="deskripsi_produk" class="form-label">Description</label>
