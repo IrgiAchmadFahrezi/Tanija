@@ -12,9 +12,10 @@ session_start();
 
 <!-- Bootstrap CSS -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<link href="assets/css/bootstrap.css" rel="stylesheet">
+<link href="../assets/css/bootstrap.css" rel="stylesheet">
 <!-- Style CSS -->
-<link href="assets/css/style.css" rel="stylesheet">
+<link href="../assets/css/style.css" rel="stylesheet">
+<!-- <link href="../assets/css/detail-product.css" rel="stylesheet"> -->
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -24,12 +25,11 @@ session_start();
   <!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="#">
-        <img src="/assets/icons/logo-tanija.png" alt="Logo Tanija">
+        <img src="../assets/icons/logo-tanija.png" alt="Logo Tanija">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Cari Produk..." aria-label="Cari Produk...">
@@ -37,16 +37,24 @@ session_start();
       </form>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#"> <i class="far fa-user"></i> Profile</a>
+        <a class="nav-link" href="#"> <i class="far fa-user"></i> <span id="nama_user"> Profile</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/src/html/favorite.html"><i class="far fa-heart"></i></i><span class="badge">5</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./cart.html"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
+          <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
         </li>
         <li class="nav-item">
-          <button class="btn btn-login" type="button" onclick="window.location.href='halaman_login.html';">Login</button>
+        <?php
+        if (isset($_SESSION['email'])) {
+            echo '<form action="./src/php/logout.php" method="post">
+                    <button class="btn btn-login" type="submit" name="logout">Logout</button>
+                  </form>';
+        } else {
+            echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'src/html/login.html\';">Login</button>';
+        }
+        ?>
         </li>
       </ul>
     </div>
@@ -62,10 +70,10 @@ session_start();
       <div class="collapse navbar-collapse" id="navbarSecond">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/index.html">Beranda</a>
+            <a class="nav-link" href="/tanija/index.php">Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/src/html/product.html">Produk</a>
+            <a class="nav-link" href="./product.php">Produk</a>
           </li>
           </li>
           <li class="nav-item">
@@ -83,53 +91,66 @@ session_start();
   <main>
     <div class="container mt-5">
       <div class="row">
-          <div class="col-md-3">
-              <h5>Categories</h5>
+      <div class="col-md-3">
+          <h5>Categories</h5>
+          <form method="GET" action="product.php">
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="checkAll">
+                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Semua" id="checkAll">
                   <label class="form-check-label" for="checkAll">
                       Semua Kategori
                   </label>
               </div>
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="checkPupuk">
+                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Pupuk" id="checkPupuk">
                   <label class="form-check-label" for="checkPupuk">
                       Pupuk
                   </label>
               </div>
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="checkAlatPertanian">
+                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Alat Pertanian" id="checkAlatPertanian">
                   <label class="form-check-label" for="checkAlatPertanian">
                       Alat Pertanian
                   </label>
               </div>
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="checkBibitTanaman">
+                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Bibit Tanaman" id="checkBibitTanaman">
                   <label class="form-check-label" for="checkBibitTanaman">
                       Bibit Tanaman
                   </label>
               </div>
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="checkPestisida">
+                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Pestisida" id="checkPestisida">
                   <label class="form-check-label" for="checkPestisida">
                       Pestisida
                   </label>
               </div>
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="checkLainnya">
+                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Lainnya" id="checkLainnya">
                   <label class="form-check-label" for="checkLainnya">
                       Lainnya
                   </label>
               </div>
-          </div>
-
-          <div class="col-md-9">
-              <div class="row">
+              <button type="submit" class="btn btn-primary mt-2">Filter</button>
+          </form>
+      </div>
+      <div class="col-md-9">
+      <div class="row">
                 <?php
-                // Query untuk mengambil data produk dari tabel produk
+                // Periksa apakah ada kategori yang dipilih
+                $kategoriDipilih = isset($_GET['kategori']) ? $_GET['kategori'] : array();
+
+                // Buat query dasar
                 $sql = "SELECT * FROM produk";
+
+                // Jika ada kategori yang dipilih, tambahkan kondisi WHERE
+                if (!empty($kategoriDipilih) && !in_array("Semua", $kategoriDipilih)) {
+                    $kategoriString = "'" . implode("','", $kategoriDipilih) . "'";
+                    $sql .= " WHERE kategori IN ($kategoriString)";
+                }
+
+                // Eksekusi query
                 $result = $conn->query($sql);
-        
+
                 // Cek apakah hasil query tidak kosong
                 if ($result->num_rows > 0) {
                     // Loop melalui hasil query dan tampilkan produk
@@ -139,7 +160,7 @@ session_start();
                         // Ambil nama file gambar dari database
                         $nama_file = $row['foto_produk'];
                         // Buat path lengkap menuju file gambar di folder uploads
-                        $path_gambar = "/tanija/uploads/" . $nama_file;
+                        $path_gambar = "../uploads/" . $nama_file;
                         // Periksa apakah file gambar ada
                         if (file_exists($path_gambar)) {
                             // Jika ada, tampilkan gambar
@@ -149,8 +170,8 @@ session_start();
                             echo '<img src="default_image.jpg" class="card-img-top" alt="Default Image">';
                         }
                         echo '<div class="card-body">';
-                        echo '<p class="card-text"><a href="#">'.$row['nama_produk'].'</a></p>';
-                        echo '<p class="price">$'.$row['harga_produk'].'</p>';
+                        echo '<p class="card-text"><a href="detail-product.php?id='.$row['id_produk'].'">'.$row['nama_produk'].'</a></p>';
+                        echo '<p class="price">Rp'.$row['harga_produk'].'</p>';
                         echo '<div class="rating">★★★★★</div>';
                         echo '</div>';
                         echo '</div>';
@@ -162,8 +183,8 @@ session_start();
                 // Tutup koneksi
                 $conn->close();
                 ?> 
-              </div>
-          </div>
+            </div>
+        </div>
       </div>
   </div>
   </main>
@@ -176,7 +197,7 @@ session_start();
           <div class="content-top-left subtext col-12 col-lg-4">
             <div class="subtext-text d-flex flex-column gap-3">
               <a href="#" class="logo d-inline-flex">
-                <img src="/assets/icons/logo-tanija.png" alt="" class="img img-logo" />
+                <img src="../assets/icons/logo-tanija.png" alt="" class="img img-logo" />
               </a>
               <p class="subtext-text-desc">Tanija hadir menyediakan pengalaman belanja online yang responsif dan ramah pengguna untuk para konsumen yang tertarik dengan produk-produk pertanian berkualitas.</p>
             </div>
@@ -222,6 +243,31 @@ session_start();
       </div>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+            // Cek apakah sesi email ada
+            <?php if(isset($_SESSION['email'])) { ?>
+                // Jika sesi email ada, ambil nama pengguna dari sesi
+                var namaUser = "<?php echo $_SESSION['nama_user']; ?>";
+                // Ubah teks "Profile" menjadi nama pengguna
+                document.getElementById("nama_user").innerText = namaUser;
+            <?php } ?>
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Cek apakah sesi email ada
+            <?php if(isset($_SESSION['email'])) { ?>
+                // Jika sesi email ada, tampilkan tombol logout
+                document.getElementById("loginBtn").innerHTML = '<button class="btn btn-login" type="button" onclick="logout()">Logout</button>';
+            <?php } ?>
+        });
+
+    function logout() {
+        // Redirect ke halaman logout (buat file logout.php)
+        window.location.href = "logout.php";
+    }
+  </script>
 
   <!-- Bootstrap JS, Popper.js, dan jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
