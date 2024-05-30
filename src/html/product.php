@@ -12,9 +12,9 @@ session_start();
 
 <!-- Bootstrap CSS -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<link href="assets/css/bootstrap.css" rel="stylesheet">
+<link href="/assets/css/bootstrap.css" rel="stylesheet">
 <!-- Style CSS -->
-<link href="assets/css/style.css" rel="stylesheet">
+<link href="../assets/css/style.css" rel="stylesheet">
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -62,10 +62,10 @@ session_start();
       <div class="collapse navbar-collapse" id="navbarSecond">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/index.html">Beranda</a>
+            <a class="nav-link" href="/index.php">Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/src/html/product.html">Produk</a>
+            <a class="nav-link" href="/src/html/product.php">Produk</a>
           </li>
           </li>
           <li class="nav-item">

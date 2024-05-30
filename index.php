@@ -39,7 +39,7 @@ session_start();
           <a class="nav-link" href="#"><i class="far fa-heart"></i></i><span class="badge">5</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
+          <a class="nav-link" href="./src/html/cart.html"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
         </li>
         <li class="nav-item">
         <?php
@@ -66,7 +66,7 @@ session_start();
       <div class="collapse navbar-collapse" id="navbarSecond">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/index.html">Beranda</a>
+            <a class="nav-link" href="./index.php">Beranda</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="src/html/product.php">Produk</a>
