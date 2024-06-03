@@ -17,6 +17,7 @@ session_start();
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  
 </head>
 <body>
 
@@ -198,7 +199,7 @@ session_start();
           <div class="content-top-left subtext col-12 col-lg-4">
             <div class="subtext-text d-flex flex-column gap-3">
               <a href="#" class="logo d-inline-flex">
-                <img src="/assets/icons/logo-tanija.png" alt="" class="img img-logo" />
+                <img src="../assets/icons/logo-tanija.png" alt="" class="img img-logo" />
               </a>
               <p class="subtext-text-desc">Tanija hadir menyediakan pengalaman belanja online yang responsif dan ramah pengguna untuk para konsumen yang tertarik dengan produk-produk pertanian berkualitas.</p>
             </div>
