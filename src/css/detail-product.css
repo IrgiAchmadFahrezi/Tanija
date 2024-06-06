@@ -34,6 +34,29 @@ h5 {
 
 .card-body {
   background-color: #f8f9fa;
+  text-align: left !important;
+  margin-bottom: 15px;
+}
+.star {
+  color: gold; /* Warna bintang */
+}
+.review-item {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.review-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.review-rating {
+  color: #f39c12; /* Warna bintang */
+}
+
+.review-text {
+  margin-top: 10px;
 }
 
 .btn-outline-primary {

@@ -97,37 +97,47 @@ session_start();
       <div class="col-md-3">
           <h5>Categories</h5>
           <form method="GET" action="product.php">
+              <?php
+                  // Ambil kategori yang dipilih dari parameter URL
+                  $kategoriDipilih = isset($_GET['kategori']) ? $_GET['kategori'] : array();
+
+                  // Fungsi untuk memeriksa apakah kategori dipilih
+                  function isChecked($kategoriDipilih, $value) {
+                      return in_array($value, $kategoriDipilih) ? 'checked' : '';
+                  }
+                  ?>
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Semua" id="checkAll">
+                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Semua" id="checkAll" <?php echo isChecked($kategoriDipilih, 'Semua'); ?>>
                   <label class="form-check-label" for="checkAll">
                       Semua Kategori
                   </label>
               </div>
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Pupuk" id="checkPupuk">
+                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Pupuk" id="checkPupuk" <?php echo isChecked($kategoriDipilih, 'Pupuk'); ?>>
                   <label class="form-check-label" for="checkPupuk">
                       Pupuk
                   </label>
               </div>
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Alat Pertanian" id="checkAlatPertanian">
+                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Alat Pertanian" id="checkAlatPertanian" <?php echo isChecked($kategoriDipilih, 'Alat Pertanian'); ?>>
                   <label class="form-check-label" for="checkAlatPertanian">
                       Alat Pertanian
                   </label>
               </div>
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Bibit Tanaman" id="checkBibitTanaman">
+                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Bibit Tanaman" id="checkBibitTanaman" <?php echo isChecked($kategoriDipilih, 'Bibit Tanaman'); ?>>
                   <label class="form-check-label" for="checkBibitTanaman">
                       Bibit Tanaman
                   </label>
               </div>
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Pestisida" id="checkPestisida">
+                  <input class="form-check-input" type="checkbox" name="kategori[]" value="Pestisida" id="checkPestisida" <?php echo isChecked($kategoriDipilih, 'Pestisida'); ?>>
                   <label class="form-check-label" for="checkPestisida">
                       Pestisida
                   </label>
               </div>
               <button type="submit" class="btn btn-primary mt-2">Filter</button>
+              <button type="button" class="btn btn-secondary mt-2" id="resetFilter">Reset Filter</button>
           </form>
       </div>
       <div class="col-md-9">
@@ -264,6 +274,19 @@ session_start();
         // Redirect ke halaman logout (buat file logout.php)
         window.location.href = "logout.php";
     }
+  </script>
+  <script>
+    document.getElementById('resetFilter').addEventListener('click', function() {
+        // Hapus semua pilihan checkbox
+        var checkboxes = document.querySelectorAll('.form-check-input');
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = false;
+        });
+
+        // Submit form untuk memuat ulang halaman tanpa filter
+        var form = document.querySelector('form');
+        form.submit();
+    });
   </script>
 
   <!-- Bootstrap JS, Popper.js, dan jQuery -->

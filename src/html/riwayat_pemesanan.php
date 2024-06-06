@@ -4,7 +4,7 @@ include '../php/db_connection.php';
 
 // Periksa apakah pengguna sudah login
 if (!isset($_SESSION['email'])) {
-    header("Location: ../html/login.html");
+  echo "<script>alert('Anda harus login terlebih dahulu untuk melihat riwayat pembelian!'); window.location.href='../html/login.html';</script>";
     exit();
 }
 

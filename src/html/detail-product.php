@@ -4,6 +4,12 @@ include '../php/db_connection.php';
 
 // Pastikan tombol "Add to Cart" ditekan
 if (isset($_POST['addToCartBtn'])) {
+    // Periksa apakah pengguna sudah login
+    if (!isset($_SESSION['email'])) {
+        echo "<script>alert('Anda harus login terlebih dahulu untuk menambahkan produk ke keranjang.'); window.location.href='../html/login.html';</script>";
+        exit();
+    }
+
     // Tangkap detail produk dari POST data
     $id_produk = $_POST['id_produk'];
     $nama_produk = $_POST['nama_produk'];
@@ -63,6 +69,8 @@ $conn->close();
 
     <!-- Font Awesome CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/detail-product.css">
 </head>
 <body>
     <?php
@@ -135,6 +143,9 @@ $conn->close();
                         <a class="nav-link" href="./product.php">Produk</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="./riwayat_pemesanan.php">Riwayat</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#">Artikel</a>
                     </li>
                     <li class="nav-item">
@@ -190,8 +201,64 @@ $conn->close();
                         </div>
                     </div>
                     <div class="collapse mt-3" id="reviews">
-                        <div class="card card-body">No reviews yet</div>
-                    </div>
+    <div class="card card-body">
+        <?php
+        // Koneksi ke database
+        include '../php/db_connection.php';
+
+        // Query untuk mengambil ulasan produk dari database
+        $reviews_sql = "SELECT * FROM reviews WHERE id_pemesanan = ?";
+        $reviews_stmt = $conn->prepare($reviews_sql);
+        if ($reviews_stmt) {
+            // Bind parameter
+            $reviews_stmt->bind_param("i", $id_produk);
+
+            // Set nilai parameter
+            $id_produk = $_GET['id'];
+
+            // Eksekusi statement
+            $reviews_stmt->execute();
+
+            // Ambil hasil
+            $reviews_result = $reviews_stmt->get_result();
+
+            // Tampilkan ulasan jika ada
+            if ($reviews_result->num_rows > 0) {
+                while ($review_row = $reviews_result->fetch_assoc()) {
+                    // Tampilkan nama pengguna
+                    echo '<div class="review-item">';
+                    echo '<strong>Nama:</strong> ' . $review_row['nama_user'] . '<br>';
+
+                    // Tampilkan rating dalam bentuk bintang
+                    echo '<strong>Rating:</strong> ';
+                    $rating = intval($review_row['review_rating']);
+                    for ($i = 0; $i < $rating; $i++) {
+                        echo '<span class="star">&#9733;</span>'; // Menampilkan bintang solid
+                    }
+                    echo '<br>';
+
+                    // Tampilkan teks ulasan
+                    echo '<strong>Ulasan:</strong> ' . $review_row['review_text'] . '<br>';
+                    echo '</div>';
+                }
+            } else {
+                echo "Belum ada ulasan untuk produk ini.";
+            }
+
+            // Tutup statement
+            $reviews_stmt->close();
+        } else {
+            // Handle error jika query ulasan gagal
+            echo "Gagal menyiapkan periksa ulasan statement: " . $conn->error;
+        }
+
+        // Tutup koneksi
+        $conn->close();
+        ?>
+    </div>
+</div>
+
+
                 </div>
             </div>
         </div>
@@ -280,11 +347,9 @@ $conn->close();
             window.location.href = "logout.php";
         }
 
+       
         
   </script>
-  <!-- <script>
-    
-</script> -->
 <script src="../scripts/detail-product.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
