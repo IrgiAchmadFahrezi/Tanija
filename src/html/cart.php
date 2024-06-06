@@ -17,7 +17,7 @@ session_start();
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-  
+
 </head>
 <body>
 
@@ -74,6 +74,9 @@ session_start();
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../html/product.php">Produk</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./riwayat_pemesanan.php">Riwayat</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Artikel</a>
@@ -141,13 +144,11 @@ session_start();
             }
             ?>
         </tbody>
-
-
           </table>
           <div class="d-flex justify-content-between">
             <a href="./product.php"><button class="btn btn-warning" >Lanjut Belanja</button></a>
             <form action="../php/remove_from_cart.php" method="post">
-        <button class="btn btn-danger" type="submit" name="clear_cart">Bersihkan Keranjang</button>
+            <button class="btn btn-danger" type="submit" name="clear_cart" <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '' : 'disabled'; ?>>Bersihkan Keranjang</button>
     </form>
           </div>
         </div>
@@ -172,18 +173,15 @@ session_start();
                     $total = 0;
                 }
                 ?>
-
-                <!-- Tampilkan subtotal dan total -->
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Subtotal
-                    <span>Rp. <?php echo number_format($subtotal, 0, ',', '.'); ?></span>
-                </li>
+                
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Total
                     <span>Rp. <?php echo number_format($total, 0, ',', '.'); ?></span>
                 </li>
             </ul>
-              <button class="btn btn-warning mt-3 w-100">Lanjut ke Pembayaran</button>
+            <a href="./detail-pembayaran.php">
+            <a href="./detail-pembayaran.php"><button class="btn btn-warning mt-3 w-100" <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '' : 'disabled'; ?>>Lanjut ke Pembayaran</button></a>
+            </a>
             </div>
           </div>
         </div>

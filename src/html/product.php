@@ -75,6 +75,9 @@ session_start();
           <li class="nav-item">
             <a class="nav-link" href="./product.php">Produk</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./riwayat_pemesanan.php">Riwayat</a>
+          </li>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Artikel</a>
