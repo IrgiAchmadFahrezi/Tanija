@@ -152,7 +152,7 @@ if ($result->num_rows > 0) {
 
     function showNota(idPemesanan) {
         // Redirect ke halaman nota dengan menyertakan idPemesanan sebagai parameter URL
-        window.location.href = "nota.php?id_pemesanan=" + idPemesanan;
+        window.location.href = "detail-pembelian.php?id_pemesanan=" + idPemesanan;
     }
 
     function cetakSlipPembayaran(idPemesanan) {

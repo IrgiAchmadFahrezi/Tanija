@@ -21,9 +21,12 @@
 
 .card-title {
   background-color: #e3f2fd;
-  min-height: 45px;
+  height: 50px;
 }
 
+.card-body {
+  padding: 0 2px 2px 2px !important;
+}
 .card .card-body {
   background-color: #f8f9fa;
 }

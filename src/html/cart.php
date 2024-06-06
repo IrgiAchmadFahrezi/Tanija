@@ -17,7 +17,7 @@ session_start();
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="../css/cart.css">
 </head>
 <body>
 
@@ -116,19 +116,20 @@ session_start();
                             <td>
                                 <div class='d-flex align-items-center'>
                                     <img src='../uploads/{$product['foto_produk']}' class='img-fluid me-3' alt='Gambar Produk' style='max-width: 100px;'>
-                                    <div>
-                                        <p class='mb-0'>{$product['nama']}</p>
-                                    </div>
+                                </div>
+                                <div>
+                                        <p class='mb-1'>{$product['nama']}</p>
                                 </div>
                             </td>
                             <td>Rp. ".number_format($product['harga'], 0, ',', '.')."</td>
                             <td>
                                 <div class='input-group'>
-                                    <button class='btn btn-outline-secondary btn-sm' type='button'>-</button>
-                                    <input type='text' class='form-control form-control-sm text-center' value='{$product['jumlah']}'>
-                                    <button class='btn btn-outline-secondary btn-sm' type='button'>+</button>
+                                    <button class='btn btn-outline-secondary btn-sm' type='button' onclick='decreaseQuantity({$product_id})'>-</button>
+                                    <input id='quantity{$product_id}' type='text' class='form-control form-control-sm text-center' value='{$product['jumlah']}'>
+                                    <button class='btn btn-outline-secondary btn-sm' type='button' onclick='increaseQuantity({$product_id})'>+</button>
                                 </div>
                             </td>
+
                             <td>Rp. ".number_format($subtotal, 0, ',', '.')."</td>
                             <td>
                                 <form action='../php/remove_from_cart.php' method='post'>
@@ -156,29 +157,29 @@ session_start();
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Total Keranjang</h5>
-              <ul class="list-group list-group-flush">
-                <?php
-                // Inisialisasi total dengan nilai 0
-                $total = 0;
+              <ul class="list-group list-group-flush" id="total-container">
+                  <?php
+                  // Inisialisasi total dengan nilai 0
+                  $total = 0;
 
-                // Periksa apakah keranjang tidak kosong
-                if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
-                    foreach($_SESSION['cart'] as $product_id => $product) {
-                        $subtotal = $product['harga'] * $product['jumlah'];
-                        $total += $subtotal;
-                    }
-                } else {
-                    // Jika keranjang kosong, atur total dan subtotal menjadi 0
-                    $subtotal = 0;
-                    $total = 0;
-                }
-                ?>
-                
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Total
-                    <span>Rp. <?php echo number_format($total, 0, ',', '.'); ?></span>
-                </li>
-            </ul>
+                  // Periksa apakah keranjang tidak kosong
+                  if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+                      foreach($_SESSION['cart'] as $product_id => $product) {
+                          $subtotal = $product['harga'] * $product['jumlah'];
+                          $total += $subtotal;
+                      }
+                  } else {
+                      // Jika keranjang kosong, atur total dan subtotal menjadi 0
+                      $subtotal = 0;
+                      $total = 0;
+                  }
+                  ?>
+                  
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Total
+                      <span id="total-amount">Rp. <?php echo number_format($total, 0, ',', '.'); ?></span>
+                  </li>
+              </ul>
             <a href="./detail-pembayaran.php">
             <a href="./detail-pembayaran.php"><button class="btn btn-warning mt-3 w-100" <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '' : 'disabled'; ?>>Lanjut ke Pembayaran</button></a>
             </a>
@@ -244,6 +245,92 @@ session_start();
       </div>
     </div>
   </footer>
+  <script>
+    function increaseQuantity(productId) {
+        var quantityInput = document.getElementById('quantity' + productId);
+        var currentQuantity = parseInt(quantityInput.value);
+        quantityInput.value = currentQuantity + 1;
+        updateCart(productId, currentQuantity + 1);
+        updateTotal();
+    }
+
+    function decreaseQuantity(productId) {
+        var quantityInput = document.getElementById('quantity' + productId);
+        var currentQuantity = parseInt(quantityInput.value);
+        if (currentQuantity > 1) {
+            quantityInput.value = currentQuantity - 1;
+            updateCart(productId, currentQuantity - 1);
+            updateTotal();
+        }
+    }
+
+    function updateCart(productId, newQuantity) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../php/update_cart.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // Handle response here if needed
+            }
+        };
+        xhr.send('product_id=' + productId + '&new_quantity=' + newQuantity);
+    }
+    function updateTotal() {
+        var total = 0;
+        <?php
+        // Loop through each product in the session cart
+        if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+            foreach($_SESSION['cart'] as $product_id => $product) {
+                echo 'total += ' . $product['harga'] . ' * ' . $product['jumlah'] . ';';
+            }
+        }
+        ?>
+
+        // Update the total amount displayed on the page
+        document.getElementById('total-amount').innerText = 'Rp. ' + formatNumber(total);
+    }
+
+    // Format the number with thousand separators
+    function formatNumber(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Attach event listeners to quantity inputs
+      <?php
+      if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+        foreach($_SESSION['cart'] as $product_id => $product) {
+      ?>
+          var quantityInput<?php echo $product_id; ?> = document.getElementById('quantity<?php echo $product_id; ?>');
+          quantityInput<?php echo $product_id; ?>.addEventListener('change', updateTotal);
+      <?php
+        }
+      }
+      ?>
+
+      // Update total when page is loaded for the first time
+      updateTotal();
+    });
+
+    function updateTotal() {
+      var total = 0;
+      <?php
+      if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+        foreach($_SESSION['cart'] as $product_id => $product) {
+          echo 'total += ' . $product['harga'] . ' * document.getElementById(\'quantity' . $product_id . '\').value;';
+        }
+      }
+      ?>
+
+      document.getElementById('total-container').innerHTML = '<li class="list-group-item d-flex justify-content-between align-items-center">Total<span>Rp. ' + formatNumber(total) + '</span></li>';
+    }
+
+    function formatNumber(number) {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  </script>
+
   <script>
     document.addEventListener("DOMContentLoaded", function() {
             // Cek apakah sesi email ada

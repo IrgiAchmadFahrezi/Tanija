@@ -32,6 +32,8 @@ if (isset($_GET['id_pemesanan'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- Font Awesome CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <title>Nota Pembayaran</title>
     <style>
         /* Gaya CSS untuk nota pembayaran */
@@ -63,76 +65,85 @@ if (isset($_GET['id_pemesanan'])) {
         .container th {
             background-color: #F1F1F1;
         }
-        button{
-            background-color: #00880d;
-            width: 100px;
-            height: 40px;
+        button {
+            width: 130px;
+            height: 60px;
             border-radius: 30px;
             border: none;
-            margin-left: 10%;
+            /* margin-left: 10%; */
             color: #F1F1F1;
             font-weight: bold;
             cursor: pointer;
         }
-        button:hover{
-            background-color: #087613;
+        .cetak{
+            background-color: #00880d;
         }
-        @media print{
-			#no-print{
-				display: none;
-			}
-		}
+        .kembali{
+            background-color: #f6b943;
+        }
+        button:hover {
+            filter: brightness(80%); /* Mengurangi kecerahan saat di-hover */
+        }
+        @media print {
+            #no-print {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Nota Pembayaran Tanija</h1>
-        <p>No. Pembelian: <?php echo $id_pemesanan; ?></p></p>
+        <p>No. Pembelian: <?php echo $id_pemesanan; ?></p>
         <p>No. Telepon: <?php echo $nomor_telepon; ?></p>
         <p>Tanggal Pembelian: <?php echo $pemesanan['tanggal_pemesanan']; ?></p>
         <table>
             <tr>
                 <th style="width: 5%;">No.</th>
                 <th>Produk</th>
-                <th>Harga</th>
+                <th>Jumlah</th>
+                <th>Harga per Produk</th>
+                <th>Total Harga</th>
             </tr>
             <?php 
             $total_pembayaran = 0;
             if (!empty($detail_barang)) {
                 foreach ($detail_barang as $index => $barang) : 
-                    $total_pembayaran += $barang['harga'];
+                    $total_harga = $barang['harga'] * $barang['jumlah'];
+                    $total_pembayaran += $total_harga;
             ?>
             <tr>
                 <td style="text-align: center;"><?php echo $index + 1; ?></td>
                 <td><?php echo $barang['nama_barang']; ?></td>
+                <td style="text-align: center;"><?php echo $barang['jumlah']; ?></td>
                 <td>Rp. <?php echo number_format($barang['harga'], 0, ',', '.'); ?></td>
+                <td>Rp. <?php echo number_format($total_harga, 0, ',', '.'); ?></td>
             </tr>
             <?php 
                 endforeach; 
             } else {
-                echo "<tr><td colspan='3'>Tidak ada barang dalam pemesanan ini.</td></tr>";
+                echo "<tr><td colspan='5'>Tidak ada barang dalam pemesanan ini.</td></tr>";
             }
             ?>
             <tr>
-                <td colspan="2" style="text-align: right; border:none !important; font-weight: bold;">Total:</td>
+                <td colspan="4" style="text-align: right; border:none !important; font-weight: bold;">Total:</td>
                 <td style="background-color: #F1F1F1;">Rp. <?php echo number_format($total_pembayaran, 0, ',', '.'); ?></td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: right; border:none !important; font-weight: bold;">Ongkir:</td>
+                <td colspan="4" style="text-align: right; border:none !important; font-weight: bold;">Ongkir:</td>
                 <td style="background-color: #F1F1F1;">Rp. <?php echo number_format($pemesanan['ongkir'], 0, ',', '.'); ?></td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: right; border:none !important; font-weight: bold;">Total Pembayaran:</td>
+                <td colspan="4" style="text-align: right; border:none !important; font-weight: bold;">Total Pembayaran:</td>
                 <td style="background-color: #F1F1F1;">Rp. <?php echo number_format($total_pembayaran + $pemesanan['ongkir'], 0, ',', '.'); ?></td>
             </tr>
         </table>
     </div>
-    <button id="no-print" onclick="window.print();">Cetak Nota</button>
-    <!-- <script>
-        window.onload = function() {
-            window.print();
-        }
-    </script> -->
+    <div id="no-print" style="text-align: center; margin-top: 20px;">
+    <button class="cetak" onclick="window.print();"><i class="fas fa-print"></i></button>
+    <button class="kembali" onclick="window.history.back();"><i class="fas fa-arrow-left"></i></button>
+</div>
+
 </body>
 </html>
 
