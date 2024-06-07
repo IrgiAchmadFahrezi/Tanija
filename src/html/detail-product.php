@@ -50,6 +50,44 @@ if ($result->num_rows > 0) {
     echo "Produk tidak ditemukan.";
     exit();
 }
+
+$id_produk = $_GET['id'];
+$sql = "SELECT * FROM produk WHERE id_produk = '$id_produk'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+} else {
+    echo "Produk tidak ditemukan.";
+    exit();
+}
+
+if(isset($_POST['addToFavoriteBtn'])) {
+    // Tangkap detail produk
+    $id_produk = $_GET['id'];
+    $nama_produk = $row['nama_produk'];
+    $harga_produk = $row['harga_produk'];
+    $foto_produk = $row['foto_produk']; // Tambahkan ini
+
+    // Buat array untuk menyimpan detail produk
+    $produk = array(
+        'id' => $id_produk,
+        'nama' => $nama_produk,
+        'harga' => $harga_produk,
+        'foto_produk' => $foto_produk // Tambahkan ini
+    );
+
+    // Periksa apakah favorit telah dibuat sebelumnya dalam sesi
+    if(!isset($_SESSION['favorites'])) {
+        $_SESSION['favorites'] = array();
+    }
+
+    // Tambahkan detail produk ke dalam favorit
+    $_SESSION['favorites'][$id_produk] = $produk;
+
+    // Redirect ke halaman favorit
+    //header("Location: favorite.php");
+    //exit();
+}
 $conn->close();
 ?>
 
@@ -71,7 +109,6 @@ $conn->close();
     <!-- Font Awesome CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/detail-product.css">
 </head>
 <body>
     <?php
@@ -162,7 +199,7 @@ $conn->close();
         <div class="container my-5">
         <div class="row">
             <div class="col-md-6">
-                <img src="../uploads/<?php echo $row['foto_produk']; ?>" class="img-fluid" alt="<?php echo $row['nama_produk']; ?>">
+                <img src="../uploads/<?php echo $row['foto_produk']; ?>" class="img-fluid product-image" alt="<?php echo $row['nama_produk']; ?>">
             </div>
             <div class="col-md-6">
                 <h1><?php echo $row['nama_produk']; ?></h1>
@@ -173,6 +210,8 @@ $conn->close();
                     <input type="text" id="quantity" value="1" class="form-control w-auto d-inline text-center">
                     <button class="btn btn-outline-secondary" type="button" id="increase">+</button>
                 </div>
+
+                <div class="btn-container">
                 <form method="post" action="">
                         <input type="hidden" name="id_produk" value="<?php echo $row['id_produk']; ?>">
                         <input type="hidden" name="nama_produk" value="<?php echo $row['nama_produk']; ?>">
@@ -180,10 +219,13 @@ $conn->close();
                         <input type="hidden" name="quantity" id="form_quantity" value="1">
                         <input type="hidden" name="foto_produk" value="<?php echo $row['foto_produk']; ?>"> <!-- Tambahkan input hidden untuk menyimpan nama file foto produk -->
                         <button type="submit" name="addToCartBtn" class="btn btn-warning">Add to Cart</button>
+                        <button type="submit" class="btn btn-outline-secondary btn-favorite" name="addToFavoriteBtn">Add to Favorite</button>
+                        <button class="btn btn-success">Buy it now</button>
                     </form>
+                </div>
                 <!-- <button class="btn btn-warning" id="addToCartBtn">Add to Cart</button> -->
 
-                <button class="btn btn-success">Buy it now</button>
+                
                 <p class="mt-3">
                     <strong>Stok:</strong> <?php echo $row['stock']; ?><br>
                     <strong>Kategori:</strong> <?php echo $row['kategori']; ?><br>
@@ -351,7 +393,7 @@ $conn->close();
        
         
   </script>
-<script src="../scripts/detail-product.js"></script>
+    <script src="../scripts/detail-product.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
