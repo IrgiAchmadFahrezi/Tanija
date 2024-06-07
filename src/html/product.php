@@ -15,7 +15,7 @@ session_start();
   <link href="../assets/css/bootstrap.css" rel="stylesheet">
   <!-- Style CSS -->
   <link href="../assets/css/style.css" rel="stylesheet">
-  <!-- <link href="../assets/css/detail-product.css" rel="stylesheet"> -->
+  <link href="/src/css/product.css" rel="stylesheet">
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -40,7 +40,7 @@ session_start();
         <a class="nav-link" href="#"> <i class="far fa-user"></i> <span id="nama_user"> Profile</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/src/html/favorite.html"><i class="far fa-heart"></i></i><span class="badge">5</span></a>
+          <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i></i><span class="badge">5</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>

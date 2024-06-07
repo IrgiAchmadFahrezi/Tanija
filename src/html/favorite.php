@@ -1,20 +1,21 @@
 <?php
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Keranjang - Tanija</title>
+  <title>Favorit - Tanija</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/css/bootstrap.css" rel="stylesheet"> 
-  <!-- <link href="../css/favorite.css" rel="stylesheet"> -->
-  
+  <link href="../assets/css/bootstrap.css" rel="stylesheet">
+
   <!-- Style CSS -->
   <link href="../assets/css/style.css" rel="stylesheet">
+  <link href="../css/favorite.css" rel="stylesheet">
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -37,7 +38,7 @@ session_start();
       </form>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#"> <i class="far fa-user"></i> <span id="nama_user"> Profile</span></a>
+          <a class="nav-link" href="#"> <i class="far fa-user"></i> Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i></i><span class="badge">5</span></a>
@@ -47,14 +48,14 @@ session_start();
         </li>
         <li class="nav-item">
         <?php
-            if (isset($_SESSION['email'])) {
-                echo '<form action="../php/logout.php" method="post">
-                        <button class="btn btn-login" type="submit" name="logout">Logout</button>
-                    </form>';
-            } else {
-                echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'../html/login.html\';">Login</button>';
-            }
-            ?>
+        if (isset($_SESSION['email'])) {
+            echo '<form action="../php/logout.php" method="post">
+                    <button class="btn btn-login" type="submit" name="logout">Logout</button>
+                  </form>';
+        } else {
+            echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'../html/login.html\';">Login</button>';
+        }
+        ?>
         </li>
       </ul>
     </div>
@@ -73,7 +74,7 @@ session_start();
             <a class="nav-link" href="/tanija/index.php">Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../html/product.php">Produk</a>
+            <a class="nav-link" href="./product.php">Produk</a>
           </li>
           </li>
           <li class="nav-item">
@@ -89,102 +90,41 @@ session_start();
 
   <!-- main -->
   <main>
-    <div class="container mt-5">
-        <div class="row">
-          <div class="col-lg-8">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Product</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Subtotal</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <img src="/assets/icons/50x50.png" class="img-fluid me-3" alt="Product Image">
-                      <div>
-                        <p class="mb-0">Play game</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>$11,70</td>
-                  <td>
-                    <div class="input-group">
-                      <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
-                      <input type="text" class="form-control form-control-sm text-center" value="1">
-                      <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
-                    </div>
-                  </td>
-                  <td>$11,70</td>
-                  <td>
-                    <button class="btn btn-sm btn-outline-danger">×</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <img src="/assets/icons/50x50.png" class="img-fluid me-3" alt="Product Image">
-                      <div>
-                        <p class="mb-0">Play game</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>$11,70</td>
-                  <td>
-                    <div class="input-group">
-                      <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
-                      <input type="text" class="form-control form-control-sm text-center" value="1">
-                      <button class="btn btn-outline-secondary btn-sm" type="button">+</button>
-                    </div>
-                  </td>
-                  <td>$11,70</td>
-                  <td>
-                    <button class="btn btn-sm btn-outline-danger">×</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="d-flex justify-content-between">
-              <button class="btn btn-warning">Continue shopping</button>
-              <button class="btn btn-success">Update cart</button>
-              <button class="btn btn-danger">Clear cart</button>
+        <div class="container my-5">
+            <h1 class="text-center">Produk Favorit</h1>
+            <div class="row">
+                <?php
+                if (isset($_SESSION['favorites']) && !empty($_SESSION['favorites'])) {
+                  foreach ($_SESSION['favorites'] as $produk) {
+                    echo '<div class="col-md-4">';
+                    echo '<div class="card">';
+                    // Check if "foto" key exists, use a default image if not
+                    if (isset($produk['foto_produk'])) {
+                      echo '<img src="../uploads/'.$produk['foto_produk'].'" class="card-img-top" alt="'.$produk['nama'].'">';
+                  } else {
+                      echo '<img src="../assets/images/default.jpg" class="card-img-top" alt="Default Image">';
+                  }
+                        echo '<div class="card-body">';
+                        echo '<h5 class="card-title"><a href="detail-product.php?id='.$produk['id'].'">'.$produk['nama'].'</a></h5>';
+                        echo '<p class="card-text">Rp. '.$produk['harga'].'</p>';
+                        echo '<form method="post" action="../php/remove_favorite.php">';
+                        echo '<input type="hidden" name="id_produk" value="'.$produk['id'].'">';
+                        echo '<button type="submit" class="btn btn-danger"><i class="far fa-heart"></i> Hapus dari Favorit</button>';
+                        echo '</form>';
+                        echo '<form method="post" action="detail-produk.php?id='.$produk['id'].'">';
+                        echo '<button type="submit" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Tambahkan ke Keranjang</button>';
+                        echo '</form>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo '<p>Belum ada produk favorit.</p>';
+                }
+                ?>
             </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Cart total</h5>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Subtotal
-                    <span>$23,20</span>
-                  </li>
-                  
-                  <!-- <li class="list-group-item"> -->
-                    <!-- <div class="input-group"> -->
-                      <!-- <input type="text" class="form-control" placeholder="Enter coupon code"> -->
-                      <!-- <button class="btn btn-outline-success" type="button">Apply</button> -->
-                    <!-- </div> -->
-                  <!-- </li> -->
-
-                  <li class="list-group-item">
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Total amount
-                    <span>$23,20</span>
-                  </li>
-                </ul>
-                <button class="btn btn-warning mt-3 w-100">Proceed to checkout</button>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-  </main>
+    </main>
 
   <!-- footer -->
   <footer class="footer">
@@ -241,34 +181,10 @@ session_start();
     </div>
   </footer>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-            // Cek apakah sesi email ada
-            <?php if(isset($_SESSION['email'])) { ?>
-                // Jika sesi email ada, ambil nama pengguna dari sesi
-                var namaUser = "<?php echo $_SESSION['nama_user']; ?>";
-                // Ubah teks "Profile" menjadi nama pengguna
-                document.getElementById("nama_user").innerText = namaUser;
-            <?php } ?>
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            // Cek apakah sesi email ada
-            <?php if(isset($_SESSION['email'])) { ?>
-                // Jika sesi email ada, tampilkan tombol logout
-                document.getElementById("loginBtn").innerHTML = '<button class="btn btn-login" type="button" onclick="logout()">Logout</button>';
-            <?php } ?>
-        });
-
-        function logout() {
-            // Redirect ke halaman logout (buat file logout.php)
-            window.location.href = "logout.php";
-        }
-  </script>
   <!-- Bootstrap JS, Popper.js, dan jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+  
 </body>
 </html>

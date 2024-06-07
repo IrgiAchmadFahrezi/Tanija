@@ -23,9 +23,18 @@ h5 {
 }
 
 .img-thumbnail {
-  width: 80px;
-  height: 80px;
+  width: 10px;
+  height: 10px;
   cursor: pointer;
+}
+
+.product-image {
+  max-width: 100%;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .badge.bg-success {
@@ -48,6 +57,32 @@ h5 {
 .btn-outline-primary:hover {
   background-color: green;
   border: 2px solid green;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 1px;
+}
+
+.btn-container button,
+.btn-container form button {
+  width: 35%;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.btn-favorite {
+  background-color: #dc3545; /* Warna latar belakang tombol merah */
+  color: white; /* Warna teks putih */
+  border: 2px solid #dc3545; /* Warna border merah */
+}
+
+.btn-favorite:hover {
+  background-color: #c82333; /* Warna latar belakang tombol saat hover */
+  border-color: #c82333; /* Warna border saat hover */
 }
 
 .footer {

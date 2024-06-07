@@ -36,7 +36,7 @@ session_start();
           <a class="nav-link" href="#"> <i class="far fa-user"></i> <span id="nama_user"> Profile</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./src/html/favorite.html"><i class="far fa-heart"></i></i><span class="badge">5</span></a>
+          <a class="nav-link" href="./src/html/favorite.php"><i class="far fa-heart"></i></i><span class="badge">5</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./src/html/cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
@@ -370,5 +370,6 @@ function logout() {
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="src/scripts/index.js"></script>
+  <script src="src/scripts/update-counts.js"></script>
 </body>
 </html>

@@ -18,6 +18,15 @@ h1 {
   color: green;
 }
 
+.card-title a {
+  color: green; /* Warna teks hijau */
+  text-decoration: none; /* Hilangkan underline */
+}
+
+.card-title a:hover {
+  text-decoration: none; /* Hilangkan underline saat dihover */
+}
+
 .card-text {
   font-weight: bold;
 }

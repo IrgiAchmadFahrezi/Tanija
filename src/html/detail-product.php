@@ -1,5 +1,6 @@
 <?php
 session_start();
+include '../php/db_connection.php';
 
 // Pastikan tombol "Add to Cart" ditekan
 if(isset($_POST['addToCartBtn'])) {
@@ -29,6 +30,43 @@ if(isset($_POST['addToCartBtn'])) {
     $total_items = count($_SESSION['cart']);
     echo "<script>alert('Produk berhasil ditambahkan ke keranjang belanja. Total item dalam keranjang: $total_items');</script>";
 }
+$id_produk = $_GET['id'];
+$sql = "SELECT * FROM produk WHERE id_produk = '$id_produk'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+} else {
+    echo "Produk tidak ditemukan.";
+    exit();
+}
+
+if(isset($_POST['addToFavoriteBtn'])) {
+    // Tangkap detail produk
+    $id_produk = $_GET['id'];
+    $nama_produk = $row['nama_produk'];
+    $harga_produk = $row['harga_produk'];
+    $foto_produk = $row['foto_produk']; // Tambahkan ini
+
+    // Buat array untuk menyimpan detail produk
+    $produk = array(
+        'id' => $id_produk,
+        'nama' => $nama_produk,
+        'harga' => $harga_produk,
+        'foto_produk' => $foto_produk // Tambahkan ini
+    );
+
+    // Periksa apakah favorit telah dibuat sebelumnya dalam sesi
+    if(!isset($_SESSION['favorites'])) {
+        $_SESSION['favorites'] = array();
+    }
+
+    // Tambahkan detail produk ke dalam favorit
+    $_SESSION['favorites'][$id_produk] = $produk;
+
+    // Redirect ke halaman favorit
+    //header("Location: favorite.php");
+    //exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +82,7 @@ if(isset($_POST['addToCartBtn'])) {
 
     <!-- Style CSS -->
     <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../css/detail-product.css" rel="stylesheet">
 
     <!-- Font Awesome CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -66,7 +105,7 @@ if(isset($_POST['addToCartBtn'])) {
 
     <!-- Navbar Bootstrap -->
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/tanija/index.php">
             <img src="../assets/icons/logo-tanija.png" alt="Logo Tanija">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,7 +122,7 @@ if(isset($_POST['addToCartBtn'])) {
                   <a class="nav-link" href="#"><i class="far fa-user"></i> <span id="nama_user"> Profile</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/src/html/favorite.html"><i class="far fa-heart"></i><span class="badge">5</span></a>
+                    <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i><span class="badge">5</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
@@ -134,7 +173,7 @@ if(isset($_POST['addToCartBtn'])) {
         <div class="container my-5">
         <div class="row">
           <div class="col-md-6">
-              <img src="../uploads/<?php echo $row['foto_produk']; ?>" class="img-fluid" alt="<?php echo $row['nama_produk']; ?>">
+              <img src="../uploads/<?php echo $row['foto_produk']; ?>" class="img-fluid product-image" alt="<?php echo $row['nama_produk']; ?>">
           </div>
           <div class="col-md-6">
               <h1><?php echo $row['nama_produk']; ?></h1>
@@ -145,9 +184,17 @@ if(isset($_POST['addToCartBtn'])) {
                   <input type="text" id="quantity" value="1" class="form-control w-auto d-inline text-center">
                   <button class="btn btn-outline-secondary" type="button" id="increase">+</button>
               </div>
-              <button class="btn btn-warning" id="addToCartBtn">Add to Cart</button>
 
-              <button class="btn btn-success">Buy it now</button>
+            <div class="btn-container">
+                <form method="post" action="">
+                    <button type="submit" class="btn btn-warning" name="addToCartBtn">Add to Cart</button>
+                </form>
+                <form method="post" action="">
+                    <button type="submit" class="btn btn-outline-secondary btn-favorite" name="addToFavoriteBtn">Add to Favorite</button>
+                </form>
+                    <button class="btn btn-success">Buy it now</button>
+            </div>
+
               <p class="mt-3">
                   <strong>Stok:</strong> <?php echo $row['id_produk']; ?><br>
                   <strong>Kategori:</strong> <?php echo $row['kategori']; ?><br>
@@ -166,8 +213,17 @@ if(isset($_POST['addToCartBtn'])) {
                       </div>
                   </div>
                   <div class="collapse mt-3" id="reviews">
-                      <div class="card card-body">No reviews yet</div>
-                  </div>
+    <div class="card card-body">
+        <!-- Add this form -->
+        <form id="review-form">
+            <div class="form-group">
+                <label for="review-text">Your Review:</label>
+                <textarea class="form-control" id="review-text" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+        </form>
+    </div>
+</div>
               </div>
           </div>
       </div>
