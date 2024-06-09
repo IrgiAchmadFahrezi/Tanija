@@ -135,7 +135,7 @@ session_start();
                             <td>
                                 <form action='../php/remove_from_cart.php' method='post'>
                                     <input type='hidden' name='product_id' value='{$product_id}'>
-                                    <button class='btn btn-sm btn-outline-danger' type='submit'>Hapus</button>
+                                    <button class='btn btn-sm btn-outline-danger' type='submit'>X</button>
                                 </form>
                             </td>
                         </tr>";
@@ -148,9 +148,9 @@ session_start();
         </tbody>
           </table>
           <div class="d-flex justify-content-between">
-            <a href="./product.php"><button class="btn btn-warning" >Lanjut Belanja</button></a>
+            <a href="./product.php"><button class="btn btn-warning" ><i class="fas fa-shopping-cart"></i> Lanjut Belanja</button></a>
             <form action="../php/remove_from_cart.php" method="post">
-            <button class="btn btn-danger" type="submit" name="clear_cart" <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '' : 'disabled'; ?>>Bersihkan Keranjang</button>
+            <button class="btn btn-danger" type="submit" name="clear_cart" <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '' : 'disabled'; ?>><i class="fas fa-trash"></i> Bersihkan Keranjang</button>
     </form>
           </div>
         </div>
@@ -182,7 +182,7 @@ session_start();
                   </li>
               </ul>
             <a href="./detail-pembayaran.php">
-            <a href="./detail-pembayaran.php"><button class="btn btn-warning mt-3 w-100" <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '' : 'disabled'; ?>>Lanjut ke Pembayaran</button></a>
+            <a href="./detail-pembayaran.php"><button class="btn btn-warning mt-3 w-100" <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '' : 'disabled'; ?>><i class="fas fa-arrow-right"></i> Lanjut ke Pembayaran</button></a>
             </a>
             </div>
           </div>

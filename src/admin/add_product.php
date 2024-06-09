@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 if (!isset($_SESSION['admin'])) {
     header('Location: login_admin.php');
     exit();
@@ -11,7 +11,8 @@ if (!isset($_SESSION['admin'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <title>Add Product</title>
 </head>
 <body>

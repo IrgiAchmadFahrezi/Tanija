@@ -15,7 +15,7 @@ session_start();
   <link href="../assets/css/bootstrap.css" rel="stylesheet">
   <!-- Style CSS -->
   <link href="../assets/css/style.css" rel="stylesheet">
-  <link href="/src/css/product.css" rel="stylesheet">
+  <link href="../css/product.css" rel="stylesheet">
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -136,8 +136,8 @@ session_start();
                       Pestisida
                   </label>
               </div>
-              <button type="submit" class="btn btn-primary mt-2">Filter</button>
-              <button type="button" class="btn btn-secondary mt-2" id="resetFilter">Reset Filter</button>
+              <button type="submit" class="btn btn-primary mt-2"><i class="fas fa-filter"></i>Filter</button>
+              <button type="button" class="btn btn-secondary mt-2" id="resetFilter">Reset</button>
           </form>
       </div>
       <div class="col-md-9">

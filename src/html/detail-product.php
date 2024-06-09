@@ -51,15 +51,18 @@ if ($result->num_rows > 0) {
     exit();
 }
 
-$id_produk = $_GET['id'];
-$sql = "SELECT * FROM produk WHERE id_produk = '$id_produk'";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-} else {
-    echo "Produk tidak ditemukan.";
-    exit();
+// Hitung jumlah ulasan
+$reviews_sql = "SELECT COUNT(*) as total_reviews FROM reviews WHERE id_produk = ?";
+$reviews_stmt = $conn->prepare($reviews_sql);
+$reviews_stmt->bind_param("i", $id_produk);
+$reviews_stmt->execute();
+$reviews_result = $reviews_stmt->get_result();
+$reviews_count = 0;
+if ($reviews_result->num_rows > 0) {
+    $reviews_row = $reviews_result->fetch_assoc();
+    $reviews_count = $reviews_row['total_reviews'];
 }
+$reviews_stmt->close();
 
 if(isset($_POST['addToFavoriteBtn'])) {
     // Tangkap detail produk
@@ -203,7 +206,7 @@ $conn->close();
             </div>
             <div class="col-md-6">
                 <h1><?php echo $row['nama_produk']; ?></h1>
-                <p class="price">$<?php echo $row['harga_produk']; ?></p>
+                <p class="price">Rp.<?php echo $row['harga_produk']; ?></p>
 
                 <div class="quantity mb-3">
                     <button class="btn btn-outline-secondary" type="button" id="decrease">-</button>
@@ -218,9 +221,9 @@ $conn->close();
                         <input type="hidden" name="harga_produk" value="<?php echo $row['harga_produk']; ?>">
                         <input type="hidden" name="quantity" id="form_quantity" value="1">
                         <input type="hidden" name="foto_produk" value="<?php echo $row['foto_produk']; ?>"> <!-- Tambahkan input hidden untuk menyimpan nama file foto produk -->
-                        <button type="submit" name="addToCartBtn" class="btn btn-warning">Add to Cart</button>
-                        <button type="submit" class="btn btn-outline-secondary btn-favorite" name="addToFavoriteBtn">Add to Favorite</button>
-                        <button class="btn btn-success">Buy it now</button>
+                        <button type="submit" name="addToCartBtn" class="btn btn-warning"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        <button type="submit" class="btn btn-outline-secondary btn-favorite" name="addToFavoriteBtn"><i class="fas fa-heart"></i> Add to Favorite</button>
+                        <button class="btn btn-success"><i class="fas fa-shopping-cart"></i> Buy it now</button>
                     </form>
                 </div>
                 <!-- <button class="btn btn-warning" id="addToCartBtn">Add to Cart</button> -->
@@ -229,14 +232,13 @@ $conn->close();
                 <p class="mt-3">
                     <strong>Stok:</strong> <?php echo $row['stock']; ?><br>
                     <strong>Kategori:</strong> <?php echo $row['kategori']; ?><br>
-                    <strong>Share:</strong>
                 </p>
                 <div>
                     <button class="btn-outline-primary" data-bs-toggle="collapse" href="#description" role="button" aria-expanded="false" aria-controls="description">
                         Description
                     </button>
                     <button class="btn-outline-primary" data-bs-toggle="collapse" href="#reviews" role="button" aria-expanded="false" aria-controls="reviews">
-                        Reviews
+                        Reviews (<?php echo $reviews_count; ?>)
                     </button>
                     <div class="collapse mt-3" id="description">
                         <div class="card card-body">
@@ -244,62 +246,63 @@ $conn->close();
                         </div>
                     </div>
                     <div class="collapse mt-3" id="reviews">
-    <div class="card card-body">
-        <?php
-        // Koneksi ke database
-        include '../php/db_connection.php';
+                        <div class="card card-body">
+                            <?php
+                            // Koneksi ke database
+                            include '../php/db_connection.php';
 
-        // Query untuk mengambil ulasan produk dari database
-        $reviews_sql = "SELECT * FROM reviews WHERE id_pemesanan = ?";
-        $reviews_stmt = $conn->prepare($reviews_sql);
-        if ($reviews_stmt) {
-            // Bind parameter
-            $reviews_stmt->bind_param("i", $id_produk);
+                            // Query untuk mengambil ulasan produk dari database
+                            $reviews_sql = "SELECT * FROM reviews WHERE id_produk = ?";
+                            $reviews_stmt = $conn->prepare($reviews_sql);
+                            if ($reviews_stmt) {
+                                // Bind parameter
+                                $reviews_stmt->bind_param("i", $id_produk);
 
-            // Set nilai parameter
-            $id_produk = $_GET['id'];
+                                // Set nilai parameter
+                                $id_produk = $_GET['id'];
 
-            // Eksekusi statement
-            $reviews_stmt->execute();
+                                // Eksekusi statement
+                                $reviews_stmt->execute();
 
-            // Ambil hasil
-            $reviews_result = $reviews_stmt->get_result();
+                                // Ambil hasil
+                                $reviews_result = $reviews_stmt->get_result();
 
-            // Tampilkan ulasan jika ada
-            if ($reviews_result->num_rows > 0) {
-                while ($review_row = $reviews_result->fetch_assoc()) {
-                    // Tampilkan nama pengguna
-                    echo '<div class="review-item">';
-                    echo '<strong>Nama:</strong> ' . $review_row['nama_user'] . '<br>';
+                                // Tampilkan ulasan jika ada
+                                if ($reviews_result->num_rows > 0) {
+                                    while ($review_row = $reviews_result->fetch_assoc()) {
+                                        // Tampilkan nama pengguna
+                                        echo '<div class="review-item">';
+                                        echo '<strong>Nama:</strong> ' . $review_row['nama_user'] . '<br>';
+                                        echo '<strong>Tanggal:</strong> ' . $review_row['created_at'] . '<br>';
 
-                    // Tampilkan rating dalam bentuk bintang
-                    echo '<strong>Rating:</strong> ';
-                    $rating = intval($review_row['review_rating']);
-                    for ($i = 0; $i < $rating; $i++) {
-                        echo '<span class="star">&#9733;</span>'; // Menampilkan bintang solid
-                    }
-                    echo '<br>';
+                                        // Tampilkan rating dalam bentuk bintang
+                                        echo '<strong>Rating:</strong> ';
+                                        $rating = intval($review_row['review_rating']);
+                                        for ($i = 0; $i < $rating; $i++) {
+                                            echo '<span class="star">&#9733;</span>'; // Menampilkan bintang solid
+                                        }
+                                        echo '<br>';
 
-                    // Tampilkan teks ulasan
-                    echo '<strong>Ulasan:</strong> ' . $review_row['review_text'] . '<br>';
-                    echo '</div>';
-                }
-            } else {
-                echo "Belum ada ulasan untuk produk ini.";
-            }
+                                        // Tampilkan teks ulasan
+                                        echo '<strong>Ulasan:</strong> ' . $review_row['review_text'] . '<br>';
+                                        echo '</div>';
+                                    }
+                                } else {
+                                    echo "Belum ada ulasan untuk produk ini.";
+                                }
 
-            // Tutup statement
-            $reviews_stmt->close();
-        } else {
-            // Handle error jika query ulasan gagal
-            echo "Gagal menyiapkan periksa ulasan statement: " . $conn->error;
-        }
+                                // Tutup statement
+                                $reviews_stmt->close();
+                            } else {
+                                // Handle error jika query ulasan gagal
+                                echo "Gagal menyiapkan periksa ulasan statement: " . $conn->error;
+                            }
 
-        // Tutup koneksi
-        $conn->close();
-        ?>
-    </div>
-</div>
+                            // Tutup koneksi
+                            $conn->close();
+                            ?>
+                        </div>
+                    </div>
 
 
                 </div>

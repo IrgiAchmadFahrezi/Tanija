@@ -2,6 +2,11 @@
 include 'db_connection.php';
 session_start();
 
+// Periksa koneksi
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $namaUser = $_SESSION['nama_user'] ?? 'Guest';
     $namaPenerima = $_POST['namaPenerima'];
@@ -29,12 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Insert into detail_barang
         foreach ($cart as $product_id => $product) {
+            $idProduk = $product['id'];
             $namaBarang = $product['nama'];
             $jumlah = $product['jumlah'];
             $harga = $product['harga'];
-            $sqlDetail = "INSERT INTO detail_barang (id_pemesanan, nama_barang, jumlah, harga) VALUES (?, ?, ?, ?)";
+            $sqlDetail = "INSERT INTO detail_barang (id_pemesanan, id_produk, nama_barang, jumlah, harga) VALUES (?, ?, ?, ?, ?)";
             $stmtDetail = $conn->prepare($sqlDetail);
-            $stmtDetail->bind_param("isid", $lastInsertId, $namaBarang, $jumlah, $harga);
+            $stmtDetail->bind_param("iisid", $lastInsertId, $idProduk, $namaBarang, $jumlah, $harga);
             $stmtDetail->execute();
         }
 

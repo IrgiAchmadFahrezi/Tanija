@@ -15,6 +15,10 @@ session_start();
   <link href="src/assets/css/style.css" rel="stylesheet">
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Navbar Bootstrap -->
@@ -158,7 +162,11 @@ session_start();
     <div class="row">
         <?php
         // Query untuk mengambil data produk dari tabel produk
-        $sql = "SELECT * FROM produk";
+        $sql = "SELECT p.*, COUNT(r.id) AS jumlah_review 
+        FROM produk p
+        LEFT JOIN reviews r ON p.id_produk = r.id_produk
+        GROUP BY p.id_produk
+        HAVING jumlah_review > 5";
         $result = $conn->query($sql);
 
         // Cek apakah hasil query tidak kosong

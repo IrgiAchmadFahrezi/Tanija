@@ -54,7 +54,7 @@ if ($result->num_rows > 0) {
           <a class="nav-link" href="#"> <i class="far fa-user"></i> <span id="nama_user">Profil</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/src/html/favorite.html"><i class="far fa-heart"></i><span class="badge">5</span></a>
+          <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i><span class="badge">5</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
@@ -125,8 +125,8 @@ if ($result->num_rows > 0) {
               <td>Rp. <?= number_format($pemesanan['total_pembayaran'], 2, ',', '.') ?></td>
               <td><?= $pemesanan['status_pembayaran'] ?></td>
               <td>
-                <button class="btn btn-info nota-btn" data-id="<?= $pemesanan['id'] ?>">Detail</button>
-                <button class="btn btn-secondary cetak-btn" data-id="<?= $pemesanan['id'] ?>">Cetak Nota</button>
+                <button class="btn btn-info nota-btn" data-id="<?= $pemesanan['id'] ?>"><i class="fas fa-info"></i> Detail</button>
+                <button class="btn btn-secondary cetak-btn" data-id="<?= $pemesanan['id'] ?>"><i class="fas fa-file"></i> Nota</button>
               </td>
             </tr>
           <?php endforeach; ?>

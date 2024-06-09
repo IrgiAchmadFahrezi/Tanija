@@ -2,92 +2,29 @@
 session_start();
 include '../php/db_connection.php';
 
-// Periksa apakah pengguna sudah login
-if (!isset($_SESSION['email'])) {
-    header("Location: ../html/login.html");
-    exit();
-}
+// Ambil informasi produk berdasarkan id_produk dari parameter URL
+if (isset($_GET['id_produk'])) {
+    $id_produk = $_GET['id_produk'];
 
-// Ambil id pemesanan dari parameter URL
-if (!isset($_GET['id_pemesanan'])) {
-    header("Location: riwayat_pemesanan.php");
-    exit();
-}
-$id_pemesanan = $_GET['id_pemesanan'];
+    // Query untuk mendapatkan informasi produk
+    $query_produk = "SELECT * FROM produk WHERE id_produk = ?";
+    $stmt_produk = $conn->prepare($query_produk);
+    $stmt_produk->bind_param("i", $id_produk);
+    $stmt_produk->execute();
+    $result_produk = $stmt_produk->get_result();
 
-// Query untuk mendapatkan detail pemesanan dan detail barang berdasarkan id_pemesanan
-$query = "SELECT rp.*, db.id_produk, db.nama_barang, db.jumlah, db.harga 
-          FROM riwayat_pemesanan rp
-          INNER JOIN detail_barang db ON rp.id = db.id_pemesanan
-          WHERE rp.id = ? AND rp.nama_user = ?";
-
-$stmt = $conn->prepare($query);
-$stmt->bind_param("is", $id_pemesanan, $_SESSION['nama_user']);
-$stmt->execute();
-$result = $stmt->get_result();
-
-// Debugging: Cek apakah query berhasil
-if (!$result) {
-    die("Query error: " . $conn->error);
-}
-
-if ($result->num_rows > 0) {
-    $pemesanan = $result->fetch_assoc();
-    $detail_barang = [];
-
-    // Reset pointer ke hasil pertama
-    $result->data_seek(0);
-    
-    while ($row = $result->fetch_assoc()) {
-        $detail_barang[] = [
-            'id_produk' => $row['id_produk'], // Tambahkan ini untuk ID Produk
-            'nama_barang' => $row['nama_barang'],
-            'jumlah' => $row['jumlah'],
-            'harga' => $row['harga']
-        ];
+    if ($result_produk->num_rows > 0) {
+        $produk = $result_produk->fetch_assoc();
+    } else {
+        echo "Produk tidak ditemukan.";
+        exit();
     }
+
+    $stmt_produk->close();
 } else {
-    echo "Pemesanan tidak ditemukan.";
+    echo "Parameter id_produk tidak ditemukan.";
     exit();
 }
-$stmt->close();
-
-// Query untuk memeriksa apakah review sudah ada
-$reviewed_products = [];
-foreach ($detail_barang as $barang) {
-    $query = "SELECT COUNT(*) AS review_count FROM reviews WHERE id_pemesanan = ? AND id_produk = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("ii", $id_pemesanan, $barang['id_produk']);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $review = $result->fetch_assoc();
-    if ($review['review_count'] > 0) {
-        $reviewed_products[$barang['id_produk']] = true;
-    } else {
-        $reviewed_products[$barang['id_produk']] = false;
-    }
-    $stmt->close();
-}
-
-
-// Query untuk memeriksa apakah review sudah ada
-$reviewed_products = [];
-foreach ($detail_barang as $barang) {
-    $query = "SELECT COUNT(*) AS review_count FROM reviews WHERE id_pemesanan = ? AND id_produk = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("ii", $id_pemesanan, $barang['id_produk']);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $review = $result->fetch_assoc();
-    if ($review['review_count'] > 0) {
-        $reviewed_products[$barang['id_produk']] = true;
-    } else {
-        $reviewed_products[$barang['id_produk']] = false;
-    }
-    $stmt->close();
-}
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -95,17 +32,17 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nota Pemesanan - Tanija</title>
-    
+    <title>Kirim Review</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
 
     <!-- Style CSS -->
     <link href="../assets/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/detail-pembelian.css">
-    <!-- Font Awesome CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/form_review.css">
 </head>
 <body>
     <!-- Navbar Bootstrap -->
@@ -175,65 +112,58 @@ $conn->close();
             </div>
         </div>
     </nav>
-    <div class="container mt-5">
-        <h1 class="mb-4">Detail Pemesanan</h1>
-
+    <main class="container mt-5 mb-5">
         <div class="row">
-            <div class="col-md-4">
-                <h2>Pembelian</h2>
-                <p><strong>No Pembelian:</strong> <?= $pemesanan['id'] ?></p>
-                <p>Tanggal: <?= $pemesanan['tanggal_pemesanan'] ?></p>
-                <p>Total: Rp. <?= number_format($pemesanan['total_pembayaran'], 2, ',', '.') ?></p>
-                <p>Status: <?= $pemesanan['status_pembayaran'] ?></p>
+            <div class="col-md-5 review-sec" style="max-height: 530px;">
+                <h1 style="font-weight: 600; text-align: center; color: #1b5a7d;">Kirim Review</h1>
+                <form action="../php/submit_review.php" method="post" class="review">
+                    <input type="hidden" name="id_produk" value="<?= $_GET['id_produk'] ?>">
+                    <input type="hidden" name="id_pemesanan" value="<?= $_GET['id_pemesanan'] ?>">
+                    <div class="form-group">
+                        <strong>
+                            <label for="nama_user">Nama User:</label>
+                        </strong>
+                        <input type="text" class="form-control form-rev" id="nama_user" name="nama_user" value="<?php echo isset($_SESSION['nama_user']) ? $_SESSION['nama_user'] : ''; ?>" required readonly>
+                    </div>
+                    <div class="form-group">
+                        <strong>
+                            <label  for="review_text">Review:</label>
+                        </strong>
+                        <textarea class="form-control form-rev" id="review_text" name="review_text" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <strong>
+                            <label for="review_rating">Rating:</label>
+                        </strong>
+                        <div class="rating">
+                            <input type="radio" id="star5" name="review_rating" value="5"><label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star4" name="review_rating" value="4"><label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star3" name="review_rating" value="3"><label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star2" name="review_rating" value="2"><label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star1" name="review_rating" value="1"><label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                    <button type="submit" class="kirim">Kirim Review</button>
+                    <button class="kembali" onclick="window.history.back();"><i class="fas fa-arrow-left"></i></button>
+                    </div>
+                </form>
             </div>
-
-            <div class="col-md-7">
-                <h2>Pengiriman</h2>
-                <p><strong>Nama Penerima:</strong> <?= $pemesanan['nama_penerima'] ?></p>
-                <p>Alamat Pengiriman: <?= $pemesanan['alamat'] ?></p>
-                <p>Nomor Handphone: <?= $pemesanan['nomor_handphone'] ?></p>
-                <p>Ongkir: Rp. <?= number_format($pemesanan['ongkir'], 2, ',', '.') ?></p>
+            <div class="col-md-5 detail-prod" style="max-height: 530px;">
+                <h1 class="tittle">Produk yang Direview</h1>
+                <div class="card" style="border-radius: 5%; border: none !important; padding-bottom: 20px;">
+                <img src="../uploads/<?= $produk['foto_produk'] ?>" class="card-img-top" alt="<?= $produk['nama_produk'] ?>">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $produk['nama_produk'] ?></h5>
+                        <p class="card-text">Harga: Rp. <?= number_format($produk['harga_produk'], 2, ',', '.') ?></p>
+                    </div>
+                    <div style="text-align: center;">
+                    <button class="btn btn-primary btn-prod" onclick="window.location.href='../html/detail-product.php?id=<?= $produk['id_produk'] ?>'">Lihat Produk</button>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <h2 class="mt-4">Detail Barang:</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>ID Produk</th>
-                    <th>Nama Barang</th>
-                    <th>Jumlah</th>
-                    <th>Harga Satuan</th>
-                    <th>Subtotal</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($detail_barang as $index => $barang) : ?>
-                    <tr>
-                        <td><?= $index + 1 ?></td>
-                        <td><?= $barang['id_produk'] ?></td>
-                        <td><?= $barang['nama_barang'] ?></td>
-                        <td><?= $barang['jumlah'] ?></td>
-                        <td>Rp. <?= number_format($barang['harga'], 2, ',', '.') ?></td>
-                        <td>Rp. <?= number_format($barang['jumlah'] * $barang['harga'], 2, ',', '.') ?></td>
-                        <td>
-                            <?php if (!$reviewed_products[$barang['id_produk']]) : ?>
-                                <form action="../html/form_review.php" method="get" style="display: inline;">
-                                    <input type="hidden" name="id_produk" value="<?= $barang['id_produk'] ?>">
-                                    <input type="hidden" name="id_pemesanan" value="<?= $id_pemesanan ?>">
-                                    <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> Kirim Review</button>
-                                </form>
-                            <?php else : ?>
-                                <button class="btn btn-secondary btn-sm" disabled><i class="fas fa-check"></i> Review Dikirim</button>
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
+    </main>
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -291,28 +221,5 @@ $conn->close();
             </div>
         </div>
     </footer>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Cek apakah sesi email ada
-            <?php if(isset($_SESSION['email'])) { ?>
-                // Jika sesi email ada, ambil nama pengguna dari sesi
-                var namaUser = "<?php echo $_SESSION['nama_user']; ?>";
-                // Ubah teks "Profile" menjadi nama pengguna
-                document.getElementById("nama_user").innerText = namaUser;
-            <?php } ?>
-        });
-        document.addEventListener("DOMContentLoaded", function() {
-            // Cek apakah sesi email ada
-            <?php if(isset($_SESSION['email'])) { ?>
-                // Jika sesi email ada, tampilkan tombol logout
-                document.getElementById("loginBtn").innerHTML = '<button class="btn btn-login" type="button" onclick="logout()">Logout</button>';
-            <?php } ?>
-        });
-
-        function logout() {
-            // Redirect ke halaman logout (buat file logout.php)
-            window.location.href = "logout.php";
-        }
-    </script>
 </body>
 </html>

@@ -1,0 +1,27 @@
+.btn-review {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.btn-review a {
+  text-decoration: none;
+}
+
+.btn-review:hover {
+  background-color: #218838;
+  color: white;
+}
+
+.btn-disabled {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: not-allowed;
+}

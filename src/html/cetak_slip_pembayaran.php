@@ -140,9 +140,9 @@ if (isset($_GET['id_pemesanan'])) {
         </table>
     </div>
     <div id="no-print" style="text-align: center; margin-top: 20px;">
-    <button class="cetak" onclick="window.print();"><i class="fas fa-print"></i></button>
-    <button class="kembali" onclick="window.history.back();"><i class="fas fa-arrow-left"></i></button>
-</div>
+        <button class="cetak" onclick="window.print();"><i class="fas fa-print"></i></button>
+        <button class="kembali" onclick="window.history.back();"><i class="fas fa-arrow-left"></i></button>
+    </div>
 
 </body>
 </html>

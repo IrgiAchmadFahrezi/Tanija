@@ -31,6 +31,7 @@ if (move_uploaded_file($_FILES["foto_produk"]["tmp_name"], $target_file)) {
 
     if ($stmt->execute()) {
         echo "New product added successfully";
+        echo "<script>location='index.php?halaman=produk';</script>";
     } else {
         echo "Error: " . $stmt->error;
     }

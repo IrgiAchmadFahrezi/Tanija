@@ -97,6 +97,14 @@ h5 {
   margin: 5px;
 }
 
+.jml-popup {
+  width: 20% !important;
+}
+
+.form-popup {
+  width: 40% !important;
+}
+
 .btn-favorite {
   background-color: #dc3545; /* Warna latar belakang tombol merah */
   color: white; /* Warna teks putih */
@@ -106,6 +114,15 @@ h5 {
 .btn-favorite:hover {
   background-color: #c82333; /* Warna latar belakang tombol saat hover */
   border-color: #c82333; /* Warna border saat hover */
+}
+
+.modal-body img {
+  max-width: 100%; /* Maksimum lebar gambar */
+  max-height: 200px; /* Maksimum tinggi gambar */
+}
+
+.jumlah-popup {
+  width: 200px;
 }
 
 .footer {

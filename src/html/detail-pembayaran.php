@@ -303,7 +303,7 @@ include '../php/db_connection.php';
                         onSuccess: function(result) {
                             console.log(result);
                             alert('Pembayaran sukses!');
-                            window.location.href = 'riwayat_pemesanan.php';
+                            // window.location.href = 'riwayat_pemesanan.php';
                             saveOrder('success', result, namaPenerima, nomorHanphone, ongkirValue, alamat, totalPembayaran);
                             
                         },
