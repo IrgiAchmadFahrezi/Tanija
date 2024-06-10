@@ -27,6 +27,7 @@
 .card-body {
   padding: 0 2px 2px 2px !important;
 }
+
 .card .card-body {
   background-color: #f8f9fa;
 }
@@ -113,4 +114,163 @@
 
 .footer .copyright {
   font-size: 0.8rem;
+}
+
+/* Responsive adjustments for cart page */
+@media (max-width: 1200px) {
+  .img-fluid {
+    width: 50px;
+    height: 50px;
+  }
+
+  .input-group button {
+    min-width: 25px;
+  }
+
+  .card-body {
+    padding: 10px;
+  }
+
+  .card .card-body {
+    padding: 10px !important;
+  }
+
+  .footer {
+    padding: 30px 0;
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .footer .content-top {
+    flex-direction: column;
+  }
+
+  .footer .content-top-right {
+    margin-top: 20px;
+  }
+
+  .card {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .table thead {
+    display: none;
+  }
+
+  .table tbody tr {
+    display: block;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+
+  .table tbody tr td {
+    display: block;
+    text-align: right;
+    font-size: 0.9rem;
+  }
+
+  .table tbody tr td:last-child {
+    text-align: right;
+  }
+
+  .table tbody tr td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .img-fluid {
+    width: 40px;
+    height: 40px;
+  }
+
+  .input-group button {
+    min-width: 20px;
+  }
+
+  .card .btn-outline-success {
+    font-size: 0.9rem;
+  }
+
+  .footer .subtext-menu {
+    margin-bottom: 20px;
+  }
+
+  .footer .content-bottom {
+    flex-direction: column;
+  }
+
+  .footer .wrap {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-brand img {
+    max-width: 100px;
+  }
+
+  .table tbody tr td {
+    font-size: 0.8rem;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .footer .subtext-text-desc {
+    font-size: 0.8rem;
+  }
+
+  .footer .subtext-menu-subtitle {
+    font-size: 1rem;
+  }
+
+  .footer .nav-link {
+    font-size: 0.8rem;
+  }
+}
+
+/* General improvements */
+.table tbody tr td {
+  padding: 8px;
+}
+
+.card-title {
+  padding: 10px;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.footer {
+  padding: 40px 20px;
+}
+
+.footer .content-top-left,
+.footer .content-top-right {
+  margin-bottom: 20px;
+}
+
+.footer .content-top-left p {
+  font-size: 0.85rem;
+}
+
+.footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer .wrap a {
+  margin-bottom: 10px;
 }

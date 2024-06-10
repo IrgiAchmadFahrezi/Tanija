@@ -1,5 +1,54 @@
 <?php
 session_start();
+include '../php/db_connection.php';
+include '../php/number.php';
+
+// Tangani penambahan ke keranjang dari halaman favorit
+if(isset($_POST['addToCartBtn'])) {
+  // Periksa apakah pengguna sudah login
+  if (!isset($_SESSION['email'])) {
+      // Jika pengguna belum login, tampilkan pesan alert dan arahkan ke halaman login
+      echo "<script>alert('Anda harus login terlebih dahulu untuk menambahkan produk ke keranjang.'); window.location.href='../html/login.html';</script>";
+      exit(); // Keluar dari skrip PHP setelah menampilkan pesan alert
+  }
+
+  // Tangkap detail produk dari formulir
+  $id_produk = $_POST['id_produk'];
+
+  // Periksa apakah produk sudah ada di keranjang belanja
+  if (isset($_SESSION['cart'][$id_produk])) {
+      // Jika produk sudah ada di keranjang belanja, tampilkan pesan alert
+      echo "<script>alert('Produk sudah ada di keranjang belanja.');</script>";
+  } else {
+      // Jika produk belum ada di keranjang belanja, tambahkan ke keranjang
+      $nama_produk = $_POST['nama_produk'];
+      $harga_produk = $_POST['harga_produk'];
+      $jumlah = $_POST['quantity'];
+      $nama_file_foto = $_POST['foto_produk']; // Mendapatkan nama file foto produk dari form
+
+      // Buat array untuk menyimpan detail produk
+      $produk = array(
+          'id' => $id_produk,
+          'nama' => $nama_produk,
+          'harga' => $harga_produk,
+          'jumlah' => $jumlah,
+          'foto_produk' => $nama_file_foto // Simpan nama file foto produk ke dalam sesi
+      );
+
+      // Periksa apakah keranjang belanja telah dibuat sebelumnya dalam sesi
+      if (!isset($_SESSION['cart'])) {
+          $_SESSION['cart'] = array();
+      }
+
+      // Tambahkan detail produk ke dalam keranjang belanja
+      $_SESSION['cart'][$id_produk] = $produk;
+
+      // Tampilkan jumlah total item dalam keranjang belanja
+      $total_items = count($_SESSION['cart']);
+      echo "<script>alert('Produk berhasil ditambahkan ke keranjang belanja. Total item dalam keranjang: $total_items');</script>";
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -38,13 +87,13 @@ session_start();
       </form>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#"> <i class="far fa-user"></i> Profile</a>
+          <a class="nav-link" href="#"> <i class="far fa-user"></i> <span id="nama_user">Profil</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i></i><span class="badge">5</span></a>
+          <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i><span class="badge"><?php echo $favoriteCount; ?></span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
+          <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge"><?php echo $cartCount; ?></span></a>
         </li>
         <li class="nav-item">
         <?php
@@ -76,6 +125,8 @@ session_start();
           <li class="nav-item">
             <a class="nav-link" href="./product.php">Produk</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./riwayat_pemesanan.php">Riwayat</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Artikel</a>
@@ -104,19 +155,24 @@ session_start();
                   } else {
                       echo '<img src="../assets/images/default.jpg" class="card-img-top" alt="Default Image">';
                   }
-                        echo '<div class="card-body">';
-                        echo '<h5 class="card-title"><a href="detail-product.php?id='.$produk['id'].'">'.$produk['nama'].'</a></h5>';
-                        echo '<p class="card-text">Rp. '.$produk['harga'].'</p>';
-                        echo '<form method="post" action="../php/remove_favorite.php">';
-                        echo '<input type="hidden" name="id_produk" value="'.$produk['id'].'">';
-                        echo '<button type="submit" class="btn btn-danger"><i class="far fa-heart"></i> Hapus dari Favorit</button>';
-                        echo '</form>';
-                        echo '<form method="post" action="detail-produk.php?id='.$produk['id'].'">';
-                        echo '<button type="submit" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Tambahkan ke Keranjang</button>';
-                        echo '</form>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '</div>';
+                  echo '<div class="card-body">';
+                  echo '<h5 class="card-title"><a href="detail-product.php?id='.$produk['id'].'">'.$produk['nama'].'</a></h5>';
+                  echo '<p class="card-text">Rp. '.$produk['harga'].'</p>';
+                  echo '<form method="post" action="../php/remove_favorite.php">';
+                  echo '<input type="hidden" name="id_produk" value="'.$produk['id'].'">';
+                  echo '<button type="submit" class="btn btn-danger"><i class="far fa-heart"></i> Hapus dari Favorit</button>';
+                  echo '</form>';
+                  echo '<form method="post" action="">';
+                  echo '<input type="hidden" name="id_produk" value="'.$produk['id'].'">';
+                  echo '<input type="hidden" name="nama_produk" value="'.$produk['nama'].'">';
+                  echo '<input type="hidden" name="harga_produk" value="'.$produk['harga'].'">';
+                  echo '<input type="hidden" name="quantity" value="1">';
+                  echo '<input type="hidden" name="foto_produk" value="'.$produk['foto_produk'].'">';
+                  echo '<button type="submit" class="btn btn-primary" name="addToCartBtn"><i class="fas fa-shopping-cart"></i> Tambahkan ke Keranjang</button>';
+                  echo '</form>';
+                  echo '</div>';
+                  echo '</div>';
+                  echo '</div>';
                     }
                 } else {
                     echo '<p>Belum ada produk favorit.</p>';
@@ -134,7 +190,7 @@ session_start();
           <div class="content-top-left subtext col-12 col-lg-4">
             <div class="subtext-text d-flex flex-column gap-3">
               <a href="#" class="logo d-inline-flex">
-                <img src="/assets/icons/logo-tanija.png" alt="" class="img img-logo" />
+                <img src="../assets/icons/logo-tanija.png" alt="" class="img img-logo" />
               </a>
               <p class="subtext-text-desc">Tanija hadir menyediakan pengalaman belanja online yang responsif dan ramah pengguna untuk para konsumen yang tertarik dengan produk-produk pertanian berkualitas.</p>
             </div>
@@ -180,6 +236,23 @@ session_start();
       </div>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+            <?php if(isset($_SESSION['email'])) { ?>
+                var namaUser = "<?php echo $_SESSION['nama_user']; ?>";
+                document.getElementById("nama_user").innerText = namaUser;
+            <?php } ?>
+        });
+
+        $('#reviewModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var detailId = button.data('detail-id');
+            var modal = $(this);
+            modal.find('#detailIdInput').val(detailId);
+        });
+        
+  </script>
 
   <!-- Bootstrap JS, Popper.js, dan jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

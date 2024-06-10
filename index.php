@@ -1,6 +1,7 @@
 <?php
-include 'src/php/db_connection.php';
 session_start();
+include 'src/php/db_connection.php';
+include 'src/php/number.php';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -27,19 +28,21 @@ session_start();
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Cari Produk..." aria-label="Cari Produk...">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
-      </form>
+    <form class="form-inline my-2 my-lg-0 position-relative" id="searchForm" method="post" action="">
+      <input class="form-control mr-sm-2" type="search" name="query" id="searchInput" placeholder="Cari Produk..." aria-label="Cari Produk...">
+      <div class="search-results d-none" id="searchResults"></div>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
+    </form>
+
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link" href="#"> <i class="far fa-user"></i> <span id="nama_user"> Profile</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./src/html/favorite.php"><i class="far fa-heart"></i></i><span class="badge">5</span></a>
+          <a class="nav-link" href="./src/html/favorite.php"><i class="far fa-heart"></i><span class="badge"><?php echo $favoriteCount; ?></span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./src/html/cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
+          <a class="nav-link" href="./src/html/cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge"><?php echo $cartCount; ?></span></a>
         </li>
         <li class="nav-item">
         <?php
@@ -341,7 +344,6 @@ session_start();
       </div>
     </footer>
     
-      
   <script>
     document.addEventListener("DOMContentLoaded", function() {
             // Cek apakah sesi email ada
@@ -365,6 +367,7 @@ function logout() {
     // Redirect ke halaman logout (buat file logout.php)
     window.location.href = "logout.php";
 }
+
   </script>
   
 

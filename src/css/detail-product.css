@@ -170,3 +170,36 @@ h5 {
 .footer .copyright {
   font-size: 0.8rem;
 }
+
+/* Untuk layar dengan lebar maksimum 576px */
+@media (max-width: 576px) {
+  /* Sesuaikan ukuran gambar produk */
+  .product-image {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Untuk layar dengan lebar minimum 577px dan maksimum 768px */
+@media (min-width: 577px) and (max-width: 768px) {
+  /* Sesuaikan tata letak kolom */
+  .col-md-6 {
+    width: 50%;
+  }
+}
+
+/* Untuk layar dengan lebar minimum 769px dan maksimum 992px */
+@media (min-width: 769px) and (max-width: 992px) {
+  /* Sesuaikan tata letak kolom */
+  .col-md-6 {
+    width: 45%;
+  }
+}
+
+/* Untuk layar dengan lebar minimum 993px dan maksimum 1200px */
+@media (min-width: 993px) and (max-width: 1200px) {
+  /* Sesuaikan tata letak kolom */
+  .col-md-6 {
+    width: 40%;
+  }
+}
