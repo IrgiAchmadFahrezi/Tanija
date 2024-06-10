@@ -106,3 +106,54 @@ h5 {
 .footer .copyright {
   font-size: 0.8rem;
 }
+
+/* Styling untuk perangkat dengan lebar layar kurang dari 576px */
+@media (max-width: 575.98px) {
+  /* Atur lebar navbar menjadi 100% */
+  .navbar {
+    width: 100%;
+  }
+
+  /* Atur margin top pada footer menjadi lebih kecil */
+  .footer {
+    margin-top: 50px;
+  }
+
+  /* Atur margin bottom pada subtext-menu menjadi lebih kecil */
+  .subtext-menu {
+    margin-bottom: 20px;
+  }
+
+  /* Atur margin bottom pada subtext-menu-subtitle menjadi lebih kecil */
+  .subtext-menu-subtitle {
+    margin-bottom: 10px;
+  }
+
+  /* Atur margin bottom pada nav-link menjadi lebih kecil */
+  .nav-link {
+    margin-bottom: 3px;
+  }
+}
+
+/* Styling untuk perangkat dengan lebar layar antara 576px dan 767.98px */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  /* Atur lebar navbar menjadi 100% */
+  .navbar {
+    width: 100%;
+  }
+
+  /* Atur margin top pada footer menjadi lebih kecil */
+  .footer {
+    margin-top: 50px;
+  }
+}
+
+/* Styling untuk perangkat dengan lebar layar antara 768px dan 991.98px */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Tambahkan styling tambahan sesuai kebutuhan */
+}
+
+/* Styling untuk perangkat dengan lebar layar lebih dari 992px */
+@media (min-width: 992px) {
+  /* Tambahkan styling tambahan sesuai kebutuhan */
+}

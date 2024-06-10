@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../php/db_connection.php';
+include '../php/number.php';
 
 // Pastikan tombol "Add to Cart" ditekan
 if (isset($_POST['addToCartBtn'])) {
@@ -12,31 +13,37 @@ if (isset($_POST['addToCartBtn'])) {
 
     // Tangkap detail produk dari POST data
     $id_produk = $_POST['id_produk'];
-    $nama_produk = $_POST['nama_produk'];
-    $harga_produk = $_POST['harga_produk'];
-    $jumlah = $_POST['quantity'];
-    $nama_file_foto = $_POST['foto_produk']; // Mendapatkan nama file foto produk dari form
 
-    // Buat array untuk menyimpan detail produk
-    $produk = array(
-        'id' => $id_produk,
-        'nama' => $nama_produk,
-        'harga' => $harga_produk,
-        'jumlah' => $jumlah,
-        'foto_produk' => $nama_file_foto // Simpan nama file foto produk ke dalam sesi
-    );
+    // Periksa apakah produk sudah ada di keranjang belanja
+    if (isset($_SESSION['cart'][$id_produk])) {
+        echo "<script>alert('Produk sudah ada di keranjang belanja.');</script>";
+    } else {
+        $nama_produk = $_POST['nama_produk'];
+        $harga_produk = $_POST['harga_produk'];
+        $jumlah = $_POST['quantity'];
+        $nama_file_foto = $_POST['foto_produk']; // Mendapatkan nama file foto produk dari form
 
-    // Periksa apakah keranjang belanja telah dibuat sebelumnya dalam sesi
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = array();
+        // Buat array untuk menyimpan detail produk
+        $produk = array(
+            'id' => $id_produk,
+            'nama' => $nama_produk,
+            'harga' => $harga_produk,
+            'jumlah' => $jumlah,
+            'foto_produk' => $nama_file_foto // Simpan nama file foto produk ke dalam sesi
+        );
+
+        // Periksa apakah keranjang belanja telah dibuat sebelumnya dalam sesi
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = array();
+        }
+
+        // Tambahkan detail produk ke dalam keranjang belanja
+        $_SESSION['cart'][$id_produk] = $produk;
+
+        // Tampilkan jumlah total item dalam keranjang belanja
+        $total_items = count($_SESSION['cart']);
+        echo "<script>alert('Produk berhasil ditambahkan ke keranjang belanja. Total item dalam keranjang: $total_items');</script>";
     }
-
-    // Tambahkan detail produk ke dalam keranjang belanja
-    $_SESSION['cart'][$id_produk] = $produk;
-
-    // Tampilkan jumlah total item dalam keranjang belanja
-    $total_items = count($_SESSION['cart']);
-    echo "<script>alert('Produk berhasil ditambahkan ke keranjang belanja. Total item dalam keranjang: $total_items');</script>";
 }
 
 // Tangkap ID produk dari URL
@@ -63,6 +70,46 @@ if ($reviews_result->num_rows > 0) {
     $reviews_count = $reviews_row['total_reviews'];
 }
 $reviews_stmt->close();
+
+// Tangani permintaan penambahan ke favorit
+if (isset($_POST['addToFavoriteBtn'])) {
+    // Periksa apakah pengguna sudah login
+    if (!isset($_SESSION['email'])) {
+        echo "<script>alert('Anda harus login terlebih dahulu untuk menambahkan produk ke favorit.'); window.location.href='../html/login.html';</script>";
+        exit();
+    }
+
+    // Tangkap detail produk dari POST data
+    $id_produk = $_POST['id_produk'];
+    $nama_produk = $_POST['nama_produk'];
+    $harga_produk = $_POST['harga_produk'];
+    $nama_file_foto = $_POST['foto_produk']; // Mendapatkan nama file foto produk dari form
+
+    // Periksa apakah produk sudah ada dalam daftar favorit
+    if (isset($_SESSION['favorites'][$id_produk])) {
+        echo "<script>alert('Produk sudah ada di favorit.');</script>";
+    } else {
+        // Buat array untuk menyimpan detail produk
+        $produk = array(
+            'id' => $id_produk,
+            'nama' => $nama_produk,
+            'harga' => $harga_produk,
+            'foto_produk' => $nama_file_foto // Simpan nama file foto produk ke dalam sesi
+        );
+
+        // Periksa apakah daftar favorit telah dibuat sebelumnya dalam sesi
+        if (!isset($_SESSION['favorites'])) {
+            $_SESSION['favorites'] = array();
+        }
+
+        // Tambahkan detail produk ke dalam daftar favorit
+        $_SESSION['favorites'][$id_produk] = $produk;
+
+        // Tampilkan jumlah total item dalam daftar favorit
+        $total_favorites = count($_SESSION['favorites']);
+        echo "<script>alert('Produk berhasil ditambahkan ke favorit. Total item dalam favorit: $total_favorites');</script>";
+    }
+}
 
 if(isset($_POST['addToFavoriteBtn'])) {
     // Tangkap detail produk
@@ -91,6 +138,7 @@ if(isset($_POST['addToFavoriteBtn'])) {
     //header("Location: favorite.php");
     //exit();
 }
+
 $conn->close();
 ?>
 
@@ -145,13 +193,13 @@ $conn->close();
             </form>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="#"><i class="far fa-user"></i> <span id="nama_user"> Profile</span></a>
+                    <a class="nav-link" href="#"> <i class="far fa-user"></i> <span id="nama_user">Profil</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i><span class="badge">5</span></a>
+                    <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i><span class="badge"><?php echo $favoriteCount; ?></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
+                    <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge"><?php echo $cartCount; ?></span></a>
                 </li>
                 <li class="nav-item">
                 <?php
@@ -206,7 +254,7 @@ $conn->close();
             </div>
             <div class="col-md-6">
                 <h1><?php echo $row['nama_produk']; ?></h1>
-                <p class="price">Rp.<?php echo $row['harga_produk']; ?></p>
+                <p class="price">Rp<?php echo $row['harga_produk']; ?></p>
 
                 <div class="quantity mb-3">
                     <button class="btn btn-outline-secondary" type="button" id="decrease">-</button>
@@ -393,7 +441,7 @@ $conn->close();
             window.location.href = "logout.php";
         }
 
-       
+
         
   </script>
     <script src="../scripts/detail-product.js"></script>

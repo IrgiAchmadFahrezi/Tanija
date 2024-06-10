@@ -2,12 +2,14 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
 }
 
 h1 {
   font-weight: bolder;
   color: #1b5a7d;
   margin-bottom: 30px;
+  text-align: center;
 }
 
 .card {
@@ -16,6 +18,7 @@ h1 {
 
 .card-title {
   color: green;
+  text-align: center;
 }
 
 .card-title a {
@@ -29,6 +32,7 @@ h1 {
 
 .card-text {
   font-weight: bold;
+  text-align: center;
 }
 
 .card .btn-danger {
@@ -46,21 +50,26 @@ h1 {
   padding: 50px 0;
   font-weight: 500;
 }
+
 .footer .logo img {
   max-width: 150px;
 }
+
 .footer .subtext-text-desc {
   font-size: 0.9rem;
   line-height: 1.6;
 }
+
 .footer .subtext-menu {
   margin-bottom: 30px;
 }
+
 .footer .subtext-menu-subtitle {
   font-size: 1.2rem;
   margin-bottom: 15px;
   color: #f6b943;
 }
+
 .footer .nav-link {
   color: #1b5a7d !important;
   font-size: 0.9rem;
@@ -68,25 +77,88 @@ h1 {
   display: block;
   transition: color 0.3s;
 }
+
 .footer .nav-link:hover {
   color: #f6b943;
 }
+
 .footer .ic-wrap .nav-link {
   display: inline-block;
   margin-right: 15px;
 }
+
 .footer .ic-wrap .nav-link svg {
   fill: #1b5a7d;
   transition: fill 0.3s;
 }
+
 .footer .ic-wrap .nav-link:hover svg {
   fill: #f6b943;
 }
+
 .footer .content-bottom {
   border-top: 1px solid #4b6b82;
   padding-top: 20px;
   margin-top: 20px;
 }
+
 .footer .copyright {
   font-size: 0.8rem;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .navbar-nav .nav-item {
+    margin-bottom: 10px;
+  }
+
+  .navbar-nav .btn-login {
+    margin: 0 auto;
+  }
+
+  .card-title,
+  .card-text {
+    text-align: center;
+  }
+
+  .footer .subtext-menu {
+    text-align: center;
+  }
+
+  .footer .subtext-menu-subtitle,
+  .footer .nav-link {
+    text-align: center;
+  }
+
+  .footer .ic-wrap {
+    text-align: center;
+  }
+
+  .footer .ic-wrap .nav-link {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer {
+    padding: 30px 0;
+  }
+
+  .footer .subtext-text-desc {
+    font-size: 0.8rem;
+  }
+
+  .footer .subtext-menu-subtitle {
+    font-size: 1rem;
+  }
+
+  .footer .nav-link {
+    font-size: 0.8rem;
+  }
 }

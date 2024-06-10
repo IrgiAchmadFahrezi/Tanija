@@ -1,6 +1,8 @@
 <?php
-include '../php/db_connection.php';
 session_start();
+include '../php/db_connection.php';
+include '../php/number.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -40,10 +42,10 @@ session_start();
         <a class="nav-link" href="#"> <i class="far fa-user"></i> <span id="nama_user"> Profile</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i></i><span class="badge">5</span></a>
+          <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i><span class="badge"><?php echo $favoriteCount; ?></span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
+          <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge"><?php echo $cartCount; ?></span></a>
         </li>
         <li class="nav-item">
         <?php
