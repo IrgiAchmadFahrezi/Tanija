@@ -8,11 +8,19 @@ body {
 .container-artikel {
   border: 2px solid #e0e0e0;
   border-radius: 20px !important;
-
+  margin-bottom: 5% !important;
   width: 80%;
   margin: 0 auto;
   padding: 20px;
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+h3 {
+  font-weight: bold;
+  margin-left: 10.5%;
+  color: #1b5a7d;
+  margin-top: 10px;
+  margin-bottom: 1%;
 }
 
 .article-header h2 {
@@ -53,6 +61,7 @@ body {
   width: 100px;
   height: 40px;
   text-decoration: none;
+  margin-bottom: 20px;
   border-radius: 20px;
   border: none;
 }

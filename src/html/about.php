@@ -1,3 +1,9 @@
+<?php
+session_start();
+// Sambungkan ke database
+include '../php/db_connection.php';
+include '../php/number.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +12,11 @@
     <title>Tentang Kami</title>
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/assets/css/bootstrap.css" rel="stylesheet">
+  <link href="../assets/css/bootstrap.css" rel="stylesheet">
 
   <!-- Style CSS -->
-  <link href="/src/css/about.css" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link href="../css/about.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -22,10 +28,10 @@
 </head>
 
 <body>
-      <!-- Navbar Bootstrap -->
+  <!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="#">
-        <img src="/assets/icons/logo-tanija.png" alt="Logo Tanija">
+    <a class="navbar-brand" href="/tanija/index.php">
+        <img src="../assets/icons/logo-tanija.png" alt="Logo Tanija">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -38,17 +44,24 @@
       </form>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#"> <i class="far fa-user"></i> Profile</a>
+          <a class="nav-link" href="#"> <i class="far fa-user"></i> <span id="nama_user">Profil</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="far fa-heart"></i></i><span class="badge">5</span></a>
+          <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i><span class="badge"><?php echo $favoriteCount; ?></span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
+          <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge"><?php echo $cartCount; ?></span></a>
         </li>
         <li class="nav-item">
-          <button class="btn btn-login" type="button" onclick="window.location.href='halaman_login.html';">Login</button>
-
+        <?php
+            if (isset($_SESSION['email'])) {
+                echo '<form action="../php/logout.php" method="post">
+                        <button class="btn btn-login" type="submit" name="logout">Logout</button>
+                    </form>';
+            } else {
+                echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'../html/login.html\';">Login</button>';
+            }
+        ?>
         </li>
       </ul>
     </div>
@@ -64,14 +77,16 @@
       <div class="collapse navbar-collapse" id="navbarSecond">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/index.html">Beranda</a>
+            <a class="nav-link" href="/tanija/index.php">Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/src/html/product.html">Produk</a>
-          </li>
+            <a class="nav-link" href="../html/product.php">Produk</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Artikel</a>
+            <a class="nav-link" href="./riwayat_pemesanan.php">Riwayat</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./article.php">Artikel</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Tentang Kami</a>
@@ -116,7 +131,7 @@
         </div>
         <div class="subtext-text d-flex flex-row justify-content-between align-items-center">
           <div class="wrap-image col-12 col-md-4" data-aos="fade-left">
-            <img src="/assets/icons/TANIJA_1.png" alt="" class="img" />
+            <img src="../assets/icons/TANIJA_1.png" alt="" class="img" />
           </div>
           <div class="wrap-text col-12 col-md-7" data-aos="fade-right">
             <h3 class="subtext-text-subtitle">Misi</h3>
@@ -137,7 +152,7 @@
         <h2 class="subtext-title" data-aos="fade-up">Our Teams</h2>
         <div class="team-wrap d-flex justify-content-center" data-aos="fade-up" data-aos-delay="300">
           <div class="card">
-            <img src="/assets/images/Irgi.jpg" alt="" class="img card-image" />
+            <img src="../assets/images/Irgi.jpg" alt="" class="img card-image" />
             <div class="card-body">
               <h5 class="card-title">Irgi Achmad Fahrezi.</h5>
               <p class="card-text">UI/UX</p>
@@ -152,7 +167,7 @@
             </div>
           </div>
           <div class="card">
-            <img src="/assets/images/Danu.jpg" alt="" class="img card-image" />
+            <img src="../assets/images/Danu.jpg" alt="" class="img card-image" />
             <div class="card-body">
               <h5 class="card-title">Danu Febrianto.</h5>
               <p class="card-text">FRONT-END</p>
@@ -167,7 +182,7 @@
             </div>
           </div>
           <div class="card">
-            <img src="/assets/images/machrus.jpg" alt="" class="img card-image" />
+            <img src="../assets/images/machrus.jpg" alt="" class="img card-image" />
             <div class="card-body">
               <h5 class="card-title">M. Machrus Ali W.</h5>
               <p class="card-text">BACK-END</p>
@@ -268,7 +283,7 @@
   </section>
   <!-- description end -->
 
-  <!-- footer -->
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="content">
@@ -276,7 +291,7 @@
           <div class="content-top-left subtext col-12 col-lg-4">
             <div class="subtext-text d-flex flex-column gap-3">
               <a href="#" class="logo d-inline-flex">
-                <img src="/assets/icons/logo-tanija.png" alt="" class="img img-logo" />
+                <img src="../assets/icons/logo-tanija.png" alt="" class="img img-logo" />
               </a>
               <p class="subtext-text-desc">Tanija hadir menyediakan pengalaman belanja online yang responsif dan ramah pengguna untuk para konsumen yang tertarik dengan produk-produk pertanian berkualitas.</p>
             </div>
@@ -327,5 +342,30 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="/src/scripts/index.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+            // Cek apakah sesi email ada
+            <?php if(isset($_SESSION['email'])) { ?>
+                // Jika sesi email ada, ambil nama pengguna dari sesi
+                var namaUser = "<?php echo $_SESSION['nama_user']; ?>";
+                // Ubah teks "Profile" menjadi nama pengguna
+                document.getElementById("nama_user").innerText = namaUser;
+            <?php } ?>
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+      // Cek apakah sesi email ada
+      <?php if(isset($_SESSION['email'])) { ?>
+          // Jika sesi email ada, tampilkan tombol logout
+          document.getElementById("loginBtn").innerHTML = '<button class="btn btn-login" type="button" onclick="logout()">Logout</button>';
+      <?php } ?>
+  });
+
+  function logout() {
+      // Redirect ke halaman logout (buat file logout.php)
+      window.location.href = "logout.php";
+  }
+  </script>
 </body>
 </html>

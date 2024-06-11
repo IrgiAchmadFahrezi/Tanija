@@ -86,7 +86,7 @@ include 'src/php/number.php';
             <a class="nav-link" href="src/html/article.php">Artikel</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Tentang Kami</a>
+            <a class="nav-link" href="src/html/about.php">Tentang Kami</a>
           </li>
         </ul>
       </div>

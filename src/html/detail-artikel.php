@@ -15,6 +15,8 @@ include '../php/number.php';
     <!-- Style CSS -->
     <link href="../assets/css/style.css" rel="stylesheet">
     <link href="../css/detail-artikel.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -102,7 +104,7 @@ include '../php/number.php';
                 if ($ambil->num_rows > 0) {
                     $pecah = $ambil->fetch_assoc();
             ?>
-                    <button class="kembali" onclick="window.history.back();">Kembali</button>
+                    <button class="kembali" onclick="window.history.back();"><i class="fas fa-caret-left"></i> Kembali</button>
                     <div class="article-header">
                         <h2><?php echo $pecah['judul']; ?></h2>
                     </div>
