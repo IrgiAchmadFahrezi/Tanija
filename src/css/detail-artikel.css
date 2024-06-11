@@ -1,0 +1,61 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container-artikel {
+  border: 2px solid #e0e0e0;
+  border-radius: 20px !important;
+
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+.article-header h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.article-details {
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.penulis-details {
+  color: #888;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.article-image {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.article-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.article-content {
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.kembali {
+  background-color: #f6b943;
+  width: 100px;
+  height: 40px;
+  text-decoration: none;
+  border-radius: 20px;
+  border: none;
+}
+.kembali:hover {
+  background-color: #d29b2f;
+}

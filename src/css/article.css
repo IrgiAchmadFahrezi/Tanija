@@ -1,0 +1,19 @@
+.card-img {
+  margin-top: 50px;
+  margin-left: 10%;
+  border-radius: 20px;
+}
+
+.card {
+  border: 2px solid #e0e0e0;
+  border-radius: 20px !important;
+}
+
+.card-title {
+  color: #1b5a7d;
+}
+
+.card-text {
+  text-align: justify;
+  color: #00880d;
+}

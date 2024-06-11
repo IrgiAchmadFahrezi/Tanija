@@ -83,7 +83,7 @@ include 'src/php/number.php';
           </li>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Artikel</a>
+            <a class="nav-link" href="src/html/article.php">Artikel</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Tentang Kami</a>
@@ -364,18 +364,17 @@ include 'src/php/number.php';
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-    // Cek apakah sesi email ada
-    <?php if(isset($_SESSION['email'])) { ?>
-        // Jika sesi email ada, tampilkan tombol logout
-        document.getElementById("loginBtn").innerHTML = '<button class="btn btn-login" type="button" onclick="logout()">Logout</button>';
-    <?php } ?>
-});
+      // Cek apakah sesi email ada
+      <?php if(isset($_SESSION['email'])) { ?>
+          // Jika sesi email ada, tampilkan tombol logout
+          document.getElementById("loginBtn").innerHTML = '<button class="btn btn-login" type="button" onclick="logout()">Logout</button>';
+      <?php } ?>
+  });
 
-function logout() {
-    // Redirect ke halaman logout (buat file logout.php)
-    window.location.href = "logout.php";
-}
-
+  function logout() {
+      // Redirect ke halaman logout (buat file logout.php)
+      window.location.href = "logout.php";
+  }
   </script>
   
 

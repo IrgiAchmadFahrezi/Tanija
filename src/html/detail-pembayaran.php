@@ -26,7 +26,6 @@ include '../php/number.php';
   data-client-key="SB-Mid-client-WJFgv3j4ga-uCoJX"></script>
 </head>
 <body>
-
   <!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/tanija/index.php">

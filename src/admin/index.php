@@ -56,6 +56,7 @@ font-size: 16px;">&nbsp; <a href="logout.php" class="btn btn-danger square-btn-a
 					</li>
                     <li><a href="index.php"><i class="fas fa-home"></i></i>Home</a></li>
                     <li><a href="index.php?halaman=produk"><i class="fas fa-shopping-bag"></i></i>Produk</a></li>
+                    <li><a href="index.php?halaman=artikel"><i class="fas fa-shopping-bag"></i></i>artikel</a></li>
                     <li><a href="index.php?halaman=logout"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
                    </ul>
                
@@ -90,6 +91,18 @@ if (isset($_GET['halaman'])) {
     }
     elseif ($_GET['halaman'] == "tambahpelanggan") {
         include 'tambahpelanggan.php';
+    }
+    elseif ($_GET['halaman'] == "artikel") {
+        include 'artikel.php';
+    }
+    elseif ($_GET['halaman'] == "tambahartikel") {
+        include 'tambah_artikel.php';
+    }
+    elseif ($_GET['halaman'] == "hapusartikel") {
+        include 'hapus_artikel.php';
+    }
+    elseif ($_GET['halaman'] == "ubahartikel") {
+        include 'ubah-artikel.php';
     }
     elseif ($_GET['halaman'] == "hapuspelanggan") {
         include 'hapuspelanggan.php';
