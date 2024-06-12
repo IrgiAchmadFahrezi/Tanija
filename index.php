@@ -28,11 +28,10 @@ include 'src/php/number.php';
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <form class="form-inline my-2 my-lg-0 position-relative" id="searchForm" method="post" action="">
-      <input class="form-control mr-sm-2" type="search" name="query" id="searchInput" placeholder="Cari Produk..." aria-label="Cari Produk...">
-      <div class="search-results d-none" id="searchResults"></div>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
-    </form>
+      <form class="form-inline my-2 my-lg-0" method="get" action="src/php/search.php">
+        <input class="form-control mr-sm-2" type="search" name="query" placeholder="Cari Produk..." aria-label="Cari Produk...">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
+      </form>
 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">

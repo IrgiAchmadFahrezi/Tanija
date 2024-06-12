@@ -40,9 +40,9 @@ if (!isset($_SESSION['email'])) {
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Cari Produk..." aria-label="Cari Produk...">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
+      <form class="form-inline my-2 my-lg-0" method="get" action="../php/search.php">
+        <input class="form-control mr-sm-2" type="search" name="query" placeholder="Cari Produk..." aria-label="Cari Produk...">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
       </form>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
