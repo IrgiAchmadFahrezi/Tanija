@@ -1,72 +1,66 @@
 <?php
 session_start();
-include 'db_connection.php';
+include '../php/db_connection.php';
+include '../php/number.php';
 
-// Ambil data dari AJAX
-$id_produk = $_POST['id'];
-$quantity = $_POST['quantity'];
-
-// Query untuk mendapatkan detail produk
-$sql = "SELECT * FROM produk WHERE id_produk = $id_produk";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $nama_produk = $row['nama_produk'];
-    $harga_produk = $row['harga_produk'];
-    $foto_produk = $row['foto_produk']; // Tambahkan foto produk ke variabel
-
-    // Tambahkan data ke dalam session
-    $_SESSION['cart'][] = array(
-        'id_produk' => $id_produk,
-        'nama_produk' => $nama_produk,
-        'harga_produk' => $harga_produk,
-        'quantity' => $quantity,
-        'foto_produk' => $foto_produk // Simpan foto produk di sesi
-    );
-} else {
-    echo "Produk tidak ditemukan";
+// Periksa apakah pengguna sudah login
+if (!isset($_SESSION['email'])) {
+    echo "<script>alert('Anda harus login terlebih dahulu untuk melakukan pembelian.'); window.location.href='../html/login.html';</script>";
+    exit();
 }
 
-// Tutup koneksi database
-$conn->close();
+// Tangkap keranjang dari sesi
+$cart = $_SESSION['cart'];
 
-// Kirim respons ke JavaScript (jika diperlukan)
-echo "Produk berhasil ditambahkan ke keranjang";
-?>
-<?php
-session_start();
-include 'db_connection.php';
+// Mulai transaksi
+$conn->begin_transaction();
 
-// Ambil data dari AJAX
-$id_produk = $_POST['id'];
-$quantity = $_POST['quantity'];
+try {
+    foreach ($cart as $item) {
+        $id_produk = $item['id'];
+        $jumlah = $item['jumlah'];
 
-// Query untuk mendapatkan detail produk
-$sql = "SELECT * FROM produk WHERE id_produk = $id_produk";
-$result = $conn->query($sql);
+        // Kurangi stok produk
+        $stok_sql = "SELECT stock FROM produk WHERE id_produk = ?";
+        $stok_stmt = $conn->prepare($stok_sql);
+        $stok_stmt->bind_param("i", $id_produk);
+        $stok_stmt->execute();
+        $stok_result = $stok_stmt->get_result();
+        $stok_stmt->close();
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $nama_produk = $row['nama_produk'];
-    $harga_produk = $row['harga_produk'];
-    $foto_produk = $row['foto_produk']; // Tambahkan foto produk ke variabel
+        if ($stok_result->num_rows > 0) {
+            $stok_row = $stok_result->fetch_assoc();
+            $stok_produk = $stok_row['stock'];
 
-    // Tambahkan data ke dalam session
-    $_SESSION['cart'][] = array(
-        'id_produk' => $id_produk,
-        'nama_produk' => $nama_produk,
-        'harga_produk' => $harga_produk,
-        'quantity' => $quantity,
-        'foto_produk' => $foto_produk // Simpan foto produk di sesi
-    );
-} else {
-    echo "Produk tidak ditemukan";
+            if ($jumlah > $stok_produk) {
+                throw new Exception('Jumlah produk yang ingin dibeli melebihi stok yang tersedia.');
+            } else {
+                // Kurangi stok produk
+                $new_stok = $stok_produk - $jumlah;
+                $update_stok_sql = "UPDATE produk SET stock = ? WHERE id_produk = ?";
+                $update_stok_stmt = $conn->prepare($update_stok_sql);
+                $update_stok_stmt->bind_param("ii", $new_stok, $id_produk);
+                $update_stok_stmt->execute();
+                $update_stok_stmt->close();
+            }
+        } else {
+            throw new Exception('Produk tidak ditemukan.');
+        }
+
+        // Lakukan proses pembelian lainnya, seperti menyimpan data transaksi
+    }
+
+    // Commit transaksi
+    $conn->commit();
+
+    // Kosongkan keranjang setelah pembelian berhasil
+    unset($_SESSION['cart']);
+    echo "<script>alert('Pembelian berhasil. Terima kasih telah berbelanja di Tanija.'); window.location.href='../index.php';</script>";
+} catch (Exception $e) {
+    // Rollback transaksi jika terjadi kesalahan
+    $conn->rollback();
+    echo "<script>alert('Pembelian gagal: " . $e->getMessage() . "'); window.location.href='../html/cart.php';</script>";
 }
 
-// Tutup koneksi database
 $conn->close();
-
-// Kirim respons ke JavaScript (jika diperlukan)
-echo "Produk berhasil ditambahkan ke keranjang";
 ?>

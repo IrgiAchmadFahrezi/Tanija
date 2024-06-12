@@ -54,6 +54,10 @@ h5 {
   font-weight: bold;
   color: green;
 }
+.out-of-stock {
+  color: red;
+  font-weight: bold;
+}
 
 .footer {
   background-color: #e2f4ff;

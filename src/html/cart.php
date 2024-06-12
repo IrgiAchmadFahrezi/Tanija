@@ -8,6 +8,29 @@ if (!isset($_SESSION['email'])) {
   echo "<script>alert('Anda harus login terlebih dahulu untuk melihat keranjang!'); window.location.href='../html/login.html';</script>";
     exit();
 }
+
+// Modifikasi loop untuk menampilkan produk dalam keranjang
+foreach($_SESSION['cart'] as $product_id => $product) {
+  // Ambil informasi stok dari database untuk produk yang bersangkutan
+  $sql = "SELECT stock FROM produk WHERE id_produk = $product_id";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($result);
+  $stock = $row['stock'];
+
+//   // Gunakan informasi stok untuk membatasi penambahan jumlah produk
+//   $maxQuantity = $stock - $product['jumlah']; // Jumlah maksimum yang dapat ditambahkan ke keranjang
+//   echo "<tr>
+//           ...
+//           <td>
+//               <div class='input-group'>
+//                   <button class='btn btn-outline-secondary btn-sm' type='button' onclick='decreaseQuantity({$product_id})'>-</button>
+//                   <input id='quantity{$product_id}' type='text' class='form-control form-control-sm text-center' value='{$product['jumlah']}' max='{$maxQuantity}'>
+//                   <button class='btn btn-outline-secondary btn-sm' type='button' onclick='increaseQuantity({$product_id}, {$maxQuantity})'>+</button>
+//               </div>
+//           </td>
+//           ...
+//         </tr>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -122,6 +145,7 @@ if (!isset($_SESSION['email'])) {
                 foreach($_SESSION['cart'] as $product_id => $product) {
                     $subtotal = $product['harga'] * $product['jumlah'];
                     $total += $subtotal;
+                    $maxQuantity = $stock; // Jumlah maksimum yang dapat ditambahkan ke keranjang
                     echo "<tr>
                             <td>
                                 <div class='d-flex align-items-center'>
@@ -135,8 +159,8 @@ if (!isset($_SESSION['email'])) {
                             <td>
                                 <div class='input-group'>
                                     <button class='btn btn-outline-secondary btn-sm' type='button' onclick='decreaseQuantity({$product_id})'>-</button>
-                                    <input id='quantity{$product_id}' type='text' class='form-control form-control-sm text-center' value='{$product['jumlah']}'>
-                                    <button class='btn btn-outline-secondary btn-sm' type='button' onclick='increaseQuantity({$product_id})'>+</button>
+                                    <input id='quantity{$product_id}' type='text' class='form-control form-control-sm text-center' value='{$product['jumlah']}' max='{$maxQuantity}'>
+                                    <button class='btn btn-outline-secondary btn-sm' type='button' onclick='increaseQuantity({$product_id}, {$maxQuantity})'>+</button>
                                 </div>
                             </td>
 
@@ -257,13 +281,19 @@ if (!isset($_SESSION['email'])) {
   </footer>
 
   <script>
-    function increaseQuantity(productId) {
-        var quantityInput = document.getElementById('quantity' + productId);
-        var currentQuantity = parseInt(quantityInput.value);
+    function increaseQuantity(productId, maxQuantity) {
+    var quantityInput = document.getElementById('quantity' + productId);
+    var currentQuantity = parseInt(quantityInput.value);
+    if (currentQuantity < maxQuantity) {
         quantityInput.value = currentQuantity + 1;
         updateCart(productId, currentQuantity + 1);
         updateTotal();
+    } else {
+        alert("Stok tidak mencukupi!");
     }
+}
+
+
 
     function decreaseQuantity(productId) {
         var quantityInput = document.getElementById('quantity' + productId);

@@ -209,66 +209,14 @@ include 'src/php/number.php';
 
     </div>
 
-    <!-- Review -->
     <div class="container mt-5">
-      <h2 class="text-center">Review From Customer</h2>
-      <div class="row">
-          <div class="col-md-4 mb-4">
-              <div class="card customer-review">
-                  <div class="card-body text-center">
-                      <img src="avatar1.jpg" class="rounded-circle mb-3" alt="Customer 1">
-                      <h5 class="card-title">Savannah Nguyen</h5>
-                      <p class="card-text review-text">Lorem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque.</p>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-4 mb-4">
-              <div class="card customer-review">
-                  <div class="card-body text-center">
-                      <img src="avatar2.jpg" class="rounded-circle mb-3" alt="Customer 2">
-                      <h5 class="card-title">Esther Howard</h5>
-                      <p class="card-text review-text">Lorem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque.</p>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-4 mb-4">
-              <div class="card customer-review">
-                  <div class="card-body text-center">
-                      <img src="avatar3.jpg" class="rounded-circle mb-3" alt="Customer 3">
-                      <h5 class="card-title">Esther Howard</h5>
-                      <p class="card-text review-text">Lorem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque.</p>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-4 mb-4">
-              <div class="card customer-review">
-                  <div class="card-body text-center">
-                      <img src="avatar1.jpg" class="rounded-circle mb-3" alt="Customer 4">
-                      <h5 class="card-title">Savannah Nguyen</h5>
-                      <p class="card-text review-text">Lorem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque.</p>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-4 mb-4">
-              <div class="card customer-review">
-                  <div class="card-body text-center">
-                      <img src="avatar2.jpg" class="rounded-circle mb-3" alt="Customer 5">
-                      <h5 class="card-title">Esther Howard</h5>
-                      <p class="card-text review-text">Lorem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque.</p>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-4 mb-4">
-              <div class="card customer-review">
-                  <div class="card-body text-center">
-                      <img src="avatar3.jpg" class="rounded-circle mb-3" alt="Customer 6">
-                      <h5 class="card-title">Esther Howard</h5>
-                      <p class="card-text review-text">Lorem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque.</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+        <h2 class="text-center">Review From Customer</h2>
+        <div class="row" id="customer-reviews">
+            <!-- Di sini akan ditampilkan review dari API -->
+        </div>
+    </div>
+
+
 
     <!-- Why us ? -->
     <div class="container mt-5 text-center">
@@ -295,6 +243,77 @@ include 'src/php/number.php';
           </div>
       </div>
     </div>
+    <div class="container mt-5">
+        <h1>Latest news</h1>
+        <a href="src/html/article.php" class="view-all">View all</a>
+        <div class="news-grid">
+            <?php
+            include 'src/php/db_connection.php';
+            // Query to fetch articles from the database
+            $query = "SELECT * FROM artikel ORDER BY tanggal DESC LIMIT 4";
+            $result = $conn->query($query);
+
+            // Check if there are articles
+            if ($result->num_rows > 0) {
+                // Loop through each article
+                while ($row = $result->fetch_assoc()) {
+                    // Extract article details
+                    $id = $row['id_artikel'];
+                    $image = $row['gambar'];
+                    $date = $row['tanggal'];
+                    $title = $row['judul'];
+                    $content = $row['isi'];
+                    $author = $row['penulis'];
+
+                    // Truncate content to 100 characters
+                    if (strlen($content) > 100) {
+                      $content = substr($content, 0, 100) . '...';
+                  }
+
+                    // Display article HTML
+                    echo '<a href="src/html/detail-artikel.php?id=' . $id . '" class="news-link">';
+                    echo '<div class="news-item">';
+                    echo '<img src="src/uploads-artikel/' . $image . '" alt="News Image">';
+                    echo '<div class="news-details">';
+                    echo '<span class="date">' . date("d,M, Y", strtotime($date)) . '</span>';
+                    echo '<h2>' . $title . '</h2>';
+                    echo '<p>' . $content . '</p>';
+                    echo '<p class="author">By ' . $author . '</p>';
+                    echo '</div></div>';
+                    echo '</a>';
+                }
+            } else {
+                // If no articles found
+                echo "<p>No articles found.</p>";
+            }
+
+            // Close database connection
+            $conn->close();
+            ?>
+        </div>
+    </div>
+    <div class="container mt-5">
+    <div class="card feature-card mt-4">
+          <div class="card-body sponsor">
+              <div class="row">
+                  <div class="col-md-4">
+                      <img src="src/assets/icon-sponsor/Petrokimia_Gresik.png" alt="">
+                  </div>
+                  <div class="col-md-4">
+                      <img src="src/assets/icon-sponsor/quick.png" alt="">
+                  </div>
+                  <div class="col-md-4">
+                      <i class="bi bi-shield-check fs-1"></i>
+                      <h5 class="card-title">1 year warranty</h5>
+                      <p class="card-text">Available warranty</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    
+</div>
+
   </main>
 
     <!-- footer -->
@@ -352,6 +371,75 @@ include 'src/php/number.php';
       </div>
     </footer>
     
+    <script>
+        const unsplashAccessKey = 'nZg1uXb0YxxNbUhabacx2mSVwNjKuzfNJRZgK0ybfQg'; // Ganti dengan access key Unsplash Anda
+        const unsplashApiUrl = `https://api.unsplash.com/photos/random?client_id=${unsplashAccessKey}&count=6&query=avatar`;
+
+        const fetchReviews = async () => {
+            try {
+                const response = await fetch('https://artikel-api.vercel.app/product-reviews');
+                return response.json();
+            } catch (error) {
+                console.error('Error fetching reviews:', error);
+                return [];
+            }
+        };
+
+        const fetchAvatars = async () => {
+            try {
+                const response = await fetch(unsplashApiUrl);
+                return response.json();
+            } catch (error) {
+                console.error('Error fetching avatars:', error);
+                return [];
+            }
+        };
+
+        const displayReviews = async () => {
+            const reviews = await fetchReviews();
+            const avatars = await fetchAvatars();
+
+            const reviewsContainer = document.getElementById('customer-reviews');
+
+            reviews.forEach((review, index) => {
+                const avatarUrl = avatars[index % avatars.length].urls.thumb; // Mengambil URL thumbnail dari Unsplash
+
+                const colDiv = document.createElement('div');
+                colDiv.classList.add('col-md-4', 'mb-4');
+
+                const cardDiv = document.createElement('div');
+                cardDiv.classList.add('card', 'customer-review');
+
+                const cardBodyDiv = document.createElement('div');
+                cardBodyDiv.classList.add('card-body', 'text-center');
+
+                const img = document.createElement('img');
+                img.src = avatarUrl;
+                img.classList.add('rounded-circle', 'mb-3');
+                img.alt = 'Customer Avatar';
+
+                const title = document.createElement('h5');
+                title.classList.add('card-title');
+                title.textContent = review.name;
+
+                const text = document.createElement('p');
+                text.classList.add('card-text', 'review-text');
+                text.textContent = review.review;
+
+                cardBodyDiv.appendChild(img);
+                cardBodyDiv.appendChild(title);
+                cardBodyDiv.appendChild(text);
+
+                cardDiv.appendChild(cardBodyDiv);
+                colDiv.appendChild(cardDiv);
+
+                reviewsContainer.appendChild(colDiv);
+            });
+        };
+
+        displayReviews();
+    </script>
+
   <script>
     document.addEventListener("DOMContentLoaded", function() {
             // Cek apakah sesi email ada

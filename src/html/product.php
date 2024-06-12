@@ -149,43 +149,50 @@ include '../php/number.php';
                 $kategoriDipilih = isset($_GET['kategori']) ? $_GET['kategori'] : array();
 
                 // Buat query dasar
-                $sql = "SELECT * FROM produk";
+$sql = "SELECT * FROM produk";
 
-                // Jika ada kategori yang dipilih, tambahkan kondisi WHERE
-                if (!empty($kategoriDipilih) && !in_array("Semua", $kategoriDipilih)) {
-                    $kategoriString = "'" . implode("','", $kategoriDipilih) . "'";
-                    $sql .= " WHERE kategori IN ($kategoriString)";
-                }
+// Jika ada kategori yang dipilih, tambahkan kondisi WHERE
+if (!empty($kategoriDipilih) && !in_array("Semua", $kategoriDipilih)) {
+    $kategoriString = "'" . implode("','", $kategoriDipilih) . "'";
+    $sql .= " WHERE kategori IN ($kategoriString)";
+}
 
-                // Eksekusi query
-                $result = $conn->query($sql);
+// Tambahkan pengurutan berdasarkan stok_produk (stok yang ada akan muncul terlebih dahulu)
+$sql .= " ORDER BY CASE WHEN stock > 0 THEN 0 ELSE 1 END, stock DESC";
+
+// Eksekusi query
+$result = $conn->query($sql);
 
                 // Cek apakah hasil query tidak kosong
                 if ($result->num_rows > 0) {
                     // Loop melalui hasil query dan tampilkan produk
-                    while($row = $result->fetch_assoc()) {
-                        echo '<div class="col-md-3 mb-4">';
-                        echo '<div class="card">';
-                        // Ambil nama file gambar dari database
-                        $nama_file = $row['foto_produk'];
-                        // Buat path lengkap menuju file gambar di folder uploads
-                        $path_gambar = "../uploads/" . $nama_file;
-                        // Periksa apakah file gambar ada
-                        if (file_exists($path_gambar)) {
-                            // Jika ada, tampilkan gambar
-                            echo '<img src="'.$path_gambar.'" class="card-img-top" alt="'.$row['nama_produk'].'">';
-                        } else {
-                            // Jika tidak, tampilkan gambar default
-                            echo '<img src="default_image.jpg" class="card-img-top" alt="Default Image">';
-                        }
-                        echo '<div class="card-body">';
-                        echo '<p class="card-text"><a href="detail-product.php?id='.$row['id_produk'].'">'.$row['nama_produk'].'</a></p>';
-                        echo '<p class="price">Rp'.$row['harga_produk'].'</p>';
-                        echo '<div class="rating">★★★★★</div>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '</div>';
-                    }
+            while($row = $result->fetch_assoc()) {
+              echo '<div class="col-md-3 mb-4">';
+              echo '<div class="card">';
+              // Ambil nama file gambar dari database
+              $nama_file = $row['foto_produk'];
+              // Buat path lengkap menuju file gambar di folder uploads
+              $path_gambar = "../uploads/" . $nama_file;
+              // Periksa apakah file gambar ada
+              if (file_exists($path_gambar)) {
+                  // Jika ada, tampilkan gambar
+                  echo '<img src="'.$path_gambar.'" class="card-img-top" alt="'.$row['nama_produk'].'">';
+              } else {
+                  // Jika tidak, tampilkan gambar default
+                  echo '<img src="default_image.jpg" class="card-img-top" alt="Default Image">';
+              }
+              echo '<div class="card-body">';
+              echo '<p class="card-text"><a href="detail-product.php?id='.$row['id_produk'].'">'.$row['nama_produk'].'</a></p>';
+              echo '<p class="price">Rp'.$row['harga_produk'].'</p>';
+              echo '<div class="rating">★★★★★</div>';
+              // Tambahkan logika untuk menampilkan pesan "Stock Habis" jika stok = 0
+              if ($row['stock'] == 0) {
+                  echo '<p class="out-of-stock">Stock Habis</p>';
+              }
+              echo '</div>';
+              echo '</div>';
+              echo '</div>';
+            }
                 } else {
                     echo "Tidak ada produk.";
                 }

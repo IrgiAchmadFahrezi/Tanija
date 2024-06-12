@@ -31,6 +31,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt->execute()) {
         $lastInsertId = $stmt->insert_id;
+        if ($statusPembayaran === 'success') {
+            foreach ($_SESSION['cart'] as $id_produk => $produk) {
+                $jumlah = $produk['jumlah'];
+                $sqlUpdateStock = "UPDATE produk SET stock = stock - $jumlah WHERE id_produk = '$id_produk'";
+                $conn->query($sqlUpdateStock);
+            }
+            // Kosongkan keranjang belanja setelah pembayaran berhasil
+            unset($_SESSION['cart']);
+        }
 
         // Insert into detail_barang
         foreach ($cart as $product_id => $product) {

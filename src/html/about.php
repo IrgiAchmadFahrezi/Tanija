@@ -158,10 +158,10 @@ include '../php/number.php';
               <p class="card-text">UI/UX</p>
               <div class="card-social-media">
                 <a href="https://www.instagram.com/irgifhrziy_" class="nav-link">
-                  <img src="/assets/icons/instagram.svg" alt="" class="ic" />
+                  <img src="../assets/icons/instagram.svg" alt="" class="ic" />
                 </a>
                 <a href="https://www.linkedin.com/in/irgi-achmad-fahrezi" class="nav-link">
-                  <img src="/assets/icons/linkedin.svg" alt="" class="ic" />
+                  <img src="../assets/icons/linkedin.svg" alt="" class="ic" />
                 </a>
               </div>
             </div>
@@ -173,10 +173,10 @@ include '../php/number.php';
               <p class="card-text">FRONT-END</p>
               <div class="card-social-media">
                 <a href="https://www.instagram.com/danufbrnt/" class="nav-link">
-                  <img src="/assets/icons/instagram.svg" alt="" class="ic" />
+                  <img src="../assets/icons/instagram.svg" alt="" class="ic" />
                 </a>
                 <a href="https://www.linkedin.com/in/danu-febrianto-0b816a2b4/" class="nav-link">
-                  <img src="/assets/icons/linkedin.svg" alt="" class="ic" />
+                  <img src="../assets/icons/linkedin.svg" alt="" class="ic" />
                 </a>
               </div>
             </div>
@@ -188,10 +188,10 @@ include '../php/number.php';
               <p class="card-text">BACK-END</p>
               <div class="card-social-media">
                 <a href="https://www.instagram.com/machrusaw_/" class="nav-link">
-                  <img src="/assets/icons/instagram.svg" alt="" class="ic" />
+                  <img src="../assets/icons/instagram.svg" alt="" class="ic" />
                 </a>
                 <a href="https://www.linkedin.com/in/machrusaw" class="nav-link">
-                  <img src="/assets/icons/linkedin.svg" alt="" class="ic" />
+                  <img src="../assets/icons/linkedin.svg" alt="" class="ic" />
                 </a>
               </div>
             </div>

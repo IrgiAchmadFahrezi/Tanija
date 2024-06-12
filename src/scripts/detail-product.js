@@ -26,24 +26,24 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const quantityInput = document.getElementById("quantity");
-  const formQuantityInput = document.getElementById("form_quantity");
-  const increaseButton = document.getElementById("increase");
-  const decreaseButton = document.getElementById("decrease");
+// document.addEventListener("DOMContentLoaded", function () {
+//   const quantityInput = document.getElementById("quantity");
+//   const formQuantityInput = document.getElementById("form_quantity");
+//   const increaseButton = document.getElementById("increase");
+//   const decreaseButton = document.getElementById("decrease");
 
-  increaseButton.addEventListener("click", function () {
-    quantityInput.value = parseInt(quantityInput.value) + 1;
-    formQuantityInput.value = quantityInput.value;
-  });
+//   increaseButton.addEventListener("click", function () {
+//     quantityInput.value = parseInt(quantityInput.value) + 1;
+//     formQuantityInput.value = quantityInput.value;
+//   });
 
-  decreaseButton.addEventListener("click", function () {
-    if (quantityInput.value > 1) {
-      quantityInput.value = parseInt(quantityInput.value) - 1;
-      formQuantityInput.value = quantityInput.value;
-    }
-  });
-});
+//   decreaseButton.addEventListener("click", function () {
+//     if (quantityInput.value > 1) {
+//       quantityInput.value = parseInt(quantityInput.value) - 1;
+//       formQuantityInput.value = quantityInput.value;
+//     }
+//   });
+// });
 
 // Event listener untuk tombol Add to cart
 document.getElementById("addToCartBtn").addEventListener("click", function () {

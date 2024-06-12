@@ -13,6 +13,20 @@ if (isset($_POST['addToCartBtn'])) {
 
     // Tangkap detail produk dari POST data
     $id_produk = $_POST['id_produk'];
+    $jumlah = $_POST['quantity'];
+
+    // Periksa stok produk
+    $sql = "SELECT stock FROM produk WHERE id_produk = '$id_produk'";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $stok_tersedia = $row['stock'];
+
+        if ($jumlah > $stok_tersedia) {
+            echo "<script>alert('Jumlah yang dibeli melebihi stok yang tersedia.'); window.history.back();</script>";
+            exit();
+        }
+    }
 
     // Periksa apakah produk sudah ada di keranjang belanja
     if (isset($_SESSION['cart'][$id_produk])) {
@@ -20,7 +34,6 @@ if (isset($_POST['addToCartBtn'])) {
     } else {
         $nama_produk = $_POST['nama_produk'];
         $harga_produk = $_POST['harga_produk'];
-        $jumlah = $_POST['quantity'];
         $nama_file_foto = $_POST['foto_produk']; // Mendapatkan nama file foto produk dari form
 
         // Buat array untuk menyimpan detail produk
@@ -44,6 +57,7 @@ if (isset($_POST['addToCartBtn'])) {
         $total_items = count($_SESSION['cart']);
         echo "<script>alert('Produk berhasil ditambahkan ke keranjang belanja. Total item dalam keranjang: $total_items');</script>";
     }
+    
 }
 
 // Tangkap ID produk dari URL
@@ -416,7 +430,38 @@ $conn->close();
             </div>
         </div>
     </footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+  const quantityInput = document.getElementById("quantity");
+  const formQuantityInput = document.getElementById("form_quantity");
+  const increaseButton = document.getElementById("increase");
+  const decreaseButton = document.getElementById("decrease");
 
+  increaseButton.addEventListener("click", function () {
+    // quantityInput.value = parseInt(quantityInput.value) + 1;
+    // formQuantityInput.value = quantityInput.value;
+
+    let quantity = parseInt(quantityInput.value);
+        const maxQuantity = <?php echo $row['stock']; ?>; // Ambil stok dari PHP
+
+        if (quantity < maxQuantity) {
+            quantity++;
+            quantityInput.value = quantity;
+            formQuantityInput.value = quantityInput.value;
+        } else {
+            alert('Jumlah yang dibeli melebihi stok yang tersedia.');
+        }
+  });
+
+  decreaseButton.addEventListener("click", function () {
+    if (quantityInput.value > 1) {
+      quantityInput.value = parseInt(quantityInput.value) - 1;
+      formQuantityInput.value = quantityInput.value;
+    }
+  });
+});
+
+</script>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
             // Cek apakah sesi email ada
