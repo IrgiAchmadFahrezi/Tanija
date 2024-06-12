@@ -174,6 +174,9 @@ $conn->close();
     <!-- Font Awesome CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
     <?php
@@ -201,13 +204,13 @@ $conn->close();
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Cari Produk..." aria-label="Cari Produk...">
+            <form class="form-inline my-2 my-lg-0" method="get" action="../php/search.php">
+                <input class="form-control mr-sm-2" type="search" name="query" placeholder="Cari Produk..." aria-label="Cari Produk...">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
             </form>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#"> <i class="far fa-user"></i> <span id="nama_user">Profil</span></a>
+                    <a class="nav-link" href="#"> <i class="far fa-user"></i> <span id="nama_user">Profile</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i><span class="badge"><?php echo $favoriteCount; ?></span></a>
@@ -485,10 +488,9 @@ $conn->close();
             // Redirect ke halaman logout (buat file logout.php)
             window.location.href = "logout.php";
         }
-
-
-        
+ 
   </script>
+
     <script src="../scripts/detail-product.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
