@@ -2,6 +2,20 @@
 session_start();
 include '../php/db_connection.php';
 include '../php/number.php';
+
+// Check if the cart is empty
+if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+  echo "Keranjang belanja Anda kosong.";
+  exit();
+}
+
+// Fetch products from the cart
+$cart_items = $_SESSION['cart'];
+$total_amount = 0;
+
+foreach ($cart_items as $item) {
+  $total_amount += $item['harga'] * $item['jumlah'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
