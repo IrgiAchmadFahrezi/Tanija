@@ -3,12 +3,50 @@ session_start();
 include '../php/db_connection.php';
 include '../php/number.php';
 
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favorit - Tanija</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/bootstrap.css" rel="stylesheet">
+
+  <!-- Style CSS -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+  <link href="../css/favorite.css" rel="stylesheet">
+
+  <!-- Font Awesome CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+
+<?php
 // Tangani penambahan ke keranjang dari halaman favorit
 if(isset($_POST['addToCartBtn'])) {
   // Periksa apakah pengguna sudah login
   if (!isset($_SESSION['email'])) {
       // Jika pengguna belum login, tampilkan pesan alert dan arahkan ke halaman login
-      echo "<script>alert('Anda harus login terlebih dahulu untuk menambahkan produk ke keranjang.'); window.location.href='../html/login.html';</script>";
+      echo "<script>
+              Swal.fire({
+                  icon: 'warning',
+                  title: 'Anda harus login terlebih dahulu',
+                  text: 'Untuk menambahkan produk ke keranjang, silakan login terlebih dahulu.',
+                  confirmButtonText: 'Login'
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      window.location.href='../html/login.html';
+                  }
+              });
+            </script>";
       exit(); // Keluar dari skrip PHP setelah menampilkan pesan alert
   }
 
@@ -18,7 +56,13 @@ if(isset($_POST['addToCartBtn'])) {
   // Periksa apakah produk sudah ada di keranjang belanja
   if (isset($_SESSION['cart'][$id_produk])) {
       // Jika produk sudah ada di keranjang belanja, tampilkan pesan alert
-      echo "<script>alert('Produk sudah ada di keranjang belanja.');</script>";
+      echo "<script>
+              Swal.fire({
+                  icon: 'info',
+                  title: 'Produk sudah ada di keranjang',
+                  text: 'Produk ini sudah ada di keranjang belanja Anda.'
+              });
+            </script>";
   } else {
       // Jika produk belum ada di keranjang belanja, tambahkan ke keranjang
       $nama_produk = $_POST['nama_produk'];
@@ -45,31 +89,16 @@ if(isset($_POST['addToCartBtn'])) {
 
       // Tampilkan jumlah total item dalam keranjang belanja
       $total_items = count($_SESSION['cart']);
-      echo "<script>alert('Produk berhasil ditambahkan ke keranjang belanja. Total item dalam keranjang: $total_items');</script>";
+      echo "<script>
+              Swal.fire({
+                  icon: 'success',
+                  title: 'Berhasil',
+                  text: 'Produk berhasil ditambahkan ke keranjang belanja. Total item dalam keranjang: $total_items'
+              });
+            </script>";
   }
 }
-
 ?>
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Favorit - Tanija</title>
-
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/css/bootstrap.css" rel="stylesheet">
-
-  <!-- Style CSS -->
-  <link href="../assets/css/style.css" rel="stylesheet">
-  <link href="../css/favorite.css" rel="stylesheet">
-
-  <!-- Font Awesome CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-</head>
-<body>
 
   <!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">
@@ -160,7 +189,7 @@ if(isset($_POST['addToCartBtn'])) {
                   echo '<p class="card-text">Rp. '.$produk['harga'].'</p>';
                   echo '<form method="post" action="../php/remove_favorite.php">';
                   echo '<input type="hidden" name="id_produk" value="'.$produk['id'].'">';
-                  echo '<button type="submit" class="btn btn-danger"><i class="far fa-heart"></i> Hapus dari Favorit</button>';
+                  echo '<button type="button" class="btn btn-danger" onclick="hapusDariFavorite('.$produk['id'].')"><i class="far fa-heart"></i> Hapus dari Favorit</button>';
                   echo '</form>';
                   echo '<form method="post" action="">';
                   echo '<input type="hidden" name="id_produk" value="'.$produk['id'].'">';
@@ -251,7 +280,22 @@ if(isset($_POST['addToCartBtn'])) {
             var modal = $(this);
             modal.find('#detailIdInput').val(detailId);
         });
-        
+
+  function hapusDariFavorite(idProduk) {
+    Swal.fire({
+      title: 'Konfirmasi',
+      text: 'Apakah Anda yakin ingin menghapus produk ini dari favorit?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ya',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Redirect ke remove-favorite.php dengan mengirimkan id_produk
+        window.location.href = '../php/remove_favorite.php?id_produk=' + idProduk;
+      }
+    });
+  }
   </script>
 
   <!-- Bootstrap JS, Popper.js, dan jQuery -->

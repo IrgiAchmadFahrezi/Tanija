@@ -27,6 +27,10 @@ if (!isset($_SESSION['email'])) {
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
 </head>
 <body>
 
@@ -142,9 +146,9 @@ if (!isset($_SESSION['email'])) {
 
                             <td>Rp. ".number_format($subtotal, 0, ',', '.')."</td>
                             <td>
-                                <form action='../php/remove_from_cart.php' method='post'>
+                                <form id='deleteForm{$product_id}' action='../php/remove_from_cart.php' method='post'>
                                     <input type='hidden' name='product_id' value='{$product_id}'>
-                                    <button class='btn btn-sm btn-outline-danger' type='submit'>Hapus</button>
+                                    <button class='btn btn-sm btn-outline-danger' type='button' onclick='confirmDelete({$product_id})'>Hapus</button>
                                 </form>
                             </td>
                         </tr>";
@@ -159,9 +163,10 @@ if (!isset($_SESSION['email'])) {
           </table>
           <div class="d-flex justify-content-between">
             <a href="./product.php"><button class="btn btn-warning" >Lanjut Belanja</button></a>
-            <form action="../php/remove_from_cart.php" method="post">
-            <button class="btn btn-danger" type="submit" name="clear_cart" <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '' : 'disabled'; ?>>Bersihkan Keranjang</button>
-    </form>
+            <form id='clearCartForm' action="../php/remove_from_cart.php" method="post">
+    <button class="btn btn-danger" type="submit" name="clear_cart" onclick="return confirmClearCart();" <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '' : 'disabled'; ?>>Bersihkan Keranjang</button>
+</form>
+
           </div>
         </div>
         <div class="col-lg-4">
@@ -201,8 +206,8 @@ if (!isset($_SESSION['email'])) {
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
+<!-- footer -->
+<footer class="footer">
     <div class="container">
       <div class="content">
         <div class="content-top d-flex justify-content-between flex-column flex-lg-row">
@@ -255,7 +260,6 @@ if (!isset($_SESSION['email'])) {
       </div>
     </div>
   </footer>
-
   <script>
     function increaseQuantity(productId) {
         var quantityInput = document.getElementById('quantity' + productId);
@@ -362,6 +366,42 @@ if (!isset($_SESSION['email'])) {
             // Redirect ke halaman logout (buat file logout.php)
             window.location.href = "logout.php";
         }
+
+    function confirmDelete(productId) {
+    return Swal.fire({
+        title: 'Konfirmasi',
+        text: 'Apakah Anda yakin ingin menghapus produk ini dari keranjang?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('deleteForm' + productId).submit();
+        } else {
+            return false;
+        }
+    });
+}
+
+function confirmClearCart() {
+    Swal.fire({
+        title: 'Konfirmasi',
+        text: 'Apakah Anda yakin ingin mengosongkan keranjang?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // SweetAlert2 konfirmasi, kirimkan form untuk menghapus keranjang
+            document.getElementById('clearCartForm').submit();
+        }
+    });
+    // return false agar form tidak dikirim secara otomatis
+    return false;
+}
+
   </script>
 
   <!-- Bootstrap JS -->

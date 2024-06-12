@@ -3,61 +3,7 @@ session_start();
 include '../php/db_connection.php';
 include '../php/number.php';
 
-// Pastikan tombol "Add to Cart" ditekan
-if (isset($_POST['addToCartBtn'])) {
-    // Periksa apakah pengguna sudah login
-    if (!isset($_SESSION['email'])) {
-        echo "<script>alert('Anda harus login terlebih dahulu untuk menambahkan produk ke keranjang.'); window.location.href='../html/login.html';</script>";
-        exit();
-    }
-
-    // Tangkap detail produk dari POST data
-    $id_produk = $_POST['id_produk'];
-
-    // Periksa apakah produk sudah ada di keranjang belanja
-    if (isset($_SESSION['cart'][$id_produk])) {
-        echo "<script>alert('Produk sudah ada di keranjang belanja.');</script>";
-    } else {
-        $nama_produk = $_POST['nama_produk'];
-        $harga_produk = $_POST['harga_produk'];
-        $jumlah = $_POST['quantity'];
-        $nama_file_foto = $_POST['foto_produk']; // Mendapatkan nama file foto produk dari form
-
-        // Buat array untuk menyimpan detail produk
-        $produk = array(
-            'id' => $id_produk,
-            'nama' => $nama_produk,
-            'harga' => $harga_produk,
-            'jumlah' => $jumlah,
-            'foto_produk' => $nama_file_foto // Simpan nama file foto produk ke dalam sesi
-        );
-
-        // Periksa apakah keranjang belanja telah dibuat sebelumnya dalam sesi
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = array();
-        }
-
-        // Tambahkan detail produk ke dalam keranjang belanja
-        $_SESSION['cart'][$id_produk] = $produk;
-
-        // Tampilkan jumlah total item dalam keranjang belanja
-        $total_items = count($_SESSION['cart']);
-        echo "<script>alert('Produk berhasil ditambahkan ke keranjang belanja. Total item dalam keranjang: $total_items');</script>";
-    }
-}
-
-// Tangkap ID produk dari URL
-$id_produk = $_GET['id'];
-$sql = "SELECT * FROM produk WHERE id_produk = '$id_produk'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-} else {
-    echo "Produk tidak ditemukan.";
-    exit();
-}
-
+// Mendapatkan detail produk dari database
 $id_produk = $_GET['id'];
 $sql = "SELECT * FROM produk WHERE id_produk = '$id_produk'";
 $result = $conn->query($sql);
@@ -66,74 +12,6 @@ if ($result->num_rows > 0) {
 } else {
     echo "Produk tidak ditemukan.";
     exit();
-}
-
-// Tangani permintaan penambahan ke favorit
-if (isset($_POST['addToFavoriteBtn'])) {
-    // Periksa apakah pengguna sudah login
-    if (!isset($_SESSION['email'])) {
-        echo "<script>alert('Anda harus login terlebih dahulu untuk menambahkan produk ke favorit.'); window.location.href='../html/login.html';</script>";
-        exit();
-    }
-
-    // Tangkap detail produk dari POST data
-    $id_produk = $_POST['id_produk'];
-    $nama_produk = $_POST['nama_produk'];
-    $harga_produk = $_POST['harga_produk'];
-    $nama_file_foto = $_POST['foto_produk']; // Mendapatkan nama file foto produk dari form
-
-    // Periksa apakah produk sudah ada dalam daftar favorit
-    if (isset($_SESSION['favorites'][$id_produk])) {
-        echo "<script>alert('Produk sudah ada di favorit.');</script>";
-    } else {
-        // Buat array untuk menyimpan detail produk
-        $produk = array(
-            'id' => $id_produk,
-            'nama' => $nama_produk,
-            'harga' => $harga_produk,
-            'foto_produk' => $nama_file_foto // Simpan nama file foto produk ke dalam sesi
-        );
-
-        // Periksa apakah daftar favorit telah dibuat sebelumnya dalam sesi
-        if (!isset($_SESSION['favorites'])) {
-            $_SESSION['favorites'] = array();
-        }
-
-        // Tambahkan detail produk ke dalam daftar favorit
-        $_SESSION['favorites'][$id_produk] = $produk;
-
-        // Tampilkan jumlah total item dalam daftar favorit
-        $total_favorites = count($_SESSION['favorites']);
-        echo "<script>alert('Produk berhasil ditambahkan ke favorit. Total item dalam favorit: $total_favorites');</script>";
-    }
-}
-
-if(isset($_POST['addToFavoriteBtn'])) {
-    // Tangkap detail produk
-    $id_produk = $_GET['id'];
-    $nama_produk = $row['nama_produk'];
-    $harga_produk = $row['harga_produk'];
-    $foto_produk = $row['foto_produk']; // Tambahkan ini
-
-    // Buat array untuk menyimpan detail produk
-    $produk = array(
-        'id' => $id_produk,
-        'nama' => $nama_produk,
-        'harga' => $harga_produk,
-        'foto_produk' => $foto_produk // Tambahkan ini
-    );
-
-    // Periksa apakah favorit telah dibuat sebelumnya dalam sesi
-    if(!isset($_SESSION['favorites'])) {
-        $_SESSION['favorites'] = array();
-    }
-
-    // Tambahkan detail produk ke dalam favorit
-    $_SESSION['favorites'][$id_produk] = $produk;
-
-    // Redirect ke halaman favorit
-    //header("Location: favorite.php");
-    //exit();
 }
 
 $conn->close();
@@ -174,6 +52,142 @@ $conn->close();
         echo "Produk tidak ditemukan.";
         exit();
     }
+
+    // Pastikan tombol "Add to Cart" ditekan
+if (isset($_POST['addToCartBtn'])) {
+    // Periksa apakah pengguna sudah login
+    if (!isset($_SESSION['email'])) {
+        echo "<script>
+            Swal.fire({
+                icon: 'warning',
+                title: 'Anda harus login terlebih dahulu untuk menambahkan produk ke keranjang.',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href='../html/login.html';
+                }
+            });
+        </script>";
+        exit();
+    }
+
+    // Tangkap detail produk dari POST data
+    $id_produk = $_POST['id_produk'];
+
+    // Periksa apakah produk sudah ada di keranjang belanja
+    if (isset($_SESSION['cart'][$id_produk])) {
+        echo "<script>
+            Swal.fire({
+                icon: 'info',
+                title: 'Produk sudah ada di keranjang belanja.',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+            });
+        </script>";
+    } else {
+        $nama_produk = $_POST['nama_produk'];
+        $harga_produk = $_POST['harga_produk'];
+        $jumlah = $_POST['quantity'];
+        $nama_file_foto = $_POST['foto_produk']; // Mendapatkan nama file foto produk dari form
+
+        // Buat array untuk menyimpan detail produk
+        $produk = array(
+            'id' => $id_produk,
+            'nama' => $nama_produk,
+            'harga' => $harga_produk,
+            'jumlah' => $jumlah,
+            'foto_produk' => $nama_file_foto // Simpan nama file foto produk ke dalam sesi
+        );
+
+        // Periksa apakah keranjang belanja telah dibuat sebelumnya dalam sesi
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = array();
+        }
+
+        // Tambahkan detail produk ke dalam keranjang belanja
+        $_SESSION['cart'][$id_produk] = $produk;
+
+        // Tampilkan jumlah total item dalam keranjang belanja
+        $total_items = count($_SESSION['cart']);
+        echo "<script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Produk berhasil ditambahkan ke keranjang belanja.',
+                text: 'Total item dalam keranjang: $total_items',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+            });
+        </script>";
+    }
+}
+
+// Tangani permintaan penambahan ke favorit
+if (isset($_POST['addToFavoriteBtn'])) {
+    // Periksa apakah pengguna sudah login
+    if (!isset($_SESSION['email'])) {
+        echo "<script>
+            Swal.fire({
+                icon: 'warning',
+                title: 'Anda harus login terlebih dahulu untuk menambahkan produk ke favorit.',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href='../html/login.html';
+                }
+            });
+        </script>";
+        exit();
+    }
+
+    // Tangkap detail produk dari POST data
+    $id_produk = $_POST['id_produk'];
+    $nama_produk = $_POST['nama_produk'];
+    $harga_produk = $_POST['harga_produk'];
+    $nama_file_foto = $_POST['foto_produk']; // Mendapatkan nama file foto produk dari form
+
+    // Periksa apakah produk sudah ada dalam daftar favorit
+    if (isset($_SESSION['favorites'][$id_produk])) {
+        echo "<script>
+            Swal.fire({
+                icon: 'info',
+                title: 'Produk sudah ada di favorit.',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+            });
+        </script>";
+    } else {
+        // Buat array untuk menyimpan detail produk
+        $produk = array(
+            'id' => $id_produk,
+            'nama' => $nama_produk,
+            'harga' => $harga_produk,
+            'foto_produk' => $nama_file_foto // Simpan nama file foto produk ke dalam sesi
+        );
+
+        // Periksa apakah daftar favorit telah dibuat sebelumnya dalam sesi
+        if (!isset($_SESSION['favorites'])) {
+            $_SESSION['favorites'] = array();
+        }
+
+        // Tambahkan detail produk ke dalam daftar favorit
+        $_SESSION['favorites'][$id_produk] = $produk;
+
+        // Tampilkan jumlah total item dalam daftar favorit
+        $total_favorites = count($_SESSION['favorites']);
+        echo "<script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Produk berhasil ditambahkan ke favorit.',
+                text: 'Total item dalam favorit: $total_favorites',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+            });
+        </script>";
+    }
+}
+
     $conn->close();
     ?>
 

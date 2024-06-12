@@ -239,38 +239,3 @@
     font-size: 0.8rem;
   }
 }
-
-/* General improvements */
-.table tbody tr td {
-  padding: 8px;
-}
-
-.card-title {
-  padding: 10px;
-}
-
-.card-body {
-  padding: 15px;
-}
-
-.footer {
-  padding: 40px 20px;
-}
-
-.footer .content-top-left,
-.footer .content-top-right {
-  margin-bottom: 20px;
-}
-
-.footer .content-top-left p {
-  font-size: 0.85rem;
-}
-
-.footer .wrap {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.footer .wrap a {
-  margin-bottom: 10px;
-}
