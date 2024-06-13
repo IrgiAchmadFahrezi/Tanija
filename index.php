@@ -292,19 +292,26 @@ include 'src/php/number.php';
         </div>
     </div>
     <div class="container mt-5">
-    <div class="card feature-card mt-4">
+      <div class="card feature-card mt-4">
           <div class="card-body sponsor">
               <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-4 sponsor">
                       <img src="src/assets/icon-sponsor/Petrokimia_Gresik.png" alt="">
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-4 sponsor p-4 mx-auto">
                       <img src="src/assets/icon-sponsor/quick.png" alt="">
                   </div>
-                  <div class="col-md-4">
-                      <i class="bi bi-shield-check fs-1"></i>
-                      <h5 class="card-title">1 year warranty</h5>
-                      <p class="card-text">Available warranty</p>
+                  <div class="col-md-4 sponsor">
+                     <img src="src/assets/icon-sponsor/Pupuk Kaltim.png" alt="">
+                  </div>
+                  <div class="col-md-4 sponsor pt-5">
+                     <img src="src/assets/icon-sponsor/Pupuk Indonesia.png" alt="">
+                  </div>
+                  <div class="col-md-4 sponsor pt-4">
+                     <img src="src/assets/icon-sponsor/Ninu Farm.png" alt="">
+                  </div>
+                  <div class="col-md-4 sponsor pt-5">
+                     <img src="src/assets/icon-sponsor/Kubota.png" alt="">
                   </div>
               </div>
           </div>

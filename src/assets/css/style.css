@@ -271,3 +271,7 @@ body {
     padding: 20px;
   }
 }
+/* Sponsor */
+.sponsor img {
+  max-height: 100px;
+}
