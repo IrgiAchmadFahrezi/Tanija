@@ -3,6 +3,49 @@ session_start();
 include '../php/db_connection.php';
 include '../php/number.php';
 
+// Pastikan tombol "Add to Cart" ditekan
+if (isset($_POST['addToCartBtn'])) {
+    // Periksa apakah pengguna sudah login
+    if (!isset($_SESSION['email'])) {
+        echo "<script>alert('Anda harus login terlebih dahulu untuk menambahkan produk ke keranjang.'); window.location.href='../html/login.html';</script>";
+        exit();
+    }
+
+    // Tangkap detail produk dari POST data
+    $id_produk = $_POST['id_produk'];
+
+    // Periksa apakah produk sudah ada di keranjang belanja
+    if (isset($_SESSION['cart'][$id_produk])) {
+        echo "<script>alert('Produk sudah ada di keranjang belanja.');</script>";
+    } else {
+        $nama_produk = $_POST['nama_produk'];
+        $harga_produk = $_POST['harga_produk'];
+        $jumlah = $_POST['quantity'];
+        $nama_file_foto = $_POST['foto_produk']; // Mendapatkan nama file foto produk dari form
+
+        // Buat array untuk menyimpan detail produk
+        $produk = array(
+            'id' => $id_produk,
+            'nama' => $nama_produk,
+            'harga' => $harga_produk,
+            'jumlah' => $jumlah,
+            'foto_produk' => $nama_file_foto // Simpan nama file foto produk ke dalam sesi
+        );
+
+        // Periksa apakah keranjang belanja telah dibuat sebelumnya dalam sesi
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = array();
+        }
+
+        // Tambahkan detail produk ke dalam keranjang belanja
+        $_SESSION['cart'][$id_produk] = $produk;
+
+        // Tampilkan jumlah total item dalam keranjang belanja
+        $total_items = count($_SESSION['cart']);
+        echo "<script>alert('Produk berhasil ditambahkan ke keranjang belanja. Total item dalam keranjang: $total_items');</script>";
+    }
+}
+
 // Tangkap ID produk dari URL
 $id_produk = $_GET['id'];
 $sql = "SELECT * FROM produk WHERE id_produk = '$id_produk'";
@@ -15,18 +58,55 @@ if ($result->num_rows > 0) {
     exit();
 }
 
-// Hitung jumlah ulasan
-$reviews_sql = "SELECT COUNT(*) as total_reviews FROM reviews WHERE id_produk = ?";
-$reviews_stmt = $conn->prepare($reviews_sql);
-$reviews_stmt->bind_param("i", $id_produk);
-$reviews_stmt->execute();
-$reviews_result = $reviews_stmt->get_result();
-$reviews_count = 0;
-if ($reviews_result->num_rows > 0) {
-    $reviews_row = $reviews_result->fetch_assoc();
-    $reviews_count = $reviews_row['total_reviews'];
+$id_produk = $_GET['id'];
+$sql = "SELECT * FROM produk WHERE id_produk = '$id_produk'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+} else {
+    echo "Produk tidak ditemukan.";
+    exit();
 }
-$reviews_stmt->close();
+
+// Tangani permintaan penambahan ke favorit
+if (isset($_POST['addToFavoriteBtn'])) {
+    // Periksa apakah pengguna sudah login
+    if (!isset($_SESSION['email'])) {
+        echo "<script>alert('Anda harus login terlebih dahulu untuk menambahkan produk ke favorit.'); window.location.href='../html/login.html';</script>";
+        exit();
+    }
+
+    // Tangkap detail produk dari POST data
+    $id_produk = $_POST['id_produk'];
+    $nama_produk = $_POST['nama_produk'];
+    $harga_produk = $_POST['harga_produk'];
+    $nama_file_foto = $_POST['foto_produk']; // Mendapatkan nama file foto produk dari form
+
+    // Periksa apakah produk sudah ada dalam daftar favorit
+    if (isset($_SESSION['favorites'][$id_produk])) {
+        echo "<script>alert('Produk sudah ada di favorit.');</script>";
+    } else {
+        // Buat array untuk menyimpan detail produk
+        $produk = array(
+            'id' => $id_produk,
+            'nama' => $nama_produk,
+            'harga' => $harga_produk,
+            'foto_produk' => $nama_file_foto // Simpan nama file foto produk ke dalam sesi
+        );
+
+        // Periksa apakah daftar favorit telah dibuat sebelumnya dalam sesi
+        if (!isset($_SESSION['favorites'])) {
+            $_SESSION['favorites'] = array();
+        }
+
+        // Tambahkan detail produk ke dalam daftar favorit
+        $_SESSION['favorites'][$id_produk] = $produk;
+
+        // Tampilkan jumlah total item dalam daftar favorit
+        $total_favorites = count($_SESSION['favorites']);
+        echo "<script>alert('Produk berhasil ditambahkan ke favorit. Total item dalam favorit: $total_favorites');</script>";
+    }
+}
 
 if(isset($_POST['addToFavoriteBtn'])) {
     // Tangkap detail produk
@@ -55,71 +135,6 @@ if(isset($_POST['addToFavoriteBtn'])) {
     //header("Location: favorite.php");
     //exit();
 }
-
-// Handle Buy It Now
-if (isset($_POST['buy_it_now'])) {
-    $id_produk = $_POST['id_produk'];
-    $nama_produk = $_POST['nama_produk'];
-    $harga_produk = $_POST['harga_produk'];
-    $jumlah = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1;
-    $foto_produk = $_POST['foto_produk'];
-    $stock = $_POST['stock'];
-    
-    // Periksa stok produk dari database
-    $sql = "SELECT stock FROM produk WHERE id_produk = '$id_produk'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $stok_tersedia = $row['stock'];
-
-        // Periksa apakah stok cukup untuk pembelian
-        if ($jumlah <= $stok_tersedia) {
-            // Kurangi jumlah stok yang dibeli dari jumlah stok yang tersedia
-            $stok_baru = $stok_tersedia - $jumlah;
-
-            // Perbarui jumlah stok produk di database
-            $update_sql = "UPDATE produk SET stock = '$stok_baru' WHERE id_produk = '$id_produk'";
-            $update_result = $conn->query($update_sql);
-
-            if ($update_result) {
-                // Stok berhasil diperbarui, lanjutkan dengan proses pembayaran atau tindakan lainnya
-                // Check if product is already in the cart
-                $found = false;
-                foreach ($_SESSION['cart'] as &$item) {
-                    if ($item['id'] == $id_produk) {
-                        $item['jumlah'] += $jumlah;
-                        $found = true;
-                        break;
-                    }
-                }
-                if (!$found) {
-                    $_SESSION['cart'][] = array(
-                        'id' => $id_produk,
-                        'nama' => $nama_produk,
-                        'harga' => $harga_produk,
-                        'jumlah' => $jumlah,
-                        'foto_produk' => $foto_produk
-                    );
-                }
-
-                // Redirect to payment page
-                header("Location: detail-pembayaran.php");
-                exit();
-            } else {
-                // Gagal memperbarui stok di database
-                echo "Gagal memperbarui stok produk di database.";
-            }
-        } else {
-            // Jumlah yang dibeli melebihi stok yang tersedia
-            echo "Jumlah yang dibeli melebihi stok yang tersedia.";
-        }
-    } else {
-        // Produk tidak ditemukan dalam database
-        echo "Produk tidak ditemukan.";
-    }
-}
-
 
 $conn->close();
 ?>
@@ -329,6 +344,7 @@ if (isset($_POST['addToCartBtn'])) {
         echo "Produk tidak ditemukan.";
         exit();
     }
+    $conn->close();
     ?>
     
     

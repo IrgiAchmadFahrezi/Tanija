@@ -43,6 +43,10 @@ foreach($_SESSION['cart'] as $product_id => $product) {
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
 </head>
 <body>
 
@@ -169,7 +173,7 @@ foreach($_SESSION['cart'] as $product_id => $product) {
 
                             <td>Rp. ".number_format($subtotal, 0, ',', '.')."</td>
                             <td>
-                                <form action='../php/remove_from_cart.php' method='post'>
+                                <form id='deleteForm{$product_id}' action='../php/remove_from_cart.php' method='post'>
                                     <input type='hidden' name='product_id' value='{$product_id}'>
                                     <button class='btn btn-sm btn-outline-danger' type='submit'>X</button>
                                 </form>
@@ -395,6 +399,42 @@ foreach($_SESSION['cart'] as $product_id => $product) {
             // Redirect ke halaman logout (buat file logout.php)
             window.location.href = "logout.php";
         }
+
+    function confirmDelete(productId) {
+    return Swal.fire({
+        title: 'Konfirmasi',
+        text: 'Apakah Anda yakin ingin menghapus produk ini dari keranjang?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('deleteForm' + productId).submit();
+        } else {
+            return false;
+        }
+    });
+}
+
+function confirmClearCart() {
+    Swal.fire({
+        title: 'Konfirmasi',
+        text: 'Apakah Anda yakin ingin mengosongkan keranjang?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // SweetAlert2 konfirmasi, kirimkan form untuk menghapus keranjang
+            document.getElementById('clearCartForm').submit();
+        }
+    });
+    // return false agar form tidak dikirim secara otomatis
+    return false;
+}
+
   </script>
 
   <!-- Bootstrap JS -->
