@@ -42,10 +42,42 @@ h5 {
 }
 
 .card-body {
-  background-color: #f8f9fa;
-  text-align: left !important;
-  margin-bottom: 15px;
+  font-size: 14px; /* Ukuran font */
+  line-height: 1.6; /* Jarak antar baris */
+  color: #333; /* Warna teks */
+  text-align: left; /* Rata kiri */
+  white-space: pre-wrap; /* Membuat spasi dan baris baru sesuai dengan input */
 }
+
+.card-body p {
+  margin-bottom: 1em; /* Jarak antar paragraf */
+}
+
+.card-body h1,
+.card-body h2,
+.card-body h3,
+.card-body h4,
+.card-body h5,
+.card-body h6 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  color: #000; /* Warna heading */
+}
+
+.card-body ul,
+.card-body ol {
+  margin-left: 1.5em;
+}
+
+.card-body a {
+  color: #007bff; /* Warna tautan */
+  text-decoration: none; /* Hilangkan garis bawah pada tautan */
+}
+
+.card-body a:hover {
+  text-decoration: underline; /* Garis bawah pada tautan saat di-hover */
+}
+
 .star {
   color: gold; /* Warna bintang */
 }

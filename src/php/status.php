@@ -64,4 +64,22 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 } else {
     echo "Keranjang belanja kosong.";
 }
+
+// Pastikan sesi 'cart' telah diinisialisasi sebelum mengaksesnya
+if(isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+    // Lakukan operasi yang ingin Anda lakukan dengan $_SESSION['cart']
+    // Misalnya, tampilkan produk yang ada di dalamnya
+    foreach ($_SESSION['cart'] as $item) {
+        // Tampilkan detail produk
+        echo "ID Produk: " . $item['id'] . "<br>";
+        echo "Nama Produk: " . $item['nama'] . "<br>";
+        echo "Harga Produk: " . $item['harga'] . "<br>";
+        echo "Jumlah: " . $item['jumlah'] . "<br>";
+        // Tambahkan lebih banyak informasi yang Anda inginkan
+    }
+} else {
+    // Jika sesi 'cart' tidak diinisialisasi atau kosong, tampilkan pesan kesalahan
+    echo "Data tidak ditemukan atau terjadi kesalahan dalam pengambilan data.";
+}
+
 ?>

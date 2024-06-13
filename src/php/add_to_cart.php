@@ -1,66 +1,59 @@
 <?php
 session_start();
 include '../php/db_connection.php';
-include '../php/number.php';
 
-// Periksa apakah pengguna sudah login
-if (!isset($_SESSION['email'])) {
-    echo "<script>alert('Anda harus login terlebih dahulu untuk melakukan pembelian.'); window.location.href='../html/login.html';</script>";
-    exit();
-}
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id_produk = $_POST['id'];
+    $jumlah = $_POST['quantity'];
+    $foto_produk = $_POST['foto_produk'];
 
-// Tangkap keranjang dari sesi
-$cart = $_SESSION['cart'];
+    // Jika tindakan adalah buy_now, kurangi stok
+    if (isset($_POST['action']) && $_POST['action'] == 'buy_now') {
+        // Periksa stok produk dari database
+        $sql = "SELECT stock FROM produk WHERE id_produk = '$id_produk'";
+        $result = $conn->query($sql);
 
-// Mulai transaksi
-$conn->begin_transaction();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $stok_tersedia = $row['stock'];
 
-try {
-    foreach ($cart as $item) {
-        $id_produk = $item['id'];
-        $jumlah = $item['jumlah'];
+            // Periksa apakah stok cukup untuk pembelian
+            if ($jumlah <= $stok_tersedia) {
+                // Kurangi jumlah stok yang dibeli dari jumlah stok yang tersedia
+                $stok_baru = $stok_tersedia - $jumlah;
 
-        // Kurangi stok produk
-        $stok_sql = "SELECT stock FROM produk WHERE id_produk = ?";
-        $stok_stmt = $conn->prepare($stok_sql);
-        $stok_stmt->bind_param("i", $id_produk);
-        $stok_stmt->execute();
-        $stok_result = $stok_stmt->get_result();
-        $stok_stmt->close();
+                // Perbarui jumlah stok produk di database
+                $update_sql = "UPDATE produk SET stock = '$stok_baru' WHERE id_produk = '$id_produk'";
+                $update_result = $conn->query($update_sql);
 
-        if ($stok_result->num_rows > 0) {
-            $stok_row = $stok_result->fetch_assoc();
-            $stok_produk = $stok_row['stock'];
-
-            if ($jumlah > $stok_produk) {
-                throw new Exception('Jumlah produk yang ingin dibeli melebihi stok yang tersedia.');
+                if ($update_result) {
+                    echo "Stok berhasil diperbarui dan pesanan disimpan.";
+                } else {
+                    echo "Gagal memperbarui stok produk di database.";
+                }
             } else {
-                // Kurangi stok produk
-                $new_stok = $stok_produk - $jumlah;
-                $update_stok_sql = "UPDATE produk SET stock = ? WHERE id_produk = ?";
-                $update_stok_stmt = $conn->prepare($update_stok_sql);
-                $update_stok_stmt->bind_param("ii", $new_stok, $id_produk);
-                $update_stok_stmt->execute();
-                $update_stok_stmt->close();
+                echo "Jumlah yang dibeli melebihi stok yang tersedia.";
             }
         } else {
-            throw new Exception('Produk tidak ditemukan.');
+            echo "Produk tidak ditemukan dalam database.";
+        }
+    } else {
+        // Jika tindakan bukan buy_now, tambahkan ke keranjang
+        $item = array(
+            'id' => $id_produk,
+            'foto_produk' => $foto_produk,
+            'jumlah' => $jumlah
+        );
+
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = array();
         }
 
-        // Lakukan proses pembelian lainnya, seperti menyimpan data transaksi
+        array_push($_SESSION['cart'], $item);
+
+        echo "Produk berhasil ditambahkan ke keranjang.";
     }
-
-    // Commit transaksi
-    $conn->commit();
-
-    // Kosongkan keranjang setelah pembelian berhasil
-    unset($_SESSION['cart']);
-    echo "<script>alert('Pembelian berhasil. Terima kasih telah berbelanja di Tanija.'); window.location.href='../index.php';</script>";
-} catch (Exception $e) {
-    // Rollback transaksi jika terjadi kesalahan
-    $conn->rollback();
-    echo "<script>alert('Pembelian gagal: " . $e->getMessage() . "'); window.location.href='../html/cart.php';</script>";
+} else {
+    echo "Metode permintaan tidak valid.";
 }
-
-$conn->close();
 ?>

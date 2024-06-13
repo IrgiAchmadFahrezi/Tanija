@@ -247,3 +247,29 @@
     content: none;
   }
 }
+
+.table th {
+  font-size: 15px;
+  background-color: #e3f2fd;
+}
+
+.nota-btn {
+  background-color: #f6b943;
+  border: #f6b943;
+}
+.nota-btn:hover {
+  background-color: #a97b20;
+}
+
+.cetak-btn {
+  background-color: #00880d;
+  border: #00880d;
+}
+.cetak-btn:hover {
+  background-color: #04580c;
+}
+
+.nota-btn,
+.cetak-btn {
+  margin: 2px;
+}

@@ -53,3 +53,44 @@ document.getElementById("addToCartBtn").addEventListener("click", () => {
   };
   xhr.send(`id=${productId}&quantity=${quantity}&foto_produk=${fotoProduk}`);
 });
+
+// Event listener untuk tombol Buy It Now
+document.getElementById("buy_it_now").addEventListener("click", () => {
+  const productId = "<?php echo $row['id_produk']; ?>"; // ID produk dari PHP
+  const quantity = document.getElementById("quantity").value; // Jumlah produk dari input
+  const fotoProduk = "<?php echo $row['foto_produk']; ?>"; // URL foto produk dari PHP
+
+  snap.pay(data.token, {
+    onSuccess: function (result) {
+      console.log(result);
+      alert("Pembayaran sukses!");
+
+      // Panggil add_to_cart.php untuk mengurangi stok dan menyimpan pesanan
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "add_to_cart.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // Respons dari add_to_cart.php
+          alert(xhr.responseText);
+          // Redirect ke halaman riwayat pemesanan setelah berhasil mengurangi stok
+          window.location.href = "riwayat_pemesanan.php";
+        }
+      };
+      xhr.send(
+        `id=${productId}&quantity=${quantity}&foto_produk=${fotoProduk}&action=buy_now`
+      );
+    },
+    onPending: function (result) {
+      console.log(result);
+      alert("Pembayaran tertunda!");
+    },
+    onError: function (result) {
+      console.log(result);
+      alert("Pembayaran gagal!");
+    },
+    onClose: function () {
+      alert("Anda menutup pop-up tanpa menyelesaikan pembayaran");
+    },
+  });
+});

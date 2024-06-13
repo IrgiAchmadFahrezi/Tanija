@@ -22,10 +22,13 @@ h5 {
 .card {
   border: 1px solid #e0e0e0;
   border-radius: 5px;
+  width: 200px;
+  height: 300px;
 }
 
 .card-img-top {
-  max-height: 200px;
+  max-height: 130px;
+  margin-top: 10px;
   object-fit: contain;
 }
 

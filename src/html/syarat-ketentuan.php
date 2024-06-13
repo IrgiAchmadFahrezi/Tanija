@@ -1,47 +1,30 @@
 <?php
 session_start();
-include '../php/db_connection.php';
+
 include '../php/number.php';
 
-// Periksa apakah pengguna sudah login
-if (!isset($_SESSION['email'])) {
-  echo "<script>alert('Anda harus login terlebih dahulu untuk melihat riwayat pembelian!'); window.location.href='../html/login.html';</script>";
-    exit();
-}
-
-// Query untuk mendapatkan riwayat pemesanan pengguna yang sedang login
-$query = "SELECT * FROM riwayat_pemesanan WHERE nama_user = '{$_SESSION['nama_user']}'";
-$result = $conn->query($query);
-
-// Cek apakah ada riwayat pemesanan
-if ($result->num_rows > 0) {
-    $riwayat_pemesanan = $result->fetch_all(MYSQLI_ASSOC);
-} else {
-    $riwayat_pemesanan = [];
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Riwayat Pemesanan - Tanija</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/css/bootstrap.css" rel="stylesheet">
-  <!-- Style CSS -->
-  <link href="../assets/css/style.css" rel="stylesheet">
-  <link href="../css/riwayat_pemesanan.css" rel="stylesheet">
-  <!-- Font Awesome CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-  <!-- Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syarat dan Ketentuan - Tanija</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Style CSS -->
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/syarat-ketentuan.css">
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
 </head>
 <body>
-  <!-- Navbar Bootstrap -->
+<!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/tanija/index.php">
         <img src="../assets/icons/logo-tanija.png" alt="Logo Tanija">
@@ -49,7 +32,6 @@ if ($result->num_rows > 0) {
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <form class="form-inline my-2 my-lg-0" method="get" action="../php/search.php">
         <input class="form-control mr-sm-2" type="search" name="query" placeholder="Cari Produk..." aria-label="Cari Produk...">
@@ -57,7 +39,7 @@ if ($result->num_rows > 0) {
       </form>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link"> <i class="far fa-user"></i> <span id="nama_user">Profil</span></a>
+            <a class="nav-link"> <i class="far fa-user"></i> <span id="nama_user">Profil</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i><span class="badge"><?php echo $favoriteCount; ?></span></a>
@@ -67,13 +49,13 @@ if ($result->num_rows > 0) {
         </li>
         <li class="nav-item">
         <?php
-            if (isset($_SESSION['email'])) {
-                echo '<form action="../php/logout.php" method="post">
-                        <button class="btn btn-login" type="submit" name="logout">Logout</button>
-                    </form>';
-            } else {
-                echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'../html/login.html\';">Login</button>';
-            }
+        if (isset($_SESSION['email'])) {
+            echo '<form action="../php/logout.php" method="post">
+                    <button class="btn btn-login" type="submit" name="logout">Logout</button>
+                  </form>';
+        } else {
+            echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'../html/login.html\';">Login</button>';
+        }
         ?>
         </li>
       </ul>
@@ -108,44 +90,53 @@ if ($result->num_rows > 0) {
       </div>
     </div>
   </nav>
-  <div class="container mt-5">
-    <h1>Riwayat Pemesanan</h1>
-    <table class="table mt-3">
-      <thead>
-        <tr>
-          <th>No</th>
-          <th>Tanggal Pemesanan</th>
-          <th>Detail Barang</th>
-          <th>Total Pembayaran</th>
-          <th>Status Pembayaran</th>
-          <th>Aksi</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php if (!empty($riwayat_pemesanan)) : ?>
-          <?php foreach ($riwayat_pemesanan as $index => $pemesanan) : ?>
-            <tr>
-              <td><?= $index + 1 ?></td>
-              <td><?= $pemesanan['tanggal_pemesanan'] ?></td>
-              <td><?= $pemesanan['detail_barang'] ?></td>
-              <td>Rp. <?= number_format($pemesanan['total_pembayaran'], 2, ',', '.') ?></td>
-              <td><?= $pemesanan['status_pembayaran'] ?></td>
-              <td class="aksi">
-                <button class="btn btn-info nota-btn" data-id="<?= $pemesanan['id'] ?>"><i class="fas fa-info"></i> Detail</button>
-                <button class="btn btn-secondary cetak-btn" data-id="<?= $pemesanan['id'] ?>"><i class="fas fa-file"></i> Nota</button>
-              </td>
-            </tr>
-          <?php endforeach; ?>
-        <?php else : ?>
-          <tr>
-            <td colspan="6">Belum ada riwayat pemesanan.</td>
-          </tr>
-        <?php endif; ?>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- footer -->
+    <main>
+        <div class="container mt-5 isi">
+            <h1 class="mb-4">Syarat dan Ketentuan</h1>
+            <p>Selamat datang di Tanija! Kami hadir menyediakan pengalaman belanja online yang responsif dan ramah pengguna untuk para konsumen yang tertarik dengan produk-produk pertanian berkualitas. Sebelum menggunakan layanan kami, harap baca dan pahami syarat dan ketentuan berikut:</p>
+            
+            <h2 class="mt-4">1. Penerimaan Syarat</h2>
+            <p>Dengan mengakses dan menggunakan situs web kami, Anda menyetujui untuk terikat oleh syarat dan ketentuan ini. Jika Anda tidak setuju dengan syarat dan ketentuan ini, harap jangan gunakan situs web kami.</p>
+            
+            <h2 class="mt-4">2. Perubahan Syarat</h2>
+            <p>Tanija berhak untuk mengubah syarat dan ketentuan ini kapan saja tanpa pemberitahuan sebelumnya. Perubahan akan berlaku segera setelah dipublikasikan di situs web kami. Anda disarankan untuk secara rutin memeriksa halaman ini untuk memastikan Anda mengetahui versi terbaru dari syarat dan ketentuan ini.</p>
+            
+            <h2 class="mt-4">3. Kelayakan Pengguna</h2>
+            <p>Untuk menggunakan layanan kami, Anda harus berusia minimal 18 tahun atau telah mendapatkan izin dari orang tua atau wali Anda. Dengan menggunakan situs web kami, Anda menyatakan dan menjamin bahwa Anda memenuhi persyaratan kelayakan ini.</p>
+            
+            <h2 class="mt-4">4. Akun Pengguna</h2>
+            <p>Anda mungkin diminta untuk membuat akun pengguna untuk mengakses fitur tertentu di situs web kami. Anda bertanggung jawab untuk menjaga kerahasiaan informasi akun Anda dan untuk semua aktivitas yang terjadi di bawah akun Anda. Harap segera beri tahu kami jika Anda mencurigai adanya penggunaan yang tidak sah dari akun Anda.</p>
+            
+            <h2 class="mt-4">5. Pembelian dan Pembayaran</h2>
+            <p>Semua pembelian produk melalui situs web kami tunduk pada ketersediaan stok. Harga produk dapat berubah sewaktu-waktu tanpa pemberitahuan sebelumnya. Pembayaran harus dilakukan melalui metode pembayaran yang kami sediakan. Kami berhak untuk membatalkan atau menolak pesanan kapan saja jika kami mencurigai adanya kecurangan atau pelanggaran syarat dan ketentuan ini.</p>
+            
+            <h2 class="mt-4">6. Pengiriman</h2>
+            <p>Waktu pengiriman yang kami berikan hanya perkiraan dan kami tidak bertanggung jawab atas keterlambatan pengiriman yang disebabkan oleh pihak ketiga. Risiko kehilangan atau kerusakan produk berpindah kepada Anda setelah produk diserahkan kepada kurir pengiriman.</p>
+            
+            <h2 class="mt-4">7. Pengembalian dan Penukaran</h2>
+            <p>Jika Anda menerima produk yang rusak atau tidak sesuai dengan pesanan Anda, harap hubungi kami dalam waktu 7 hari setelah penerimaan produk untuk mengatur pengembalian atau penukaran. Produk harus dikembalikan dalam kondisi asli dan kemasan lengkap.</p>
+            
+            <h2 class="mt-4">8. Hak Kekayaan Intelektual</h2>
+            <p>Semua konten di situs web kami, termasuk teks, grafis, logo, gambar, dan perangkat lunak, adalah milik Tanija atau pemberi lisensinya dan dilindungi oleh undang-undang hak cipta. Anda tidak diizinkan untuk menyalin, memodifikasi, atau mendistribusikan konten kami tanpa izin tertulis dari kami.</p>
+            
+            <h2 class="mt-4">9. Batasan Tanggung Jawab</h2>
+            <p>Tanija tidak bertanggung jawab atas kerugian atau kerusakan yang timbul dari penggunaan atau ketidakmampuan untuk menggunakan situs web kami, termasuk kerugian atau kerusakan tidak langsung, insidental, atau konsekuensial.</p>
+            
+            <h2 class="mt-4">10. Hukum yang Berlaku</h2>
+            <p>Syarat dan ketentuan ini diatur oleh dan ditafsirkan sesuai dengan hukum Republik Indonesia. Setiap perselisihan yang timbul dari atau sehubungan dengan syarat dan ketentuan ini akan diselesaikan di pengadilan yang memiliki yurisdiksi di Indonesia.</p>
+            
+            <h2 class="mt-4">11. Hubungi Kami</h2>
+            <p>Jika Anda memiliki pertanyaan atau kekhawatiran mengenai syarat dan ketentuan ini, silakan hubungi kami di:</p>
+            <ul>
+                <li>Email: tanija207@gmail.com</li>
+                <li>Instagram : @tanija.official</li>
+                <li>Alamat: Jl. Pertanian No. 123, Jakarta, Indonesia</li>
+            </ul>
+            
+            <p>Terima kasih telah berbelanja di Tanija!</p>
+        </div>
+    </main>
+    <!-- footer -->
   <footer class="footer">
       <div class="container">
         <div class="content">
@@ -199,38 +190,5 @@ if ($result->num_rows > 0) {
         </div>
       </div>
     </footer>
-
-  <script>
-    document.addEventListener("click", function(e) {
-        if (e.target.classList.contains("nota-btn")) {
-            var idPemesanan = e.target.dataset.id;
-            showNota(idPemesanan);
-        }
-        if (e.target.classList.contains("cetak-btn")) {
-            var idPemesanan = e.target.dataset.id;
-            cetakSlipPembayaran(idPemesanan);
-        }
-    });
-
-    function showNota(idPemesanan) {
-        // Redirect ke halaman nota dengan menyertakan idPemesanan sebagai parameter URL
-        window.location.href = "detail-pembelian.php?id_pemesanan=" + idPemesanan;
-    }
-
-    function cetakSlipPembayaran(idPemesanan) {
-        // Redirect ke halaman cetak slip pembayaran dengan menyertakan idPemesanan sebagai parameter URL
-        window.location.href = "cetak_slip_pembayaran.php?id_pemesanan=" + idPemesanan;
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        // Cek apakah sesi email ada
-        <?php if(isset($_SESSION['email'])) { ?>
-            // Jika sesi email ada, ambil nama pengguna dari sesi
-            var namaUser = "<?php echo $_SESSION['nama_user']; ?>";
-            // Ubah teks "Profile" menjadi nama pengguna
-            document.getElementById("nama_user").innerText = namaUser;
-        <?php } ?>
-    });
-  </script>
 </body>
 </html>
