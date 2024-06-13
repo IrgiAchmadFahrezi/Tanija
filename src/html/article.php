@@ -19,6 +19,7 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artikel</title>
+    <link rel="shortcut icon" href="../assets/icons/logo-tanija.png">
     
     <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -36,6 +37,8 @@ $result = $conn->query($sql);
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Elemen Loading -->
+  <div class="loader"></div>
    <!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/tanija/index.php">
@@ -218,5 +221,18 @@ $result = $conn->query($sql);
       window.location.href = "logout.php";
   }
   </script>
+  <script>
+  window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader");
+
+    // Tambahkan class untuk menghilangkan loader setelah 3 detik
+    setTimeout(() => {
+      loader.classList.add("loader--hidden");
+      loader.addEventListener("transitionend", () => {
+        document.body.removeChild(loader);
+      });
+    }, 500); // 3000 milidetik atau 3 detik
+  });
+</script>
 </body>
 </html>

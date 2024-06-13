@@ -28,7 +28,8 @@ include '../php/number.php';
 
 </head>
 <body>
-
+<!-- Elemen Loading -->
+<div class="loader"></div>
 <?php
 // Tangani penambahan ke keranjang dari halaman favorit
 if(isset($_POST['addToCartBtn'])) {
@@ -106,6 +107,7 @@ if(isset($_POST['addToCartBtn'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Favorit - Tanija</title>
+  <link rel="shortcut icon" href="../assets/icons/logo-tanija.png">
 
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -322,7 +324,19 @@ if(isset($_POST['addToCartBtn'])) {
     });
   }
   </script>
+<script>
+  window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader");
 
+    // Tambahkan class untuk menghilangkan loader setelah 3 detik
+    setTimeout(() => {
+      loader.classList.add("loader--hidden");
+      loader.addEventListener("transitionend", () => {
+        document.body.removeChild(loader);
+      });
+    }, 500); // 3000 milidetik atau 3 detik
+  });
+</script>
   <!-- Bootstrap JS, Popper.js, dan jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

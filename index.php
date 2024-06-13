@@ -10,6 +10,7 @@ include 'src/php/number.php';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tanija</title>
+  <link rel="shortcut icon" href="src/assets/icons/logo-tanija.png">
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="src/assets/css/bootstrap.css" rel="stylesheet">
@@ -23,6 +24,9 @@ include 'src/php/number.php';
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
+<!-- Elemen Loading -->
+<div class="loader"></div>
+
   <!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="#">
@@ -111,13 +115,13 @@ include 'src/php/number.php';
           <div class="row no-gutters">
             <div class="col-md-6 d-flex align-items-center">
               <div class="carousel-caption">
-                <h5>Pupuk<br>Organik</h5>
-                <a href="" class="btn btn-primary">Shop now</a>
-                <a href="#" class="btn btn-outline-primary">View more</a>
+                <h5>Produk<br>Pupuk</h5>
+                <a href="./src/html/product.php?kategori%5B%5D=Pupuk" class="btn btn-primary">Shop now</a>
+                <a href="./src/html/product.php" class="btn btn-outline-primary">View more</a>
               </div>
             </div>
             <div class="col-md-6">
-              <img class="d-block w-10" src="src/assets/images/promo1.png" alt="First slide">
+              <img class="d-block w-10" src="src/assets/images/carousel1.png" alt="First slide">
             </div>
           </div>
         </div>
@@ -125,13 +129,13 @@ include 'src/php/number.php';
           <div class="row no-gutters">
             <div class="col-md-6 d-flex align-items-center">
               <div class="carousel-caption">
-                <h5>Pupuk<br>Organik</h5>
-                <a href="#" class="btn btn-primary">Shop now</a>
-                <a href="#" class="btn btn-outline-primary">View more</a>
+                <h5>Benih<br>Tanaman</h5>
+                <a href="./src/html/product.php?kategori%5B%5D=Bibit+Tanaman" class="btn btn-primary">Shop now</a>
+                <a href="./src/html/product.php" class="btn btn-outline-primary">View more</a>
               </div>
             </div>
             <div class="col-md-6">
-              <img class="d-block w-10" src="src/assets/images/promo2.png" alt="Second slide">
+              <img class="d-block w-10" src="src/assets/images/carousel2.png" alt="Second slide">
             </div>
           </div>
         </div>
@@ -139,13 +143,13 @@ include 'src/php/number.php';
           <div class="row no-gutters">
             <div class="col-md-6 d-flex align-items-center">
               <div class="carousel-caption">
-                <h5>Pupuk<br>Organik</h5>
-                <a href="#" class="btn btn-primary">Shop now</a>
-                <a href="#" class="btn btn-outline-primary">View more</a>
+                <h5>Produk<br>Pestisida</h5>
+                <a href="./src/html/product.php?kategori%5B%5D=Pestisida" class="btn btn-primary">Shop now</a>
+                <a href="./src/html/product.php" class="btn btn-outline-primary">View more</a>
               </div>
             </div>
             <div class="col-md-6">
-              <img class="d-block w-10" src="src/assets/images/promo3.png" alt="Third slide">
+              <img class="d-block w-10" src="src/assets/images/carousel3.png" alt="Third slide">
             </div>
           </div>
         </div>
@@ -473,6 +477,20 @@ include 'src/php/number.php';
       window.location.href = "logout.php";
   }
   </script>
+   <script>
+  window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader");
+
+    // Tambahkan class untuk menghilangkan loader setelah 3 detik
+    setTimeout(() => {
+      loader.classList.add("loader--hidden");
+      loader.addEventListener("transitionend", () => {
+        document.body.removeChild(loader);
+      });
+    }, 10000); // 3000 milidetik atau 3 detik
+  });
+</script>
+
   
 
   <!-- Bootstrap JS, Popper.js, dan jQuery -->

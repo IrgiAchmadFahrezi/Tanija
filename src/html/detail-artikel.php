@@ -11,7 +11,7 @@ include '../php/number.php';
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
-
+    <link rel="shortcut icon" href="../assets/icons/logo-tanija.png">
     <!-- Style CSS -->
     <link href="../assets/css/style.css" rel="stylesheet">
     <link href="../css/detail-artikel.css" rel="stylesheet">
@@ -24,6 +24,8 @@ include '../php/number.php';
 
 </head>
 <body>
+  <!-- Elemen Loading -->
+  <div class="loader"></div>
     <!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/tanija/index.php">
@@ -214,4 +216,17 @@ include '../php/number.php';
             window.location.href = "logout.php";
         }
   </script>
+  <script>
+  window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader");
+
+    // Tambahkan class untuk menghilangkan loader setelah 3 detik
+    setTimeout(() => {
+      loader.classList.add("loader--hidden");
+      loader.addEventListener("transitionend", () => {
+        document.body.removeChild(loader);
+      });
+    }, 500); // 3000 milidetik atau 3 detik
+  });
+</script>
 </html>

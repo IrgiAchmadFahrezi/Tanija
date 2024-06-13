@@ -25,6 +25,7 @@ foreach ($cart_items as $item) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keranjang - Tanija</title>
+  <link rel="shortcut icon" href="../assets/icons/logo-tanija.png">
 
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -47,6 +48,8 @@ foreach ($cart_items as $item) {
   data-client-key="SB-Mid-client-WJFgv3j4ga-uCoJX"></script>
 </head>
 <body>
+  <!-- Elemen Loading -->
+  <div class="loader"></div>
   <!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/tanija/index.php">
@@ -433,6 +436,19 @@ foreach ($cart_items as $item) {
             window.location.href = "logout.php";
         }
   </script>
+  <script>
+  window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader");
+
+    // Tambahkan class untuk menghilangkan loader setelah 3 detik
+    setTimeout(() => {
+      loader.classList.add("loader--hidden");
+      loader.addEventListener("transitionend", () => {
+        document.body.removeChild(loader);
+      });
+    }, 500); // 3000 milidetik atau 3 detik
+  });
+</script>
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

@@ -10,6 +10,8 @@ include '../php/number.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kebijakan Privasi - Tanija</title>
+    <link rel="shortcut icon" href="../assets/icons/logo-tanija.png">
+    
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
@@ -23,6 +25,8 @@ include '../php/number.php';
 
 </head>
 <body>
+  <!-- Elemen Loading -->
+  <div class="loader"></div>
 <!-- Navbar Bootstrap -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/tanija/index.php">
@@ -182,5 +186,19 @@ include '../php/number.php';
         </div>
       </div>
     </footer>
+
+    <script>
+  window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader");
+
+    // Tambahkan class untuk menghilangkan loader setelah 3 detik
+    setTimeout(() => {
+      loader.classList.add("loader--hidden");
+      loader.addEventListener("transitionend", () => {
+        document.body.removeChild(loader);
+      });
+    }, 500); // 3000 milidetik atau 3 detik
+  });
+</script>
 </body>
 </html>

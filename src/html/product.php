@@ -11,6 +11,7 @@ include '../php/number.php';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Produk - Tanija</title>
+  <link rel="shortcut icon" href="../assets/icons/logo-tanija.png">
 
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +29,8 @@ include '../php/number.php';
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-
+<!-- Elemen Loading -->
+<div class="loader"></div>
   <!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/tanija/index.php">
@@ -290,18 +292,32 @@ $result = $conn->query($sql);
     }
   </script>
   <script>
-    document.getElementById('resetFilter').addEventListener('click', function() {
-        // Hapus semua pilihan checkbox
-        var checkboxes = document.querySelectorAll('.form-check-input');
-        checkboxes.forEach(function(checkbox) {
-            checkbox.checked = false;
-        });
-
-        // Submit form untuk memuat ulang halaman tanpa filter
-        var form = document.querySelector('form');
-        form.submit();
+document.getElementById('resetFilter').addEventListener('click', function() {
+    // Hapus semua pilihan checkbox
+    var checkboxes = document.querySelectorAll('.form-check-input');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = false;
     });
-  </script>
+
+    // Set action form ke URL list produk
+    var form = document.querySelector('form');
+    form.action = './product.php'; // Ganti dengan URL list produk yang benar
+    form.submit();
+});
+</script>
+<script>
+  window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader");
+
+    // Tambahkan class untuk menghilangkan loader setelah 3 detik
+    setTimeout(() => {
+      loader.classList.add("loader--hidden");
+      loader.addEventListener("transitionend", () => {
+        document.body.removeChild(loader);
+      });
+    }, 500); // 3000 milidetik atau 3 detik
+  });
+</script>
 
   <!-- Bootstrap JS, Popper.js, dan jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

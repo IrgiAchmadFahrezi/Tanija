@@ -53,6 +53,14 @@
   margin-right: 10px;
 }
 
+.input-group {
+  flex-wrap: none !important;
+}
+.isian {
+  width: 30px !important;
+  margin-top: 11%;
+  height: 30px;
+}
 .input-group button {
   align-items: center;
   color: black;

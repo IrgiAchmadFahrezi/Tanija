@@ -113,6 +113,11 @@ body {
   background-color: #f9f9f9;
 }
 
+.carousel-item img {
+  width: 750px;
+  margin-left: -10%;
+}
+
 .container {
   width: 80%;
   margin: 0 auto;
@@ -256,6 +261,45 @@ body {
 }
 .footer .copyright {
   font-size: 0.8rem;
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  transition: opacity 0.75s, visibility 0.75s;
+  z-index: 99; /* Pastikan loader berada di atas elemen lain */
+}
+
+.loader--hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader::after {
+  content: "";
+  width: 75px;
+  height: 75px;
+  border: 15px solid #f6b943;
+  border-top-color: #00880d;
+  border-radius: 50%;
+  animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 768px) {

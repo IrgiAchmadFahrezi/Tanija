@@ -27,6 +27,7 @@ foreach($_SESSION['cart'] as $product_id => $product) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keranjang - Tanija</title>
+  <link rel="shortcut icon" href="../assets/icons/logo-tanija.png">
 
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -49,7 +50,8 @@ foreach($_SESSION['cart'] as $product_id => $product) {
   
 </head>
 <body>
-
+  <!-- Elemen Loading -->
+  <div class="loader"></div>
   <!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/tanija/index.php">
@@ -166,7 +168,7 @@ foreach($_SESSION['cart'] as $product_id => $product) {
                             <td>
                                 <div class='input-group'>
                                     <button class='btn btn-outline-secondary btn-sm' type='button' onclick='decreaseQuantity({$product_id})'>-</button>
-                                    <input id='quantity{$product_id}' type='text' class='form-control form-control-sm text-center' value='{$product['jumlah']}' max='{$maxQuantity}'>
+                                    <input id='quantity{$product_id}' type='text' class='form-control form-control-sm text-center isian' value='{$product['jumlah']}' max='{$maxQuantity}'>
                                     <button class='btn btn-outline-secondary btn-sm' type='button' onclick='increaseQuantity({$product_id}, {$maxQuantity})'>+</button>
                                 </div>
                             </td>
@@ -190,9 +192,9 @@ foreach($_SESSION['cart'] as $product_id => $product) {
           </table>
           <div class="d-flex justify-content-between">
             <a href="./product.php"><button class="btn btn-warning" ><i class="fas fa-shopping-cart"></i> Lanjut Belanja</button></a>
-            <form action="../php/remove_from_cart.php" method="post">
-            <button class="btn btn-danger" type="submit" name="clear_cart" <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '' : 'disabled'; ?>><i class="fas fa-trash"></i> Bersihkan Keranjang</button>
-    </form>
+            <form id='clearCartForm' action="../php/remove_from_cart.php" method="post">
+              <button class="btn btn-danger" type="submit" name="clear_cart" onclick="return confirmClearCart();" <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '' : 'disabled'; ?>>Bersihkan Keranjang</button>
+            </form>
           </div>
         </div>
         <div class="col-lg-4">
@@ -296,7 +298,17 @@ foreach($_SESSION['cart'] as $product_id => $product) {
         updateCart(productId, currentQuantity + 1);
         updateTotal();
     } else {
-        alert("Stok tidak mencukupi!");
+      Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Stock tidak mencukupi.',
+                        confirmButtonColor: '#00880d',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "cart.php";
+                        }
+                    });
     }
 }
 
@@ -436,6 +448,19 @@ function confirmClearCart() {
 }
 
   </script>
+  <script>
+  window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader");
+
+    // Tambahkan class untuk menghilangkan loader setelah 3 detik
+    setTimeout(() => {
+      loader.classList.add("loader--hidden");
+      loader.addEventListener("transitionend", () => {
+        document.body.removeChild(loader);
+      });
+    }, 300); // 3000 milidetik atau 3 detik
+  });
+</script>
 
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
