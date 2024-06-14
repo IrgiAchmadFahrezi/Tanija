@@ -145,8 +145,10 @@ include '../php/number.php';
                       Pestisida
                   </label>
               </div>
+              <div class="button">
               <button type="submit" class="btn btn-primary mt-2"><i class="fas fa-filter"></i>Filter</button>
               <button type="button" class="btn btn-secondary mt-2" id="resetFilter">Reset</button>
+              </div>
           </form>
       </div>
       <div class="col-md-9">
