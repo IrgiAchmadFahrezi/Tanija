@@ -129,12 +129,13 @@ body {
 }
 
 .view-all {
-  float: right;
+  /* float: right; */
   text-decoration: none !important;
   color: #1b5a7d;
   font-size: 16px;
   margin-top: 10px;
   font-weight: 600;
+  margin-left: 70%;
 }
 .view-all:hover {
   color: #124763;
@@ -155,7 +156,7 @@ body {
 
 .news-item {
   background-color: #ffffff;
-  max-height: 90%;
+  max-height: 100%;
   border: 2px solid #e0e0e0;
   border-radius: 10px;
   display: flex;
@@ -209,6 +210,11 @@ body {
   font-weight: bold;
   color: #00880d;
   font-size: 10px;
+}
+
+/* Sponsor */
+.sponsor img {
+  max-height: 100px;
 }
 
 .footer {
@@ -302,9 +308,21 @@ body {
   }
 }
 
+@media (max-width: 1080px) {
+  .carousel-item img {
+    padding-bottom: 0%;
+    width: 95% !important;
+    margin-top: 5%;
+    margin-left: -7%;
+  }
+  .carousel-caption {
+    margin-top: 10%;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
-    margin-left: 20px;
+    margin-left: 40px;
     flex-direction: column;
     align-items: stretch;
   }
@@ -318,8 +336,71 @@ body {
   .right-section {
     padding: 20px;
   }
+
+  .carousel-item img {
+    padding-bottom: 0%;
+    width: 95% !important;
+    margin-top: 5%;
+    margin-left: -7%;
+  }
+  .carousel-caption {
+    margin-top: 10%;
+  }
+
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .news-item {
+    flex-direction: column;
+    height: 450px;
+  }
+
+  .news-item img {
+    max-width: 100%;
+    max-height: 200px;
+    margin: 0;
+  }
+
+  .news-details {
+    padding: 10px;
+  }
+
+  .news-details .date {
+    font-size: 12px;
+    padding: 5px 8px;
+    margin-bottom: 10px;
+  }
+
+  .news-details h2 {
+    font-size: 14px;
+  }
+
+  .news-details p {
+    font-size: 12px;
+  }
+
+  .news-details .author {
+    font-size: 12px;
+  }
+
+  .view-all {
+    margin-left: 1%;
+  }
+  .sponsor img {
+    max-height: 46px;
+  }
 }
-/* Sponsor */
-.sponsor img {
-  max-height: 100px;
+
+@media (max-width: 448px) {
+  .carousel-item img {
+    padding-bottom: 40%;
+    width: 95% !important;
+    margin-top: 5%;
+    margin-left: 6%;
+  }
+
+  .carousel-caption {
+    margin-top: 160%;
+  }
 }

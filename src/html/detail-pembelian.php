@@ -183,6 +183,9 @@ $conn->close();
       </div>
     </div>
   </nav>
+  <main>
+    
+  </main>
     <div class="container mt-5">
         <h1 class="mb-4">Detail Pemesanan</h1>
 
@@ -204,9 +207,11 @@ $conn->close();
             </div>
         </div>
 
-        <h2 class="mt-4">Detail Barang:</h2>
+        <div class="container mt-5">
+    <h2 class="mt-4">Detail Barang:</h2>
+    <div class="table-container">
         <table class="table">
-            <thead>
+            <thead class="desktop-header">
                 <tr>
                     <th>No</th>
                     <th>ID Produk</th>
@@ -220,13 +225,13 @@ $conn->close();
             <tbody>
                 <?php foreach ($detail_barang as $index => $barang) : ?>
                     <tr>
-                        <td><?= $index + 1 ?></td>
-                        <td><?= $barang['id_produk'] ?></td>
-                        <td><?= $barang['nama_barang'] ?></td>
-                        <td><?= $barang['jumlah'] ?></td>
-                        <td>Rp. <?= number_format($barang['harga'], 2, ',', '.') ?></td>
-                        <td>Rp. <?= number_format($barang['jumlah'] * $barang['harga'], 2, ',', '.') ?></td>
-                        <td>
+                        <td data-label="No"><?= $index + 1 ?></td>
+                        <td data-label="ID Produk"><?= $barang['id_produk'] ?></td>
+                        <td data-label="Nama Barang"><?= $barang['nama_barang'] ?></td>
+                        <td data-label="Jumlah"><?= $barang['jumlah'] ?></td>
+                        <td data-label="Harga Satuan">Rp. <?= number_format($barang['harga'], 2, ',', '.') ?></td>
+                        <td data-label="Subtotal">Rp. <?= number_format($barang['jumlah'] * $barang['harga'], 2, ',', '.') ?></td>
+                        <td data-label="Aksi">
                             <?php if (!$reviewed_products[$barang['id_produk']]) : ?>
                                 <form action="../html/form_review.php" method="get" style="display: inline;">
                                     <input type="hidden" name="id_produk" value="<?= $barang['id_produk'] ?>">
@@ -241,6 +246,8 @@ $conn->close();
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
+</div>
     </div>
     <!-- footer -->
   <footer class="footer">
@@ -332,5 +339,9 @@ $conn->close();
     }, 500); // 3000 milidetik atau 3 detik
   });
 </script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="/src/scripts/index.js"></script>
 </body>
 </html>

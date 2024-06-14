@@ -6,6 +6,9 @@
   border-radius: 5px;
   text-decoration: none;
 }
+.container {
+  width: 100%;
+}
 
 .btn-review a {
   text-decoration: none;
@@ -24,4 +27,68 @@
   border-radius: 5px;
   text-decoration: none;
   cursor: not-allowed;
+}
+
+/* Container utama */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Gaya umum untuk tabel */
+.table-container {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 1rem;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  position: relative; /* Diperlukan untuk pseudo-elemen */
+}
+
+/* Responsiveness untuk tabel */
+@media screen and (max-width: 768px) {
+  .table,
+  .table thead,
+  .table tbody,
+  .table th,
+  .table td,
+  .table tr {
+    display: block;
+  }
+
+  .table thead tr {
+    display: none;
+  }
+
+  .table td {
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+  }
+
+  .table td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 45%;
+    padding-left: 15px;
+    font-weight: bold;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .table tr {
+    margin-bottom: 1rem;
+  }
 }

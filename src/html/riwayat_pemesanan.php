@@ -129,11 +129,11 @@ if ($result->num_rows > 0) {
         <?php if (!empty($riwayat_pemesanan)) : ?>
           <?php foreach ($riwayat_pemesanan as $index => $pemesanan) : ?>
             <tr>
-              <td><?= $index + 1 ?></td>
-              <td><?= $pemesanan['tanggal_pemesanan'] ?></td>
-              <td><?= $pemesanan['detail_barang'] ?></td>
-              <td>Rp. <?= number_format($pemesanan['total_pembayaran'], 2, ',', '.') ?></td>
-              <td><?= $pemesanan['status_pembayaran'] ?></td>
+              <td data-label="No :"> <?= $index + 1 ?></td>
+              <td data-label="Tanggal :"> <?= $pemesanan['tanggal_pemesanan'] ?></td>
+              <td data-label="Produk :"> <?= $pemesanan['detail_barang'] ?></td>
+              <td data-label="Total :"> Rp. <?= number_format($pemesanan['total_pembayaran'], 2, ',', '.') ?></td>
+              <td data-label="Status :"> <?= $pemesanan['status_pembayaran'] ?></td>
               <td class="aksi">
                 <button class="btn btn-info nota-btn" data-id="<?= $pemesanan['id'] ?>"><i class="fas fa-info"></i> Detail</button>
                 <button class="btn btn-secondary cetak-btn" data-id="<?= $pemesanan['id'] ?>"><i class="fas fa-file"></i> Nota</button>
@@ -249,5 +249,9 @@ if ($result->num_rows > 0) {
     }, 500); // 3000 milidetik atau 3 detik
   });
 </script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="/src/scripts/index.js"></script>
 </body>
 </html>
