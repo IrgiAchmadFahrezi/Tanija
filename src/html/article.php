@@ -55,7 +55,7 @@ $result = $conn->query($sql);
       </form>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-        <a class="nav-link"> <i class="far fa-user"></i> <span id="nama_user">Profil</span></a>
+          <a class="nav-link"> <i class="far fa-user"></i> <span id="nama_user">Profil</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i><span class="badge"><?php echo $favoriteCount; ?></span></a>
@@ -234,5 +234,9 @@ $result = $conn->query($sql);
     }, 500); // 3000 milidetik atau 3 detik
   });
 </script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="/src/scripts/index.js"></script>
 </body>
 </html>

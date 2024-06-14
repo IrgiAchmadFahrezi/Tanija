@@ -173,7 +173,7 @@ include 'src/php/number.php';
         FROM produk p
         LEFT JOIN reviews r ON p.id_produk = r.id_produk
         GROUP BY p.id_produk
-        HAVING jumlah_review > 5";
+        HAVING jumlah_review >= 3";
         $result = $conn->query($sql);
 
         // Cek apakah hasil query tidak kosong
@@ -189,12 +189,12 @@ include 'src/php/number.php';
                 // Periksa apakah file gambar ada
                 if (file_exists($path_gambar)) {
                     // Jika ada, tampilkan gambar
-                    echo '<img src="'.$path_gambar.'" class="card-img-top" alt="'.$row['nama_produk'].'">';
+                    echo '<img src="'.$path_gambar.'" class="card-img-top pop-produk" alt="'.$row['nama_produk'].'">';
                 } else {
                     // Jika tidak, tampilkan gambar default
                     echo '<img src="default_image.jpg" class="card-img-top" alt="Default Image">';
                 }
-                echo '<div class="card-body">';
+                echo '<div class="card-body body-pop">';
                 echo '<p class="card-text"><a href="src/html/detail-product.php?id='.$row['id_produk'].'">'.$row['nama_produk'].'</a></p>';
                 echo '<p class="price">Rp'.$row['harga_produk'].'</p>';
                 echo '<div class="rating">★★★★★</div>';
@@ -383,9 +383,6 @@ include 'src/php/number.php';
     </footer>
     
     <script>
-        // const unsplashAccessKey = 'nZg1uXb0YxxNbUhabacx2mSVwNjKuzfNJRZgK0ybfQg'; // Ganti dengan access key Unsplash Anda
-        // const unsplashApiUrl = `https://api.unsplash.com/photos/random?client_id=${unsplashAccessKey}&count=6&query=avatar`;
-
         const fetchReviews = async () => {
             try {
                 const response = await fetch('https://artikel-api.vercel.app/product-reviews');
@@ -395,16 +392,6 @@ include 'src/php/number.php';
                 return [];
             }
         };
-
-        // const fetchAvatars = async () => {
-        //     try {
-        //         const response = await fetch(unsplashApiUrl);
-        //         return response.json();
-        //     } catch (error) {
-        //         console.error('Error fetching avatars:', error);
-        //         return [];
-        //     }
-        // };
 
         const fetchAvatar = async () => {
             try {

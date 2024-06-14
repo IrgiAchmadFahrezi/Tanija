@@ -33,6 +33,7 @@ foreach ($cart_items as $item) {
 
   <!-- Style CSS -->
   <link href="../assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/detail-pembayaran.css">
 
   <!-- Font Awesome CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -121,100 +122,106 @@ foreach ($cart_items as $item) {
   <!-- Main -->
   <main>
     <div class="container mt-5">
-      <div class="row">
-        <div class="col-lg-12">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">No</th>
-                <th scope="col">Produk</th>
-                <th scope="col">Harga</th>
-                <th scope="col">Jumlah</th>
-                <th scope="col">Subtotal</th>
-              </tr>
-            </thead>
-            <tbody>
-                <?php
-                // Periksa apakah keranjang tidak kosong
-                if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
-                    $total = 0;
-                    $no = 1;
-                    foreach($_SESSION['cart'] as $product_id => $product) {
-                        $subtotal = $product['harga'] * $product['jumlah'];
-                        $total += $subtotal;
-                        echo "<tr>
-                                <td>{$no}</td>
-                                <td>
-                                    <div class='d-flex align-items-center'>
-                                        <img src='../uploads/{$product['foto_produk']}' class='img-fluid me-3' alt='Gambar Produk' style='max-width: 100px;'>
-                                        <div>
-                                            <p class='mb-0'>{$product['nama']}</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Rp. ".number_format($product['harga'], 0, ',', '.')."</td>
-                                <td>{$product['jumlah']}</td>
-                                <td>Rp. ".number_format($subtotal, 0, ',', '.')."</td>
-                            </tr>";
-                            $no++;
-                    }
-                    echo "<tr>
-                            <td colspan='4' class='text-right font-weight-bold'>Total Belanja :</td>
-                            <td id='totalBelanja'>Rp. ".number_format($total, 2, ',', '.')."</td>
-                        </tr>";
-                        
-                } else {
-                    // Jika keranjang kosong, tampilkan pesan
-                    echo "<tr><td colspan='5' class='text-center'>Keranjang kosong</td></tr>";
-                }
-                ?>
-                <tr>
-  <td colspan="4" class="text-right font-weight-bold">Total Pembayaran :</td>
-  <td id="totalPembayaran">Rp. 0</td>
-</tr>
-            </tbody>
-            </table>
-            <form>
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="namaPenerima">Nama Penerima:</label>
-                <input type="text" class="form-control" id="namaPenerima" name="namaPenerima" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="nomorHanphone">Nomor Handphone:</label>
-                <input type="number" class="form-control" id="nomorHanphone" name="nomorHanphone" required>
-              </div>
-              <div class="form-group col-md-4">
-                    <label for="ongkir">Ongkir:</label>
-                    <select class="form-control" id="ongkir" name="ongkir" required>
-                        <option value="0">Pilih Ongkos kirim</option>
-                        <?php 
-                            // Langkah 2: Buat query untuk mengambil data ongkir
-                            $query_ongkir = "SELECT * FROM ongkir";
-                            $result_ongkir = $conn->query($query_ongkir);
-
-                            // Tampilkan hasil query sebagai opsi ongkir
-                            while ($perongkir = $result_ongkir->fetch_assoc()) {   
-                        ?>
-                            <option value="<?php echo $perongkir["tarif"] ?>">
-                                <?php echo $perongkir['nama_kota'] ?> -
-                                Rp. <?php echo number_format($perongkir['tarif']) ?>
-                            </option>
-                        <?php } ?>
-                    </select>
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Detail Pembelian</h2>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Produk</th>
+                                <th scope="col">Harga</th>
+                                <th scope="col">Jumlah</th>
+                                <th scope="col">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Periksa apakah keranjang tidak kosong
+                            if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+                                $total = 0;
+                                $no = 1;
+                                foreach($_SESSION['cart'] as $product_id => $product) {
+                                    $subtotal = $product['harga'] * $product['jumlah'];
+                                    $total += $subtotal;
+                                    echo "<tr>
+                                            <td>{$no}</td>
+                                            <td>
+                                                <div class='d-flex align-items-center'>
+                                                    <img src='../uploads/{$product['foto_produk']}' class='img-fluid me-3' alt='Gambar Produk' style='max-width: 100px;'>
+                                                    <div>
+                                                        <p class='mb-0'>{$product['nama']}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Rp. ".number_format($product['harga'], 0, ',', '.')."</td>
+                                            <td>{$product['jumlah']}</td>
+                                            <td>Rp. ".number_format($subtotal, 0, ',', '.')."</td>
+                                        </tr>";
+                                    $no++;
+                                }
+                                echo "<tr>
+                                        <td colspan='4' class='text-right font-weight-bold'>Total Belanja :</td>
+                                        <td id='totalBelanja'>Rp. ".number_format($total, 2, ',', '.')."</td>
+                                    </tr>";
+                                    
+                            } else {
+                                // Jika keranjang kosong, tampilkan pesan
+                                echo "<tr><td colspan='5' class='text-center'>Keranjang kosong</td></tr>";
+                            }
+                            ?>
+                            <tr>
+                                <td colspan="4" class="text-right font-weight-bold">Total Pembayaran :</td>
+                                <td id="totalPembayaran">Rp. 0</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
+                <!-- Form Checkout -->
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="namaPenerima">Nama Penerima:</label>
+                            <input type="text" class="form-control" id="namaPenerima" name="namaPenerima" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="nomorHanphone">Nomor Handphone:</label>
+                            <input type="number" class="form-control" id="nomorHanphone" name="nomorHanphone" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="ongkir">Ongkir:</label>
+                            <select class="form-control" id="ongkir" name="ongkir" required>
+                                <option value="0">Pilih Ongkos kirim</option>
+                                <?php 
+                                // Langkah 2: Buat query untuk mengambil data ongkir
+                                $query_ongkir = "SELECT * FROM ongkir";
+                                $result_ongkir = $conn->query($query_ongkir);
+
+                                // Tampilkan hasil query sebagai opsi ongkir
+                                while ($perongkir = $result_ongkir->fetch_assoc()) {   
+                                    ?>
+                                    <option value="<?php echo $perongkir["tarif"] ?>">
+                                        <?php echo $perongkir['nama_kota'] ?> -
+                                        Rp. <?php echo number_format($perongkir['tarif']) ?>
+                                    </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat">Alamat:</label>
+                            <textarea class="form-control" id="alamat" name="alamat" rows="5" required style="width: 100% !important;"></textarea>
+                        </div>
+                        <button id="pay-button" class="btn btn-success w-100" disabled>Check Out</button>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-              <label for="alamat">Alamat:</label>
-              <textarea class="form-control" id="alamat" name="alamat" rows="5" required style="width: 100% !important;"></textarea>
-            </div>
-            <button id="pay-button" class="btn btn-success w-100" disabled>Check Out</button>
-          </form>
         </div>
-      </div>
-    </div>
-  </main>
+    </main>
+
 
   <!-- footer -->
   <footer class="footer">

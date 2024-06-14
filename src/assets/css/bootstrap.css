@@ -188,6 +188,14 @@ h2 {
   object-fit: contain;
 }
 
+.pop-produk {
+  margin-top: 20px;
+}
+
+.body-pop {
+  height: 170px;
+}
+
 .card-body {
   text-align: center;
 }
@@ -217,86 +225,6 @@ h2 {
   background-color: green;
   color: white;
 }
-
-@media (max-width: 768px) {
-  .navbar {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .navbar-brand img {
-    height: 50px;
-    margin-right: 10px;
-  }
-
-  .form-control {
-    height: 40px;
-    width: 200px !important;
-  }
-
-  .btn-outline-success {
-    height: 40px;
-    width: 80px;
-    margin-left: 0;
-  }
-
-  .navbar-nav {
-    margin-right: 0;
-  }
-
-  .navbar-nav .nav-link {
-    font-size: 14px;
-  }
-
-  .btn-login {
-    height: 40px;
-    width: 80px;
-  }
-
-  .badge {
-    top: -5px;
-    right: -5px;
-    padding: 2px 4px;
-    font-size: 8px;
-  }
-
-  .carousel-caption {
-    margin-top: 240%;
-  }
-
-  /* Atur tinggi carousel menjadi lebih rendah agar sesuai dengan perangkat seluler */
-  #carouselExampleIndicators {
-    height: 100%;
-    width: 100%;
-  }
-
-  .carousel-item img {
-    padding-bottom: 50%;
-    width: 100%;
-    margin-top: 5%;
-  }
-
-  /* Atur lebar tombol prev dan next agar sesuai dengan perangkat seluler */
-  .carousel-control-prev,
-  .carousel-control-next {
-    width: 30px;
-    height: 30px;
-  }
-
-  /* Sesuaikan font-size untuk teks pada tombol prev dan next */
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    font-size: 20px;
-  }
-  .card-img-top {
-    max-height: 100px;
-  }
-
-  .card-body {
-    padding: 10px;
-  }
-}
-
 .customer-review {
   border: 1px solid #e2f4ff;
   border-radius: 5px;
@@ -344,4 +272,114 @@ h2 {
   color: #555;
   font-size: 1em;
   color: #00880d;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .navbar-brand img {
+    height: 50px;
+    margin-right: 10px;
+  }
+
+  .form-control {
+    height: 40px;
+    width: 85% !important;
+    margin-left: 2%;
+  }
+
+  .btn-outline-success {
+    height: 40px;
+    width: 80px;
+    margin-left: 0;
+  }
+
+  .navbar-nav {
+    margin-right: 0;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .btn-login {
+    height: 40px;
+    width: 80px;
+    margin-left: 44%;
+  }
+
+  .badge {
+    top: -5px;
+    right: -5px;
+    padding: 2px 4px;
+    font-size: 8px;
+  }
+
+  .carousel-caption {
+    margin-top: 240%;
+  }
+
+  /* Atur tinggi carousel menjadi lebih rendah agar sesuai dengan perangkat seluler */
+  #carouselExampleIndicators {
+    height: 100%;
+    width: 100%;
+  }
+
+  .carousel-item img {
+    padding-bottom: 50%;
+    width: 100%;
+    margin-top: 5%;
+  }
+
+  /* Atur lebar tombol prev dan next agar sesuai dengan perangkat seluler */
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* Sesuaikan font-size untuk teks pada tombol prev dan next */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    font-size: 20px;
+  }
+  .card-img-top {
+    max-height: 100px;
+  }
+
+  .card-body {
+    padding: 10px;
+  }
+}
+@media (max-width: 425px) {
+  .navbar-light .navbar-toggler {
+    margin-right: 20px;
+  }
+  #navbar-kedua .navbar-nav .nav-link {
+    margin-left: 9px;
+    font-size: 12px;
+  }
+  .form-control {
+    width: 71% !important;
+  }
+  .btn-login {
+    margin-left: 38%;
+  }
+}
+
+@media (max-width: 375px) {
+  .navbar {
+    width: 100%;
+  }
+  #navbar-kedua .navbar-nav .nav-link {
+    margin-left: 0px;
+    font-size: 11px;
+  }
+  .card-img {
+    width: 156px !important;
+  }
 }
