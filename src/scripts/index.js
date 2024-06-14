@@ -1,3 +1,7 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable quotes */
+/* eslint-disable no-undef */
+
 const accordionItems = document.querySelectorAll(".card");
 
 accordionItems.forEach((item) => {

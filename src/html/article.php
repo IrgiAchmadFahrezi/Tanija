@@ -39,7 +39,7 @@ $result = $conn->query($sql);
 <body>
   <!-- Elemen Loading -->
   <div class="loader"></div>
-   <!-- Navbar Bootstrap -->
+  <!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/tanija/index.php">
         <img src="../assets/icons/logo-tanija.png" alt="Logo Tanija">
@@ -47,15 +47,14 @@ $result = $conn->query($sql);
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Cari Produk..." aria-label="Cari Produk...">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
+      <form class="form-inline my-2 my-lg-0" method="get" action="../php/search.php">
+        <input class="form-control mr-sm-2" type="search" name="query" placeholder="Cari Produk..." aria-label="Cari Produk...">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
       </form>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-        <a class="nav-link"> <i class="far fa-user"></i> <span id="nama_user">Profil</span></a>
+          <a class="nav-link"> <i class="far fa-user"></i> <span id="nama_user">Profil</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i><span class="badge"><?php echo $favoriteCount; ?></span></a>
@@ -65,13 +64,13 @@ $result = $conn->query($sql);
         </li>
         <li class="nav-item">
         <?php
-            if (isset($_SESSION['email'])) {
-                echo '<form action="../php/logout.php" method="post">
-                        <button class="btn btn-login" type="submit" name="logout">Logout</button>
-                    </form>';
-            } else {
-                echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'../html/login.html\';">Login</button>';
-            }
+        if (isset($_SESSION['email'])) {
+            echo '<form action="../php/logout.php" method="post">
+                    <button class="btn btn-login" type="submit" name="logout">Logout</button>
+                  </form>';
+        } else {
+            echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'../html/login.html\';">Login</button>';
+        }
         ?>
         </li>
       </ul>
@@ -91,10 +90,11 @@ $result = $conn->query($sql);
             <a class="nav-link" href="/tanija/index.php">Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../html/product.php">Produk</a>
+            <a class="nav-link" href="./product.php">Produk</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./riwayat_pemesanan.php">Riwayat</a>
+          </li>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./article.php">Artikel</a>

@@ -26,6 +26,12 @@ include '../php/number.php';
   <!-- SweetAlert2 JS -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+
 </head>
 <body>
 <!-- Elemen Loading -->
@@ -100,32 +106,6 @@ if(isset($_POST['addToCartBtn'])) {
   }
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Favorit - Tanija</title>
-  <link rel="shortcut icon" href="../assets/icons/logo-tanija.png">
-
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/css/bootstrap.css" rel="stylesheet">
-
-  <!-- Style CSS -->
-  <link href="../assets/css/style.css" rel="stylesheet">
-  <link href="../css/favorite.css" rel="stylesheet">
-
-  <!-- Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-</head>
-<body>
 
   <!-- Navbar Bootstrap -->
   <nav class="navbar navbar-expand-lg navbar-light">

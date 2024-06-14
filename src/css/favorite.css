@@ -109,33 +109,12 @@ h1 {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .navbar-nav {
-    text-align: center;
-  }
-
-  .navbar-nav .nav-item {
-    margin-bottom: 10px;
-  }
-
   .navbar-nav .btn-login {
     margin: 0 auto;
   }
 
   .card-title,
   .card-text {
-    text-align: center;
-  }
-
-  .footer .subtext-menu {
-    text-align: center;
-  }
-
-  .footer .subtext-menu-subtitle,
-  .footer .nav-link {
-    text-align: center;
-  }
-
-  .footer .ic-wrap {
     text-align: center;
   }
 
