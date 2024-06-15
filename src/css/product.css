@@ -20,9 +20,10 @@ h5 {
 }
 
 .card {
+  max-width: 100%;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
-  width: 200px;
+  width: 100%;
   height: 300px;
 }
 
@@ -36,10 +37,15 @@ h5 {
   text-align: center;
 }
 
+.card-body p {
+  font-size: 0.82em;
+}
+
 .card-text a {
   text-decoration: none;
   color: green;
   font-weight: bold;
+  font-size: 1em;
 }
 
 .price {
@@ -114,53 +120,31 @@ h5 {
   font-size: 0.8rem;
 }
 
-/* Styling untuk perangkat dengan lebar layar kurang dari 576px */
-@media (max-width: 575.98px) {
-  /* Atur lebar navbar menjadi 100% */
-  .navbar {
-    width: 100%;
+@media (min-width: 360px) and (max-width: 430px) {
+  .card {
+    height: 250px;
   }
 
-  /* Atur margin top pada footer menjadi lebih kecil */
-  .footer {
-    margin-top: 50px;
+  .button {
+    margin-bottom: 50px;
   }
 
-  /* Atur margin bottom pada subtext-menu menjadi lebih kecil */
-  .subtext-menu {
-    margin-bottom: 20px;
-  }
-
-  /* Atur margin bottom pada subtext-menu-subtitle menjadi lebih kecil */
-  .subtext-menu-subtitle {
-    margin-bottom: 10px;
-  }
-
-  /* Atur margin bottom pada nav-link menjadi lebih kecil */
-  .nav-link {
-    margin-bottom: 3px;
+  .card-img-top {
+    max-height: 100px; /* Ukuran gambar card untuk layar kecil */
   }
 }
 
-/* Styling untuk perangkat dengan lebar layar antara 576px dan 767.98px */
-@media (min-width: 576px) and (max-width: 767.98px) {
-  /* Atur lebar navbar menjadi 100% */
-  .navbar {
-    width: 100%;
+@media (min-width: 768px) and (max-width: 890px) {
+  .col-md-3 {
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
   }
 
-  /* Atur margin top pada footer menjadi lebih kecil */
-  .footer {
-    margin-top: 50px;
+  .button {
+    margin-bottom: 50px;
   }
-}
 
-/* Styling untuk perangkat dengan lebar layar antara 768px dan 991.98px */
-@media (min-width: 768px) and (max-width: 991.98px) {
-  /* Tambahkan styling tambahan sesuai kebutuhan */
-}
-
-/* Styling untuk perangkat dengan lebar layar lebih dari 992px */
-@media (min-width: 992px) {
-  /* Tambahkan styling tambahan sesuai kebutuhan */
+  .card-body p {
+    font-size: 0.82em;
+  }
 }

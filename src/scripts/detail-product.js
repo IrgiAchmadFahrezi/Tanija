@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-console */
+/* eslint-disable no-undef */
 /* eslint-disable comma-dangle */
 /* eslint-disable quotes */
 /* eslint-disable no-alert */
@@ -61,7 +63,7 @@ document.getElementById("buy_it_now").addEventListener("click", () => {
   const fotoProduk = "<?php echo $row['foto_produk']; ?>"; // URL foto produk dari PHP
 
   snap.pay(data.token, {
-    onSuccess: function (result) {
+    onSuccess(result) {
       console.log(result);
       alert("Pembayaran sukses!");
 
@@ -81,15 +83,15 @@ document.getElementById("buy_it_now").addEventListener("click", () => {
         `id=${productId}&quantity=${quantity}&foto_produk=${fotoProduk}&action=buy_now`
       );
     },
-    onPending: function (result) {
+    onPending(result) {
       console.log(result);
       alert("Pembayaran tertunda!");
     },
-    onError: function (result) {
+    onError(result) {
       console.log(result);
       alert("Pembayaran gagal!");
     },
-    onClose: function () {
+    onClose() {
       alert("Anda menutup pop-up tanpa menyelesaikan pembayaran");
     },
   });
