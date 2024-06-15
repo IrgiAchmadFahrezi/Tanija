@@ -408,6 +408,15 @@ body {
 }
 
 @media (max-width: 448px) {
+  .container {
+    margin-left: 40px;
+  }
+  .form-control {
+    width: 75% !important;
+  }
+  .btn-login {
+    margin-left: 40%;
+  }
   .carousel-item img {
     padding-bottom: 40%;
     width: 95% !important;
@@ -417,5 +426,11 @@ body {
 
   .carousel-caption {
     margin-top: 160%;
+  }
+}
+
+@media (max-width: 320px) {
+  .form-control {
+    width: 69% !important;
   }
 }
