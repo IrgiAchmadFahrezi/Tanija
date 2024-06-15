@@ -156,7 +156,7 @@ body {
 
 .news-item {
   background-color: #ffffff;
-  max-height: 100%;
+  max-height: 90%;
   border: 2px solid #e0e0e0;
   border-radius: 10px;
   display: flex;
@@ -308,7 +308,7 @@ body {
   }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1280px) {
   .carousel-item img {
     padding-bottom: 0%;
     width: 95% !important;
@@ -318,11 +318,22 @@ body {
   .carousel-caption {
     margin-top: 10%;
   }
+  .news-details h2 {
+    font-size: 10px;
+    margin-bottom: 1px;
+  }
+  .news-details .date {
+    font-size: 10px;
+    margin-top: -6px;
+  }
+  .view-all {
+    margin-left: 69%;
+  }
 }
 
 @media (max-width: 768px) {
   .container {
-    margin-left: 40px;
+    margin-left: 75px;
     flex-direction: column;
     align-items: stretch;
   }
@@ -364,6 +375,10 @@ body {
 
   .news-details {
     padding: 10px;
+  }
+
+  .news-details h2 {
+    font-size: 8px;
   }
 
   .news-details .date {

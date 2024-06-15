@@ -149,7 +149,61 @@
   font-size: 0.8rem;
 }
 
+/* Responsive styles */
+@media (max-width: 992px) {
+  .container-login,
+  .container-daftar {
+    flex-direction: column; /* Stack sections vertically */
+  }
+
+  .left-section,
+  .right-section {
+    width: 100%; /* Full width for both sections */
+    padding: 20px; /* Adjust padding for smaller screens */
+  }
+
+  .right-section {
+    border-left: none; /* Remove border-left for smaller screens */
+    border-top: 1px solid #f0f0f0; /* Add border-top */
+  }
+}
+
 @media (max-width: 768px) {
+  .container-login,
+  .container-daftar {
+    padding: 10px;
+  }
+
+  .left-section,
+  .right-section {
+    padding: 15px; /* Adjust padding for mobile screens */
+  }
+
+  .left-section h2 {
+    font-size: 24px; /* Adjust font size */
+  }
+
+  .right-section {
+    padding: 15px;
+  }
+
+  .right-section h3 {
+    font-size: 20px; /* Adjust font size */
+  }
+
+  .right-section .google-btn {
+    padding: 8px;
+    font-size: 14px; /* Adjust font size */
+  }
+
+  .right-section form input {
+    padding: 8px;
+    margin-top: 8px;
+  }
+
+  .right-section form button {
+    padding: 10px;
+  }
   .container {
     margin-top: 200px;
     margin-left: 20px;
