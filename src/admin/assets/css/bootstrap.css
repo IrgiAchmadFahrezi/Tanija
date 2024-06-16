@@ -4360,7 +4360,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 
 .nav > li > a {
   background: #f6b943;
-  color: black;
+  color: #fff;
   position: relative;
   display: block;
   padding: 10px 15px;
@@ -4374,6 +4374,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a:focus {
   text-decoration: none;
   background-color: #e2f4ff;
+  color: #f6b943;
 }
 
 .nav > li.disabled > a {
@@ -4956,7 +4957,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: #5e5e5e;
+  color: #f6b943;
   background-color: transparent;
 }
 

@@ -3,22 +3,8 @@ session_start();
 include '../php/db_connection.php';
 include '../php/number.php';
 
-// Periksa apakah pengguna sudah login
-if (!isset($_SESSION['email'])) {
-  echo "<script>alert('Anda harus login terlebih dahulu untuk melihat riwayat pembelian!'); window.location.href='../html/login.html';</script>";
-    exit();
-}
 
-// Query untuk mendapatkan riwayat pemesanan pengguna yang sedang login
-$query = "SELECT * FROM riwayat_pemesanan WHERE nama_user = '{$_SESSION['nama_user']}'";
-$result = $conn->query($query);
 
-// Cek apakah ada riwayat pemesanan
-if ($result->num_rows > 0) {
-    $riwayat_pemesanan = $result->fetch_all(MYSQLI_ASSOC);
-} else {
-    $riwayat_pemesanan = [];
-}
 ?>
 
 <!DOCTYPE html>
@@ -41,8 +27,39 @@ if ($result->num_rows > 0) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+  <?php
+  // Periksa apakah pengguna sudah login
+  if (!isset($_SESSION['email'])) {
+    echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Anda harus login terlebih dahulu untuk melihat keranjang!',
+                    confirmButtonColor: '#00880d',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href='../html/login.html';
+                    }
+                });
+              </script>";
+  
+  exit();
+  }
+  // Query untuk mendapatkan riwayat pemesanan pengguna yang sedang login
+$query = "SELECT * FROM riwayat_pemesanan WHERE nama_user = '{$_SESSION['nama_user']}'";
+$result = $conn->query($query);
+// Cek apakah ada riwayat pemesanan
+if ($result->num_rows > 0) {
+  $riwayat_pemesanan = $result->fetch_all(MYSQLI_ASSOC);
+} else {
+  $riwayat_pemesanan = [];
+}
+  ?>
   <!-- Elemen Loading -->
   <div class="loader"></div>
   <!-- Navbar Bootstrap -->
