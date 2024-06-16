@@ -138,9 +138,9 @@ include '../php/number.php';
           </div>
           <div class="wrap-text col-12 col-md-7" data-aos="fade-right">
             <h3 class="subtext-text-subtitle">Misi</h3>
-          <p>Tanija berkomitmen untuk menyediakan berbagai produk pertanian berkualitas tinggi yang dapat memenuhi kebutuhan para petani dan konsumen. Kami selalu berusaha memberikan layanan yang ramah, cepat, dan profesional kepada setiap pelanggan, karena kepuasan pelanggan adalah prioritas utama kami.</p>
+          <p class="subtext-text-subtitle-misi">Tanija berkomitmen untuk menyediakan berbagai produk pertanian berkualitas tinggi yang dapat memenuhi kebutuhan para petani dan konsumen. Kami selalu berusaha memberikan layanan yang ramah, cepat, dan profesional kepada setiap pelanggan, karena kepuasan pelanggan adalah prioritas utama kami.</p>
           <br>
-          <p>Selain itu, Tanija berupaya memberikan informasi yang bermanfaat bagi para petani, agar mereka dapat mengoptimalkan hasil pertanian mereka. Melalui platform kami, kami juga bertujuan untuk meningkatkan aksesibilitas produk-produk pertanian ke berbagai daerah di Indonesia, sehingga semua orang dapat merasakan manfaat dari pertanian berkualitas.</p>
+          <p class="subtext-text-subtitle-misi">Selain itu, Tanija berupaya memberikan informasi yang bermanfaat bagi para petani, agar mereka dapat mengoptimalkan hasil pertanian mereka. Melalui platform kami, kami juga bertujuan untuk meningkatkan aksesibilitas produk-produk pertanian ke berbagai daerah di Indonesia, sehingga semua orang dapat merasakan manfaat dari pertanian berkualitas.</p>
           </div>
         </div>
       </div>

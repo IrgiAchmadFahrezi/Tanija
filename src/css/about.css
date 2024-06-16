@@ -29,26 +29,6 @@
   line-height: 35px; /* 175% */
 }
 
-@media (max-width: 768px) {
-  .section-header .subtext-text .subtext-text-display {
-    font-size: 42px;
-  }
-
-  .section-header .subtext-text .subtext-text-desc {
-    font-size: 16px;
-  }
-
-  .section-header {
-    padding-block: 70px;
-  }
-}
-
-@media (max-width: 576px) {
-  .section-header .subtext-text .subtext-text-display {
-    font-size: 34px;
-  }
-}
-
 .section-choose {
   background-color: rgba(233, 238, 207, 0.3);
   padding-block: 70px;
@@ -69,24 +49,7 @@
   line-height: normal;
 }
 .wrap-image img {
-  height: 450px;
-}
-@media (max-width: 768px) {
-  .section-choose .container,
-  .section-choose .content-top,
-  .section-choose .content-bottom {
-    gap: 20px;
-  }
-
-  .section-choose .subtext-text > .subtext-text-display {
-    font-size: 32px;
-  }
-}
-
-@media (max-width: 576px) {
-  .section-choose .subtext-text > .subtext-text-display {
-    font-size: 24px;
-  }
+  height: 320px;
 }
 
 .section-choose .content-bottom .subtext-text:first-child {
@@ -127,30 +90,8 @@
   font-weight: 400;
   line-height: normal;
 }
-
-@media (max-width: 768px) {
-  .section-choose .subtext-text > .subtext-text-display {
-    font-size: 28px;
-  }
-
-  .section-choose .content-bottom .subtext-text .subtext-text-subtitle {
-    font-size: 24px;
-  }
-
-  .section-choose .content-bottom .subtext-text .subtext-text-desc,
-  .section-choose .content-bottom .subtext-text > .wrap-text li {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 576px) {
-  .section-choose .content-bottom .subtext-text .subtext-text-subtitle {
-    text-align: center;
-  }
-
-  .section-choose .content-bottom .subtext-text > .wrap-image {
-    display: none;
-  }
+.subtext-text-subtitle-misi {
+  text-align: justify;
 }
 
 /* Section Team */
@@ -163,29 +104,11 @@
   gap: 50px;
 }
 
-@media (max-width: 768px) {
-  .section-team .wrapper {
-    gap: 30px;
-  }
-}
-
 .section-team .wrapper .subtext-title {
   color: var(--black-color);
   text-align: center;
   font-size: 48px;
   font-weight: 700;
-}
-
-@media (max-width: 768px) {
-  .section-team .wrapper .subtext-title {
-    font-size: 36px;
-  }
-}
-
-@media (max-width: 576px) {
-  .section-team .wrapper .subtext-title {
-    font-size: 32px;
-  }
 }
 
 .section-team .team-wrap {
@@ -274,40 +197,21 @@
   max-width: 40px;
 }
 
-@media (max-width: 768px) {
-  .section-team .team-wrap > .card {
-    width: 45%;
-  }
-  .section-team .card-body .card-title {
-    font-size: 20px;
-  }
-
-  .section-team .card-body .card-text {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 576px) {
-  .section-team .team-wrap > .card {
-    width: 100%;
-  }
-}
-
 /* description */
 .icon-faq-1 {
-  padding-left: 700px;
+  padding-left: 550px;
 }
 .icon-faq-2 {
-  padding-left: 679px;
+  padding-left: 530px;
 }
 .icon-faq-3 {
-  padding-left: 510px;
+  padding-left: 360px;
 }
 .icon-faq-4 {
-  padding-left: 497px;
+  padding-left: 346px;
 }
 .icon-faq-5 {
-  padding-left: 521px;
+  padding-left: 370px;
 }
 
 .section-description {
@@ -317,4 +221,172 @@
 /* Footer */
 .footer {
   margin-top: 100px !important;
+}
+
+@media (max-width: 768px) {
+  .section-description {
+    padding: 20px;
+  }
+
+  .card-header h5 {
+    font-size: 1.2rem;
+  }
+
+  .card-header button {
+    width: 100%;
+    text-align: left;
+    font-size: 1rem;
+  }
+
+  .card-body {
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+
+  .btn-link {
+    padding: 10px 15px;
+  }
+
+  .icon-faq-1,
+  .icon-faq-2,
+  .icon-faq-3,
+  .icon-faq-4,
+  .icon-faq-5 {
+    float: right;
+  }
+
+  #accordion .card {
+    margin-bottom: 10px;
+  }
+
+  .section-team .team-wrap > .card {
+    width: 45%;
+  }
+  .section-team .card-body .card-title {
+    font-size: 15px;
+  }
+
+  .section-team .card-body .card-text {
+    font-size: 16px;
+  }
+  .section-team .wrapper .subtext-title {
+    font-size: 36px;
+  }
+  .section-team .wrapper {
+    gap: 30px;
+  }
+  .section-choose .subtext-text > .subtext-text-display {
+    font-size: 28px;
+  }
+
+  .section-choose .content-bottom .subtext-text .subtext-text-subtitle {
+    font-size: 24px;
+  }
+
+  .section-choose .content-bottom .subtext-text .subtext-text-desc,
+  .section-choose .content-bottom .subtext-text > .wrap-text li {
+    font-size: 16px;
+  }
+
+  .section-header .subtext-text .subtext-text-display {
+    font-size: 42px;
+  }
+
+  .section-header .subtext-text .subtext-text-desc {
+    font-size: 16px;
+  }
+
+  .section-header {
+    padding-block: 70px;
+  }
+  .subtext-image img {
+    margin-left: -200px;
+  }
+  .section-choose .container,
+  .section-choose .content-top,
+  .section-choose .content-bottom {
+    gap: 20px;
+  }
+
+  .section-choose .subtext-text > .subtext-text-display {
+    font-size: 32px;
+  }
+}
+@media (max-width: 576px) {
+  .section-team .team-wrap > .card {
+    width: 100%;
+  }
+  .section-header .subtext-text .subtext-text-display {
+    font-size: 34px;
+  }
+  .section-choose .subtext-text > .subtext-text-display {
+    font-size: 24px;
+  }
+  .section-choose .content-bottom .subtext-text .subtext-text-subtitle {
+    text-align: center;
+  }
+
+  .section-choose .content-bottom .subtext-text > .wrap-image {
+    display: none;
+  }
+
+  .section-team .wrapper .subtext-title {
+    font-size: 32px;
+  }
+
+  .subtext-image img {
+    margin-left: -200px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+  .section-description {
+    padding: 20px;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  .card-header h5 {
+    font-size: 1.2rem;
+  }
+
+  .card-header button {
+    width: 100%;
+    text-align: left;
+    font-size: 1rem;
+  }
+
+  .card-body {
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+
+  .btn-link {
+    font-size: 1.1rem;
+    padding: 10px 0;
+  }
+
+  .icon-faq-1,
+  .icon-faq-2,
+  .icon-faq-3,
+  .icon-faq-4,
+  .icon-faq-5 {
+    float: right;
+  }
+
+  #accordion .card {
+    margin-bottom: 10px;
+  }
+  .subtext-image img {
+    margin-left: -200px;
+  }
+
+  .section-team .card-body .card-title {
+    font-size: 12.5px;
+  }
+  .section-team .card-body .card-text {
+    font-size: 12px;
+  }
 }
