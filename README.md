@@ -1,6 +1,6 @@
 <div align="center">
   
-  <a href=""><img src="" alt="icon" border="0"></a>
+  <a href=""><img src="./src/assets/icons/logo-tanija.png" alt="icon" border="0" width="300px"></a>
   
 # TANIJA
 Capstone Project SIB Cycle 6 - Dicoding 2024
@@ -11,11 +11,13 @@ Ease of Shopping | User-Friendly and Accessible Website
 
 ## Tech
 
+![badge](https://img.shields.io/badge/PHP-AEB2D5?style=for-the-badge&logo=php&logoColor=white)
 ![badge](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 ![badge](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![badge](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![badge](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![badge](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+![badge](https://img.shields.io/badge/mysql-f29111?style=for-the-badge&logo=mysql&logoColor=black)
 ![badge](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
@@ -35,7 +37,7 @@ Ease of Shopping | User-Friendly and Accessible Website
 | ID        | NAMA                                                                       |
 | --------- | ------------------------------------------------------------------         |
 | F6226YB064 | [Irgi Achmad Fahrezi](https://github.com/IrgiAchmadFahrezi)               |
-| F2886YB081 | [Danu Febrianto](https://github.com/Danu1502)                             |
+| F2886YB081 | [Danu Febrianto](https://github.com/Dafr1502)                             |
 | F3326YB181 | [Muhamad Machrus Ali Wahyudi](https://github.com/machrusaw)               |
 
 ## Executive Summary
@@ -55,6 +57,8 @@ pertanian. Platform ini akan memberikan solusi terhadap berbagai tantangan yang 
 mahalnya harga pupuk, terbatasnya akses pasar, dan kesulitan dalam memperoleh produk pertanian berkualitas. Dengan
 menggunakan teknologi informasi dan komunikasi (TIK), platform ini akan mendukung petani dalam meningkatkan produktivitas,
 profitabilitas, dan keberlanjutan usaha mereka.
+
+NOTE : Projek ini bersifat TIDAK KOMERSIL hanya untuk tugas projek semata dan kami tidak mengambil keuntungan dari menyebutkan nama-nama merk/produk yang terlibat.
 
 </div>
 
