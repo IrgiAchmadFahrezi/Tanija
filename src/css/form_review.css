@@ -1,0 +1,83 @@
+.review-sec {
+  background-color: #e2f4ff !important;
+  padding: 2%;
+  border-radius: 5%;
+  margin-left: 5%;
+}
+
+.detail-prod {
+  background-color: #f5f5f5;
+  margin-left: 7%;
+  border: 2px solid #1b5b7db8 !important;
+  border-radius: 5%;
+}
+
+.review {
+  /* border: 2px solid #1b5b7db8; */
+  background-color: #f5f5f5;
+  padding: 5%;
+  border-radius: 5%;
+}
+
+.tittle {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 600;
+  color: #1b5a7d;
+}
+.foto-produk {
+  margin-top: 50px;
+}
+
+.des {
+  text-align: justify;
+}
+.form-rev {
+  width: 100% !important;
+}
+
+button {
+  width: 120px;
+  height: 50px;
+  border-radius: 20px;
+  border: none;
+  /* margin-left: 10%; */
+  color: #f1f1f1;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:hover {
+  filter: brightness(80%); /* Mengurangi kecerahan saat di-hover */
+}
+.kirim {
+  background-color: #f6b943;
+}
+.kembali {
+  background-color: #a10000 !important;
+}
+
+.btn-prod {
+  width: 30%;
+  margin-top: 39px;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: left;
+}
+.rating input {
+  display: none;
+}
+.rating label {
+  cursor: pointer;
+  width: 1em;
+  font-size: 2rem;
+  color: #d6d6d6;
+  margin-right: 2%;
+}
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+  color: #ffdf2a;
+}

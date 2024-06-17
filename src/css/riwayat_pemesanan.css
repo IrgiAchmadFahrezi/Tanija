@@ -1,0 +1,137 @@
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+.table {
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  font-size: 15px;
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #e3f2fd;
+}
+
+.table td {
+  background-color: #ffffff;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.nota-btn {
+  background-color: #f6b943;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px;
+}
+
+.nota-btn:hover {
+  background-color: #a97b20;
+}
+
+.cetak-btn {
+  background-color: #00880d;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px;
+}
+
+.cetak-btn:hover {
+  background-color: #04580c;
+}
+
+/* Responsive styles */
+@media (min-width: 576px) {
+  .navbar .navbar-collapse {
+    flex-basis: auto;
+  }
+
+  .footer .content-top {
+    flex-direction: row;
+  }
+
+  .footer .content-top .subtext {
+    margin-bottom: 0;
+  }
+
+  .table th,
+  .table td {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .table,
+  .table thead,
+  .table tbody,
+  .table th,
+  .table td,
+  .table tr {
+    display: block;
+  }
+
+  .table thead tr {
+    display: none;
+  }
+
+  .table td {
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+  }
+
+  .table td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 45%;
+    padding-left: 15px;
+    font-weight: bold;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .table tr {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .table th,
+  .table td {
+    font-size: 16px;
+    padding: 14px;
+  }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Tanija</title>
+    <link rel="shortcut icon" href="../assets/icons/logo-tanija.png" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-daftar">
+      <div class="left-section">
+        <img src="../assets/icons/gambar_login.png" alt="gambar" />
+        <h2>Beli Barang Pertanian Murah di Tanija</h2>
+        <p>Gabung dan rasakan kemudahan bertransaksi di Tanija</p>
+      </div>
+      <div class="right-section">
+        <a href="/tanija/index.php">
+          <img src="../assets/icons/logo-tanija2.png" alt="" />
+        </a>
+        <h3>Daftar Sekarang</h3>
+        <!-- <a href="#" class="google-btn">
+          <img src="../assets/icons/icon G.png" alt="Google" />
+          Google
+        </a>
+        <h5>Atau daftar dengan</h5> -->
+        <form action="../php/register.php" method="post">
+          <input
+            type="text"
+            name="nama_user"
+            placeholder="Masukkan Nama"
+            required
+          />
+          <p>Contoh : Tanija</p>
+          <input
+            type="email"
+            name="email_user"
+            placeholder="Masukkan Email"
+            required
+          />
+          <p>Contoh : example@gmail.com</p>
+          <input
+            type="password"
+            name="password_user"
+            placeholder="Masukkan password"
+            required
+          />
+          <p>
+            Password terdiri dari minimal 8 karakter. Terdapat huruf kapital dan
+            karakter unik atau angka.
+          </p>
+          <button type="submit">Daftar</button>
+        </form>
+        <p>Sudah punya akun Tanija? <a href="login.html">Masuk</a></p>
+        <p>
+          Dengan mendaftar, saya menyetujui
+          <a href="../html/syarat-ketentuan.php">Syarat dan Ketentuan</a> serta
+          <a href="../html/kebijakan-privasi.php">Kebijakan Privasi</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

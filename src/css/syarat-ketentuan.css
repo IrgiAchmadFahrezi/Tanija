@@ -1,0 +1,35 @@
+/* General styling */
+body {
+  font-family: "Poppins", sans-serif !important;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.isi {
+  max-width: 800px;
+  margin: auto;
+  padding: 0 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #00880d;
+}
+
+h2 {
+  border-bottom: 2px solid #f6b943;
+  padding-bottom: 5px;
+}
+
+p {
+  line-height: 1.6;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}

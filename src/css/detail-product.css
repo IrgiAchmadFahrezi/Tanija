@@ -1,0 +1,254 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+h5 {
+  font-weight: bold;
+  color: green;
+}
+
+.price {
+  font-size: 1.5em;
+  color: #28a745;
+}
+
+.quantity button {
+  width: 40px;
+  height: 40px;
+}
+
+.quantity input {
+  width: 60px;
+  height: 40px;
+}
+
+.img-thumbnail {
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+
+.product-image {
+  max-width: 100%;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.badge.bg-success {
+  font-size: 1em;
+}
+
+.card-body {
+  font-size: 14px; /* Ukuran font */
+  line-height: 1.6; /* Jarak antar baris */
+  color: #333; /* Warna teks */
+  text-align: left; /* Rata kiri */
+  white-space: pre-wrap; /* Membuat spasi dan baris baru sesuai dengan input */
+}
+
+.card-body p {
+  margin-bottom: 1em; /* Jarak antar paragraf */
+}
+
+.card-body h1,
+.card-body h2,
+.card-body h3,
+.card-body h4,
+.card-body h5,
+.card-body h6 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  color: #000; /* Warna heading */
+}
+
+.card-body ul,
+.card-body ol {
+  margin-left: 1.5em;
+}
+
+.card-body a {
+  color: #007bff; /* Warna tautan */
+  text-decoration: none; /* Hilangkan garis bawah pada tautan */
+}
+
+.card-body a:hover {
+  text-decoration: underline; /* Garis bawah pada tautan saat di-hover */
+}
+
+.star {
+  color: gold; /* Warna bintang */
+}
+.review-item {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.review-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.review-rating {
+  color: #f39c12; /* Warna bintang */
+}
+
+.review-text {
+  margin-top: 10px;
+}
+
+.btn-outline-primary {
+  background-color: white;
+  color: black;
+  border-radius: 11px;
+  min-width: 44px;
+  min-height: 44px;
+  border: 2px solid green;
+}
+
+.btn-outline-primary:hover {
+  background-color: green;
+  border: 2px solid green;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 1px;
+}
+
+.btn-container button,
+.btn-container form button {
+  width: 35%;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.jml-popup {
+  width: 20% !important;
+}
+
+.form-popup {
+  width: 40% !important;
+}
+
+.btn-favorite {
+  background-color: #dc3545; /* Warna latar belakang tombol merah */
+  color: white; /* Warna teks putih */
+  border: 2px solid #dc3545; /* Warna border merah */
+}
+
+.btn-favorite:hover {
+  background-color: #c82333; /* Warna latar belakang tombol saat hover */
+  border-color: #c82333; /* Warna border saat hover */
+}
+
+.modal-body img {
+  max-width: 100%; /* Maksimum lebar gambar */
+  max-height: 200px; /* Maksimum tinggi gambar */
+}
+
+.jumlah-popup {
+  width: 200px;
+}
+
+.footer {
+  background-color: #e2f4ff;
+  margin-top: 150px;
+  color: #1b5a7d;
+  padding: 50px 0;
+  font-weight: 500;
+}
+
+.footer .logo img {
+  max-width: 150px;
+}
+
+.footer .subtext-text-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.footer .subtext-menu {
+  margin-bottom: 30px;
+}
+
+.footer .subtext-menu-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #f6b943;
+}
+
+.footer .nav-link {
+  color: #1b5a7d !important;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  display: block;
+  transition: color 0.3s;
+}
+
+.footer .nav-link:hover {
+  color: #f6b943;
+}
+
+.footer .ic-wrap .nav-link {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.footer .ic-wrap .nav-link svg {
+  fill: #1b5a7d;
+  transition: fill 0.3s;
+}
+
+.footer .ic-wrap .nav-link:hover svg {
+  fill: #f6b943;
+}
+
+.footer .content-bottom {
+  border-top: 1px solid #4b6b82;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.footer .copyright {
+  font-size: 0.8rem;
+}
+
+/* Untuk layar dengan lebar maksimum 576px */
+@media (max-width: 576px) {
+  /* Sesuaikan ukuran gambar produk */
+  .product-image {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Untuk layar dengan lebar minimum 577px dan maksimum 768px */
+@media (min-width: 577px) and (max-width: 768px) {
+  /* Sesuaikan tata letak kolom */
+  .col-md-6 {
+    width: 50%;
+  }
+}
+
+/* Untuk layar dengan lebar minimum 769px dan maksimum 992px */
+@media (min-width: 769px) and (max-width: 992px) {
+  /* Sesuaikan tata letak kolom */
+  .col-md-6 {
+    width: 45%;
+  }
+}
+
+/* Untuk layar dengan lebar minimum 993px dan maksimum 1200px */
+@media (min-width: 993px) and (max-width: 1200px) {
+  /* Sesuaikan tata letak kolom */
+  .col-md-6 {
+    width: 40%;
+  }
+}

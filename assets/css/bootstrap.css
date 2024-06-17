@@ -1,67 +1,360 @@
 .navbar {
-    padding-left: 100px;
+  padding-left: 100px;
 }
 .navbar-brand img {
-    height: 100px;
-    margin-right: 100px; 
+  height: 100px;
+  margin-right: 100px;
 }
 
-.navbar{
-    background-color: #00880D; 
+.navbar {
+  background-color: #00880d;
 }
 
-.form-control{
-    border-radius: 15px;
-    height: 50px;
-    width: 300px !important; 
+.form-control {
+  border-radius: 15px;
+  height: 50px;
+  width: 300px !important;
 }
 
-.btn-outline-success{
-    background-color: #F6B943;
-    border-color:  #F6B943 !important;
-    color: #fff;
-    height: 50px;
-    width: 100px;
-    border-radius: 15px;
-    margin-left: -35px;
+.btn-outline-success {
+  background-color: #f6b943;
+  border-color: #f6b943 !important;
+  color: #fff;
+  height: 50px;
+  width: 100px;
+  border-radius: 15px;
+  margin-left: -35px;
 }
-.btn-outline-success:hover{
-    background-color: #c88e0a; 
+.btn-outline-success:hover {
+  background-color: #c88e0a;
   border-color: #c88e0a !important;
 }
 
-.navbar-nav{
-    margin-right: 50px;
+.navbar-nav {
+  margin-right: 50px;
 }
 .nav-link .fa-user {
-  font-size: 20px; 
+  font-size: 20px;
   margin-right: 5px;
   color: #fff;
 }
 
 .nav-link {
-  font-size: 16px; 
+  font-size: 16px;
   color: #fff !important;
 }
 .badge {
-      top: -8px;
-      right: -10px;
-      padding: 3px 6px;
-      border-radius: 50%;
-      background-color: #F6B943;
-      color: white;
-      font-size: 10px;
-    }
-
-.btn-login{
-    background-color: #F6B943;
-    border-color:  #F6B943 !important;
-    color: #fff;
-    height: 50px;
-    width: 100px;
-    border-radius: 15px;
+  top: -8px;
+  right: -10px;
+  padding: 3px 6px;
+  border-radius: 50%;
+  background-color: #f6b943;
+  color: white;
+  font-size: 10px;
 }
-.btn-login:hover{
-    background-color: #c88e0a; 
+
+.btn-login {
+  background-color: #f6b943;
+  border-color: #f6b943 !important;
+  color: #fff;
+  height: 50px;
+  width: 100px;
+  border-radius: 15px;
+}
+.btn-login:hover {
+  background-color: #c88e0a;
   border-color: #c88e0a !important;
+}
+
+/* navbar kedua */
+#navbar-kedua {
+  background-color: #e2dfdf;
+}
+#navbar-kedua .navbar-nav .nav-link {
+  color: #333 !important; /* Warna teks default */
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+#navbar-kedua .navbar-nav .nav-link:hover,
+#navbar-kedua .navbar-nav .nav-link:focus {
+  color: #555 !important; /* Warna teks saat dihover */
+}
+
+#navbar-kedua .navbar-nav .dropdown-item {
+  color: #333 !important; /* Warna teks dropdown item */
+}
+
+#navbar-kedua .navbar-nav .dropdown-item:hover,
+#navbar-kedua .navbar-nav .dropdown-item:focus {
+  color: #555 !important; /* Warna teks dropdown item saat dihover */
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+#carouselExampleIndicators {
+  height: 526px;
+}
+
+carousel-item {
+  width: 20%;
+}
+
+.carousel-indicators {
+  /* background-color: aqua; */
+  margin-top: 30%;
+}
+.carousel-indicators li {
+  background-color: #f6b943;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+/* .carousel-inner {
+  margin-bottom: 20%;
+} */
+
+.carousel-caption {
+  bottom: auto !important;
+}
+
+.carousel-item img {
+  margin-bottom: 10%;
+  margin-top: 10px;
+}
+
+.carousel-item h5 {
+  font-size: 30px;
+  font-weight: 1000;
+  text-align: left;
+  color: #1b5a7d;
+  margin-left: 30%;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  background-color: #00880ea9; /* Warna tombol */
+  width: 50px; /* Lebar tombol */
+  height: 50px; /* Tinggi tombol */
+  border-radius: 50%; /* Membuat tombol menjadi bulat */
+  background-size: 100%, 100%;
+  position: absolute; /* Mengatur posisi absolut */
+  margin: 10px;
+  top: 50%; /* Posisi vertikal di tengah */
+  transform: translateY(
+    -50%
+  ); /* Menggeser tombol ke atas agar benar-benar di tengah */
+}
+
+.btn-primary {
+  color: #fff;
+  font-weight: bolder;
+  background-color: #f6b943;
+  border-color: #f6b943;
+}
+.btn-primary:hover {
+  background-color: #795400; /* Warna tombol saat hover */
+  /* opacity: 1; Menghilangkan transparansi saat hover */
+}
+
+.btn-outline-primary {
+  color: #1b5a7d;
+  font-weight: bolder;
+  border-color: #1b5a7d;
+}
+.btn-outline-primary:hover {
+  background-color: #1b5a7d;
+}
+
+h2 {
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #1b5a7d;
+}
+
+.card {
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.card-img-top {
+  max-height: 150px;
+  object-fit: contain;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.card-text a {
+  text-decoration: none;
+  color: green;
+  font-weight: bold;
+}
+
+.price {
+  color: #333;
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.rating {
+  color: gold;
+  margin-top: 5px;
+}
+
+.btn-group .btn {
+  border-radius: 20px;
+}
+
+.btn-group .btn.active {
+  background-color: green;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .navbar-brand img {
+    height: 50px;
+    margin-right: 10px;
+  }
+
+  .form-control {
+    height: 40px;
+    width: 85% !important;
+    margin-left: 2%;
+  }
+
+  .btn-outline-success {
+    height: 40px;
+    width: 80px;
+    margin-left: 0;
+  }
+
+  .navbar-nav {
+    margin-right: 0;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 14px;
+  }
+
+  .btn-login {
+    height: 40px;
+    width: 80px;
+  }
+
+  .badge {
+    top: -5px;
+    right: -5px;
+    padding: 2px 4px;
+    font-size: 8px;
+  }
+
+  .carousel-caption {
+    margin-top: 240%;
+  }
+
+  /* Atur tinggi carousel menjadi lebih rendah agar sesuai dengan perangkat seluler */
+  #carouselExampleIndicators {
+    height: 100%;
+    width: 100%;
+  }
+
+  .carousel-item img {
+    padding-bottom: 50%;
+    width: 100%;
+    margin-top: 5%;
+  }
+
+  /* Atur lebar tombol prev dan next agar sesuai dengan perangkat seluler */
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* Sesuaikan font-size untuk teks pada tombol prev dan next */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    font-size: 20px;
+  }
+  .card-img-top {
+    max-height: 100px;
+  }
+
+  .card-body {
+    padding: 10px;
+  }
+}
+
+.customer-review {
+  border: 1px solid #e2f4ff;
+  border-radius: 5px;
+  padding: 15px;
+  color: #00880d;
+  margin-top: 20px;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.review-text {
+  background-color: #e2f4ff;
+  padding: 10px;
+  border-radius: 5px;
+  color: #00880d; /* Ubah teks menjadi hijau */
+}
+
+.rounded-circle {
+  width: 70px;
+  height: 70px;
+}
+
+.feature-card {
+  background-color: #e2f4ff;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.feature-card .bi {
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+.feature-card .card-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #00880d;
+  font-weight: bolder;
+}
+
+.feature-card .card-text {
+  color: #555;
+  font-size: 1em;
+  color: #00880d;
+}
+
+/* Article */
+.article {
+  margin-top: 100px;
+}
+.title-article {
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+.view-all {
+  margin-left: 1040px;
+}
+#sponsor {
+  margin-left: 150px;
 }

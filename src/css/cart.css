@@ -1,0 +1,433 @@
+.table th {
+  background-color: #e3f2fd;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  overflow-x: auto;
+}
+
+.table tbody tr {
+  display: table-row;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.table tbody tr td {
+  text-align: left;
+  font-size: 0.9rem;
+  padding: 8px;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table tbody tr td img {
+  max-width: 100px;
+  height: auto;
+}
+
+.form-control {
+  width: 50px;
+}
+
+.btn {
+  padding: 0.3rem;
+  max-width: 300px;
+}
+
+.btn-outline-danger {
+  padding: 0.2rem 0.4rem;
+}
+
+.btn-sm {
+  font-size: 0.8rem;
+}
+
+.card {
+  border: none;
+}
+
+.card-title {
+  background-color: #e3f2fd;
+  height: 50px;
+  padding-top: 10px;
+}
+
+.card-body {
+  padding: 0 2px 2px 2px !important;
+}
+
+.card .card-body {
+  background-color: #f8f9fa;
+}
+
+.card .btn-outline-success {
+  border-color: #198754;
+  color: #198754;
+  font-size: 0.7rem;
+}
+
+.card .btn-outline-success:hover {
+  background-color: #198754;
+  color: #fff;
+}
+
+.img-fluid {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+
+.input-group {
+  flex-wrap: none !important;
+}
+.isian {
+  width: 30px !important;
+  margin-top: 11%;
+  height: 30px;
+}
+.input-group button {
+  align-items: center;
+  color: black;
+}
+
+@media (max-width: 1200px) {
+  .img-fluid {
+    width: 50px;
+    height: 50px;
+  }
+
+  .input-group button {
+    min-width: 25px;
+  }
+
+  .card-body {
+    padding: 10px;
+  }
+
+  .card .card-body {
+    padding: 10px !important;
+  }
+
+  .footer {
+    padding: 30px 0;
+  }
+
+  p.mb-1 {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .footer .content-top {
+    flex-direction: column;
+  }
+
+  .footer .content-top-right {
+    margin-top: 20px;
+  }
+
+  .card {
+    margin-top: 20px;
+  }
+
+  p.mb-1 {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .table tbody tr {
+    display: block;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+
+  .table tbody tr td {
+    display: block;
+    text-align: right;
+    font-size: 0.9rem;
+  }
+
+  .table tbody tr td:last-child {
+    text-align: right;
+  }
+
+  .table tbody tr td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .img-fluid {
+    width: 40px;
+    height: 40px;
+  }
+
+  .input-group button {
+    min-width: 20px;
+  }
+
+  .card .btn-outline-success {
+    font-size: 0.9rem;
+  }
+
+  .footer .subtext-menu {
+    margin-bottom: 20px;
+  }
+
+  .footer .content-bottom {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer .wrap {
+    margin-top: 10px;
+    flex: 1 1 auto;
+  }
+
+  p.mb-1 {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-brand img {
+    max-width: 100px;
+  }
+
+  .table {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .table tbody tr {
+    display: table-row;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .table tbody tr td {
+    display: table-cell;
+    text-align: right;
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .table tbody tr td::before {
+    content: none;
+  }
+
+  .img-fluid {
+    width: 40px;
+    height: 40px;
+  }
+
+  .input-group button {
+    min-width: 20px;
+  }
+
+  .card .btn-outline-success {
+    font-size: 0.9rem;
+  }
+
+  .footer .subtext-text-desc {
+    font-size: 0.8rem;
+  }
+
+  .footer .subtext-menu-subtitle {
+    font-size: 1rem;
+  }
+
+  .footer .nav-link {
+    font-size: 0.8rem;
+  }
+
+  p.mb-1 {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .navbar-expand .navbar-nav .nav-link {
+    font-size: 0.7rem;
+  }
+
+  .table {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px;
+    text-align: right;
+    font-size: 0.8rem;
+  }
+
+  .table th {
+    background-color: #e3f2fd;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .table tbody tr {
+    display: table-row;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .table tbody tr td {
+    display: table-cell;
+    max-width: none;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+
+  .btn {
+    font-size: 0.5rem;
+    padding: 0.3rem;
+    max-width: 150px;
+  }
+
+  .btn-warning,
+  .btn-danger {
+    padding: 0.4rem 0.6rem;
+    max-width: 300px;
+  }
+
+  .input-group .form-control {
+    max-width: 50px;
+  }
+
+  .input-group button {
+    min-width: 20px;
+  }
+
+  .img-fluid {
+    width: 30px;
+    height: 30px;
+  }
+
+  .card .btn-outline-success {
+    font-size: 0.7rem;
+  }
+
+  .footer .subtext-text-desc {
+    font-size: 0.6rem;
+  }
+
+  .footer .subtext-menu-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .footer .nav-link {
+    font-size: 0.6rem;
+  }
+  p.mb-1 {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .navbar-expand .navbar-nav .nav-link {
+    font-size: 0.6rem;
+  }
+
+  .table {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .table th,
+  .table td {
+    padding: 6px;
+    text-align: right;
+    font-size: 0.7rem;
+  }
+
+  .table th {
+    background-color: #e3f2fd;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .table tbody tr {
+    display: table-row;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .table tbody tr td {
+    display: table-cell;
+    max-width: none;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+
+  .btn {
+    font-size: 0.4rem;
+    padding: 0.2rem 0.4rem;
+    max-width: 120px;
+  }
+
+  .btn-warning,
+  .btn-danger {
+    padding: 0.3rem 0.5rem;
+    max-width: 200px;
+  }
+
+  .input-group .form-control {
+    max-width: 40px;
+  }
+
+  .input-group button {
+    min-width: 16px;
+  }
+
+  .img-fluid {
+    width: 25px;
+    height: 25px;
+  }
+
+  .card .btn-outline-success {
+    font-size: 0.6rem;
+  }
+
+  .footer .subtext-text-desc {
+    font-size: 0.5rem;
+  }
+
+  .footer .subtext-menu-subtitle {
+    font-size: 0.7rem;
+  }
+
+  .footer .nav-link {
+    font-size: 0.5rem;
+  }
+
+  p.mb-1 {
+    font-size: 0.7rem;
+    margin-bottom: 0.4rem;
+  }
+}

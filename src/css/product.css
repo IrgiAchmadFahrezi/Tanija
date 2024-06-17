@@ -1,0 +1,150 @@
+body {
+  font-family: "Poppins", sans-serif !important;
+}
+
+h5 {
+  font-weight: bold;
+  color: green;
+}
+
+.form-check-label {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.reset-link {
+  display: block;
+  margin-top: 20px;
+  color: red;
+  cursor: pointer;
+}
+
+.card {
+  max-width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  width: 100%;
+  height: 300px;
+}
+
+.card-img-top {
+  max-height: 130px;
+  margin-top: 10px;
+  object-fit: contain;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.card-body p {
+  font-size: 0.82em;
+}
+
+.card-text a {
+  text-decoration: none;
+  color: green;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.price {
+  color: #333;
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.rating {
+  color: gold;
+  margin-top: 5px;
+}
+
+.form-check-input:checked ~ .form-check-label {
+  font-weight: bold;
+  color: green;
+}
+.out-of-stock {
+  color: red;
+  font-weight: bold;
+}
+
+.footer {
+  background-color: #e2f4ff;
+  margin-top: 100px;
+  color: #1b5a7d;
+  padding: 50px 0;
+  font-weight: 500;
+}
+.footer .logo img {
+  max-width: 150px;
+}
+.footer .subtext-text-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.footer .subtext-menu {
+  margin-bottom: 30px;
+}
+.footer .subtext-menu-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #f6b943;
+}
+.footer .nav-link {
+  color: #1b5a7d !important;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  display: block;
+  transition: color 0.3s;
+}
+.footer .nav-link:hover {
+  color: #f6b943;
+}
+.footer .ic-wrap .nav-link {
+  display: inline-block;
+  margin-right: 15px;
+}
+.footer .ic-wrap .nav-link svg {
+  fill: #1b5a7d;
+  transition: fill 0.3s;
+}
+.footer .ic-wrap .nav-link:hover svg {
+  fill: #f6b943;
+}
+.footer .content-bottom {
+  border-top: 1px solid #4b6b82;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+.footer .copyright {
+  font-size: 0.8rem;
+}
+
+@media (min-width: 360px) and (max-width: 430px) {
+  .card {
+    height: 250px;
+  }
+
+  .button {
+    margin-bottom: 50px;
+  }
+
+  .card-img-top {
+    max-height: 100px; /* Ukuran gambar card untuk layar kecil */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 890px) {
+  .col-md-3 {
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+  }
+
+  .button {
+    margin-bottom: 50px;
+  }
+
+  .card-body p {
+    font-size: 0.82em;
+  }
+}
