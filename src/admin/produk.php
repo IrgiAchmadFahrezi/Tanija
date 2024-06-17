@@ -7,12 +7,17 @@
         .btn-primary {
             background: #FFDE59;
             color: black;
+            margin-bottom: 2%;
         }
         .btn-danger {
             background: #F63724;
         }
         .btn-warning {
             background: #FF914D;
+        }
+        th{
+            background-color: #FFDE59;
+            text-align: center;
         }
     </style>
 </head>

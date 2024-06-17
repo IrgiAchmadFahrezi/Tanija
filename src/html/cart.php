@@ -2,25 +2,7 @@
 session_start();
 include '../php/db_connection.php';
 include '../php/number.php';
-
-// Periksa apakah pengguna sudah login
-if (!isset($_SESSION['email'])) {
-  echo "<script>alert('Anda harus login terlebih dahulu untuk melihat keranjang!'); window.location.href='../html/login.html';</script>";
-    exit();
-}
-
-// Modifikasi loop untuk menampilkan produk dalam keranjang
-foreach($_SESSION['cart'] as $product_id => $product) {
-  // Ambil informasi stok dari database untuk produk yang bersangkutan
-  $sql = "SELECT stock FROM produk WHERE id_produk = $product_id";
-  $result = mysqli_query($conn, $sql);
-  $row = mysqli_fetch_assoc($result);
-  
-}
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -50,6 +32,35 @@ foreach($_SESSION['cart'] as $product_id => $product) {
   
 </head>
 <body>
+  <?php
+  // Periksa apakah pengguna sudah login
+if (!isset($_SESSION['email'])) {
+  echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Anda harus login terlebih dahulu untuk melihat keranjang!',
+                    confirmButtonColor: '#00880d',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href='../html/login.html';
+                    }
+                });
+              </script>";
+  
+  exit();
+}
+
+// Modifikasi loop untuk menampilkan produk dalam keranjang
+foreach($_SESSION['cart'] as $product_id => $product) {
+  // Ambil informasi stok dari database untuk produk yang bersangkutan
+  $sql = "SELECT stock FROM produk WHERE id_produk = $product_id";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($result);
+  
+}
+  ?>
   <!-- Elemen Loading -->
   <div class="loader"></div>
   <!-- Navbar Bootstrap -->
