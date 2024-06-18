@@ -8,6 +8,7 @@ include '../php/number.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="dicoding:email" content="irgifahrezi78@gmail.com">
   <title>Keranjang - Tanija</title>
   <link rel="shortcut icon" href="../assets/icons/logo-tanija.png">
 

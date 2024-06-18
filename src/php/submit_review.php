@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="dicoding:email" content="irgifahrezi78@gmail.com">
     <title>My Page</title>
     <!-- Include Sweet Alert Library -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
