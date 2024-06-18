@@ -1,6 +1,6 @@
 <div align="center">
   
-  <a href=""><img src="./src/assets/icons/logo-tanija.png" alt="icon" border="0" width="300px"></a>
+  <img src="./src/assets/icons/logo-tanija.png" alt="icon" border="0" width="300px">
   
 # TANIJA
 Capstone Project SIB Cycle 6 - Dicoding 2024
@@ -17,7 +17,6 @@ Ease of Shopping | User-Friendly and Accessible Website
 ![badge](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![badge](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![badge](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
-![badge](https://img.shields.io/badge/mysql-f29111?style=for-the-badge&logo=mysql&logoColor=black)
 ![badge](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
@@ -25,7 +24,7 @@ Ease of Shopping | User-Friendly and Accessible Website
 
 | Presentasi                                         | Demo                                       |
 | -------------------------------------------------- | ------------------------------------------ |
-| [Presentation Video](https://youtu.be/l8Y4mRo4hTM?si=KWTBm_zM4mBNZiw2) | [Demo Video]() |
+| [Presentation Video](https://youtu.be/l8Y4mRo4hTM?si=KWTBm_zM4mBNZiw2) | [Demo Video](https://youtu.be/DaiW8sPKp5M) |
 
 ### Team ID : `C624-PS073`
 
@@ -58,7 +57,7 @@ mahalnya harga pupuk, terbatasnya akses pasar, dan kesulitan dalam memperoleh pr
 menggunakan teknologi informasi dan komunikasi (TIK), platform ini akan mendukung petani dalam meningkatkan produktivitas,
 profitabilitas, dan keberlanjutan usaha mereka.
 
-NOTE : Projek ini bersifat TIDAK KOMERSIL hanya untuk tugas projek semata dan kami tidak mengambil keuntungan dari menyebutkan nama-nama merk/produk yang terlibat.
+NOTE : Projek ini bersifat **TIDAK KOMERSIL** hanya untuk tugas projek semata dan kami tidak mengambil keuntungan apapun dari menyebutkan nama-nama merk/produk yang terlibat.
 
 </div>
 
@@ -67,11 +66,11 @@ NOTE : Projek ini bersifat TIDAK KOMERSIL hanya untuk tugas projek semata dan ka
 
 | Minggu | Scope             | Kegiatan                                                                |
 | ------ | ------------      | -------------------------------------------------------------------     |
-| 1      | Planning          | Pencarian ide dalam pembuatan ide project &                             |
+| 1      | Planning          | Pencarian ide dalam pembuatan ide project                             |
 | 2      | Design            | Inisialisasi, mockup, dan evaluasi                                      |
 | 3      | Development (FE)  | Implementasi slicing dan juga pengaturan responsifitas                  |
 | 4      | Development (BE)  | Pembuatan API, dan mengintegrasikan dengan FE        |
-| 5      | Release (DevOps)          | Build, Testing, Deploy                                     |
+| 5      | Release (DevOps)          | Testing, dan deploy                                     |
 
 
 ## Presented By :
