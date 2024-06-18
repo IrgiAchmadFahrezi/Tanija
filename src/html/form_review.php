@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../php/db_connection.php';
+include '../php/number.php';
 
 // Ambil informasi produk berdasarkan id_produk dari parameter URL
 if (isset($_GET['id_produk'])) {
@@ -57,45 +58,45 @@ if (isset($_GET['id_produk'])) {
   <!-- Elemen Loading -->
   <div class="loader"></div>
     <!-- Navbar Bootstrap -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="/tanija/index.php">
-            <img src="../assets/icons/logo-tanija.png" alt="Logo Tanija">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/tanija/index.php">
+        <img src="../assets/icons/logo-tanija.png" alt="Logo Tanija">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Cari Produk..." aria-label="Cari Produk...">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
-            </form>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link"> <i class="far fa-user"></i> <span id="nama_user">Profil</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/src/html/favorite.html"><i class="far fa-heart"></i><span class="badge">5</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge">10</span></a>
-                </li>
-                <li class="nav-item">
-                    <?php
-                        if (isset($_SESSION['email'])) {
-                            echo '<form action="../php/logout.php" method="post">
-                                    <button class="btn btn-login" type="submit" name="logout">Logout</button>
-                                </form>';
-                        } else {
-                            echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'../html/login.html\';">Login</button>';
-                        }
-                    ?>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <form class="form-inline my-2 my-lg-0" method="get" action="../php/search.php">
+        <input class="form-control mr-sm-2" type="search" name="query" placeholder="Cari Produk..." aria-label="Cari Produk...">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
+      </form>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link"> <i class="far fa-user"></i> <span id="nama_user">Profil</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./favorite.php"><i class="far fa-heart"></i><span class="badge"><?php echo $favoriteCount; ?></span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./cart.php"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge"><?php echo $cartCount; ?></span></a>
+        </li>
+        <li class="nav-item">
+        <?php
+        if (isset($_SESSION['email'])) {
+            echo '<form action="../php/logout.php" method="post">
+                    <button class="btn btn-login" type="submit" name="logout">Logout</button>
+                  </form>';
+        } else {
+            echo '<button class="btn btn-login" type="button" onclick="window.location.href=\'../html/login.html\';">Login</button>';
+        }
+        ?>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-    <!-- Navbar Kedua -->
+  <!-- Navbar Kedua -->
   <nav class="navbar navbar-expand" id="navbar-kedua">
     <div class="container">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSecond" aria-controls="navbarSecond" aria-expanded="false" aria-label="Toggle navigation">
